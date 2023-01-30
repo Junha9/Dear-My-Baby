@@ -1,7 +1,6 @@
 package com.ssafy.dmb.controller;
 
 
-import com.ssafy.dmb.domain.record.Comment;
 import com.ssafy.dmb.dto.CommentDto;
 import com.ssafy.dmb.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,6 @@ public class CommentApiController {
 
     }
 
-    }
 
 
 }
