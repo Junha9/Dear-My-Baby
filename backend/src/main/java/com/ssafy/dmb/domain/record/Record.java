@@ -1,6 +1,5 @@
 package com.ssafy.dmb.domain.record;
 
-
 import com.ssafy.dmb.domain.location.Coordinate;
 import com.ssafy.dmb.domain.plan.Day;
 import lombok.Getter;
@@ -29,7 +28,7 @@ public class Record {
     private String record_text;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     // 위도

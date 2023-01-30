@@ -27,7 +27,13 @@ public class Location {
     @Embedded
     private Coordinate locationCoordinate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Region region;
+
+
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<Bookmark> bookmarks = new ArrayList<>();
 
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    private List<Place> places = new ArrayList<>();
 }
