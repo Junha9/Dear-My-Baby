@@ -14,11 +14,11 @@ public class Family {
 
     @Id @GeneratedValue
     @Column(name = "family_id")
-    private Long no;
+    private Long id;
 
-    @OneToMany(mappedBy = "family")
+    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
     private List<FamilyUser> FamilyUser = new ArrayList<>();
 
-    @OneToMany(mappedBy = "family")
+    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
     private List<Plan> plans = new ArrayList<>();
 }

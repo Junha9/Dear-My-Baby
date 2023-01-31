@@ -28,7 +28,7 @@ public class User {
 
     private String userImg;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<FamilyUser> familyUser = new ArrayList<>();
 
 

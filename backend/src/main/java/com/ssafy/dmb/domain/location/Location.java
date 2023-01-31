@@ -24,16 +24,17 @@ public class Location {
 
     private String locationAddress;
 
-    @Embedded
-    private Coordinate locationCoordinate;
+    private String locationLatitude;
+
+    private String locationLongitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Region region;
 
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    private List<Bookmark> bookmarks = new ArrayList<>();
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    private List<Place> places = new ArrayList<>();
+//    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+//    private List<Bookmark> bookmarks = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+//    private List<Place> places = new ArrayList<>();
 }

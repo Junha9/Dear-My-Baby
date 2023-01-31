@@ -21,7 +21,14 @@ public class Place {
     @JoinColumn(name = "day_id")
     private Day day;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private Location location;
+    private String placeName;
+
+    private LocationType placeType;
+
+    private String placeLatitude;
+
+    private String placeLongitude;
+
+    private String placeAddress;
+
 }
