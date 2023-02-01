@@ -17,7 +17,7 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping()
-    public Stirng saveComment(@RequestParam("commentText") CommentDto commentDto) throws IOException {
+    public String saveComment(@RequestParam("commentText") CommentDto commentDto) throws IOException {
         commentService.saveComment(commentDto);
         return "ok";
     }
