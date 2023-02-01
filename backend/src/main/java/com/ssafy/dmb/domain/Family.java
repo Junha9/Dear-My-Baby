@@ -16,9 +16,12 @@ public class Family {
     @Column(name = "family_id")
     private Long id;
 
-    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
+    @Column(nullable = false)
+    private String familyName;
+
+    @OneToMany(mappedBy = "family", cascade = CascadeType.PERSIST)
     private List<FamilyUser> FamilyUser = new ArrayList<>();
 
-    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "family", cascade = CascadeType.PERSIST)
     private List<Plan> plans = new ArrayList<>();
 }

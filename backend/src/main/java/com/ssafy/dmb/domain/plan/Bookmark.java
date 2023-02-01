@@ -1,17 +1,13 @@
 package com.ssafy.dmb.domain.plan;
 
-import com.ssafy.dmb.domain.location.Location;
 import com.ssafy.dmb.domain.location.LocationType;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter @Setter
 @Entity
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Bookmark {
 
     @Id @GeneratedValue
@@ -31,5 +27,16 @@ public class Bookmark {
     private String bookmarkLongitude;
 
     private LocationType bookmarkType;
+
+    @Builder
+    public Bookmark (Plan plan, String bookmarkName, String bookmarkAddress,
+                     String bookmarkLatitude, String bookmarkLongitude, LocationType bookmarkType) {
+        this.plan = plan;
+        this.bookmarkName = bookmarkName;
+        this.bookmarkAddress = bookmarkAddress;
+        this.bookmarkLatitude = bookmarkLatitude;
+        this.bookmarkLongitude = bookmarkLongitude;
+        this.bookmarkType = bookmarkType;
+    }
 
 }

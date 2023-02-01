@@ -15,26 +15,21 @@ public class User {
     @Column(name = "user_no")
     private Long no;
 
+    @Column(nullable = false)
     private String userName;
 
+    @Column(nullable = false)
     private String userEmail;
 
+    @Column(nullable = false)
     private String userPassword;
 
-    @Enumerated(EnumType.ORDINAL)
-    private UserValid uservalid; // 1 - valid, 2 - withdrawn
-
+    @Column(nullable = false)
     private String userId;
 
     private String userImg;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<FamilyUser> familyUser = new ArrayList<>();
-
-
-
-
-
-
 
 }

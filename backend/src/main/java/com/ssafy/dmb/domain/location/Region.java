@@ -21,7 +21,7 @@ public class Region {
     @Embedded
     private Coordinate regionCoordinate;
 
-    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "region", cascade = CascadeType.PERSIST)
     private List<Location> locations = new ArrayList<>();
 
 }

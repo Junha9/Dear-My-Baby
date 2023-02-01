@@ -49,7 +49,7 @@ public class BookmarkDto {
     @Builder
     @AllArgsConstructor
     public static class Request {
-        private Long id;
+//        private Long id;
         private Long planId;
         private String bookmarkName;
         private String bookmarkAddress;
@@ -57,18 +57,18 @@ public class BookmarkDto {
         private String bookmarkLongitude;
         private LocationType bookmarkType;
 
-        public Bookmark toEntity() {
-            return Bookmark.builder()
-                    .id(id)
-                    .plan(Plan.builder()
-                            .id(planId)
-                            .build())
-                    .bookmarkName(bookmarkName)
-                    .bookmarkAddress(bookmarkAddress)
-                    .bookmarkLatitude(bookmarkLatitude)
-                    .bookmarkLongitude(bookmarkLongitude)
-                    .bookmarkType(bookmarkType)
-                    .build();
-        }
+//        public Bookmark toEntity() {
+//            return Bookmark.builder()
+////                    .id(id)
+//                    .plan(Plan.builder()
+//                            .id(planId)
+//                            .build())
+//                    .bookmarkName(bookmarkName)
+//                    .bookmarkAddress(bookmarkAddress)
+//                    .bookmarkLatitude(bookmarkLatitude)
+//                    .bookmarkLongitude(bookmarkLongitude)
+//                    .bookmarkType(bookmarkType)
+//                    .build();
+//        }
     }
 }

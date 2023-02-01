@@ -1,7 +1,6 @@
 package com.ssafy.dmb.domain.plan;
 
 import com.ssafy.dmb.domain.Family;
-import com.ssafy.dmb.domain.plan.Bookmark;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,31 +10,41 @@ import java.util.List;
 
 @Getter @Setter
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Plan {
     @Id @GeneratedValue
     @Column(name = "plan_id")
     private Long id;
 
+    @Column(nullable = false)
     private String planDestination;
 
-    private LocalDate planDate;
+    @Column(nullable = false)
+    private LocalDate startDate;
 
+    @Column(nullable = false)
+    private LocalDate endDate;
+
+    @Column(nullable = false)
     private int planPeriod;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "family_id")
     private Family family;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.PERSIST)
     private List<Bookmark> bookmarks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.PERSIST)
     private List<Day> days = new ArrayList<>();
 
-
-
+    @Builder
+    public Plan(String planDestination, LocalDate startDate, LocalDate endDate, int planPeriod, Family family){
+        this.planDestination = planDestination;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.planPeriod = planPeriod;
+        this.family = family;
+    }
 
 }
