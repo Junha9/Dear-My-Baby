@@ -1,22 +1,33 @@
 package com.ssafy.dmb.controller;
 
 import com.ssafy.dmb.dto.CommentDto;
+import com.ssafy.dmb.dto.CommentResponseDto;
 import com.ssafy.dmb.service.CommentService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.List;
+
+
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/comment")
 public class CommentController {
     private CommentService commentService;
-    public CommentController(CommentService commentService) {
-        super();
-        this.commentService = commentService;
-    }
-    @PostMapping("/records/{recordId}/comments")
-    public ResponseEntity<CommentDto> createComment(@PathVariable long recordId, @RequestBody CommentDto commentDto) {
-        return new ResponseEntity<>(commentService.createComment(recordId, commentDto), HttpStatus.CREATED);
+
+    @PostMapping()
+    public Stirng saveComment(@RequestParam("commentText") CommentDto commentDto) throws IOException {
+        commentService.saveComment(commentDto);
+        return "ok";
     }
 
+    @GetMapping("/comments")
+    public List<CommentResponseDto> getCommentList(@RequestParam("recordId") Long recordId) throws IOException {
+        return commentService.getCommentList(recordId);
+    }
+
+    public void deleteComment(@RequestParam("commentId") Long commentId) throws IOException {
+        commentService.deleteComment(commentId);
+    }
 }

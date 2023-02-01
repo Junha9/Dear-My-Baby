@@ -1,10 +1,16 @@
 package com.ssafy.dmb.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommentDto {
-    private long id;
-    private long userId;
-    private String comment_text;
+    private Long recordId;
+    private Long userId;
+    private String commentText;
 }

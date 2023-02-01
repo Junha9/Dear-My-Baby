@@ -2,14 +2,14 @@ package com.ssafy.dmb.domain.record;
 
 
 import com.ssafy.dmb.domain.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Getter @Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
     @Id @GeneratedValue
@@ -26,8 +26,16 @@ public class Comment {
     @JoinColumn(name = "user_no")
     private User user;
 
-    private String comment_text;
+    private String commentText;
 
-    private LocalDate comment_date;
+    private LocalDate commentDate;
+
+    @Builder
+    public Comment(Record record, User user, String commentText, LocalDate commentDate) {
+        this.record = record;
+        this.user = user;
+        this.commentText = commentText;
+        this.commentDate = commentDate;
+    }
 
 }

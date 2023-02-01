@@ -4,50 +4,69 @@ import com.ssafy.dmb.domain.User;
 import com.ssafy.dmb.domain.record.Comment;
 import com.ssafy.dmb.domain.record.Record;
 import com.ssafy.dmb.dto.CommentDto;
-import com.ssafy.dmb.exception.ResourceNotFoundException;
+import com.ssafy.dmb.dto.CommentResponseDto;
 import com.ssafy.dmb.repository.CommentRepository;
 import com.ssafy.dmb.repository.RecordRepository;
-import org.springdoc.api.OpenApiResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ssafy.dmb.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+
+@RequiredArgsConstructor
 @Service
+@Slf4j
 public class CommentServiceImpl implements CommentService{
-    private CommentRepository commentRepository;
-    private RecordRepository recordRepository;
 
-    @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository, RecordRepository recordRepository) {
-        super();
-        this.commentRepository = commentRepository;
-        this.recordRepository = recordRepository;
-    }
+    private final Logger LOGGER = (Logger) LoggerFactory.getLogger(CommentServiceImpl.class);
+
+    private final CommentRepository commentRepository;
+    private final RecordRepository recordRepository;
+    private final UserRepository userRepository;
+
     @Override
-    public CommentDto createComment(long recordId, CommentDto commentDto) {
-        Record record = recordRepository.findById(recordId).orElseThrow(() -> new ResourceNotFoundException());
-//        Record record = recordRepository.findById(recordId).orElseThrow(() -> new ResourceNotFoundException("Record", "id", recordId));
+    public CommentResponseDto saveComment(CommentDto commentDto) {
+        Long recordId = commentDto.getRecordId();
+        Long userId = commentDto.getUserId();
 
-        // set Post to comment entity
-        Comment comment = mapToEntity(commentDto);
-        comment.setRecord(record);
-        // comment entity to DB
-        Comment newComment = commentRepository.save(comment);
-        return mapToDTO(newComment);
+        Record record = recordRepository.findById(recordId).
+                orElseThrow(() -> new NoSuchElementException());
+        User user = userRepository.findById(userId).
+                orElseThrow(() -> new NoSuchElementException());
+        Comment comment = Comment.builder().
+                record(record).
+                user(user).
+                commentText(commentDto.getCommentText()).
+                build();
+
+        commentRepository.save(comment);
+        return null;
     }
-    private CommentDto mapToDTO(Comment comment) {
-        CommentDto commentDto = new CommentDto();
-        commentDto.setId(comment.getId());
-        commentDto.setUserId(commentDto.getUserId()); // 프론트에서 주나 ?
-        commentDto.setComment_text(comment.getComment_text());
-        return commentDto;
+
+    @Override
+    public List<CommentResponseDto> getCommentList(Long recordId) {
+//        LOGGER.info("[getCommentList] input recordId: {}", recordId);
+        List<Comment> commentList = commentRepository.findAllByRecordId(recordId);
+        List<CommentResponseDto> recordCommentList = commentList.stream()
+                .map(r -> new CommentResponseDto(r))
+                .collect(Collectors.toList());
+        return recordCommentList;
     }
-    private Comment mapToEntity(CommentDto commentDto) {
-        Comment comment = new Comment();
-        comment.setId(commentDto.getId());
-        comment.setUser(comment.getUser());
-        comment.setComment_text(comment.getComment_text());
-        return comment;
+
+    @Override
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
     }
+
+
+
+
 
 
 }
