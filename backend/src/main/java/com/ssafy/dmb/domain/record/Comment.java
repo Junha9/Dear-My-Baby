@@ -2,14 +2,14 @@ package com.ssafy.dmb.domain.record;
 
 
 import com.ssafy.dmb.domain.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
     @Id @GeneratedValue
@@ -17,7 +17,7 @@ public class Comment {
     private Long id;
 
     // FK
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="record_id")
     private Record record;
 
@@ -31,4 +31,11 @@ public class Comment {
 
     @Column(columnDefinition = "DATETIME default now()")
     private LocalDateTime commentDate;
+
+    @Builder
+    public Comment(Record record, User user, String commentText) {
+        this.record = record;
+        this.user = user;
+        this.commentText = commentText;
+    }
 }
