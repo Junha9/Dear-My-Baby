@@ -1,5 +1,6 @@
 package com.ssafy.dmb.domain;
 
+import com.ssafy.dmb.domain.baby.Baby;
 import com.ssafy.dmb.domain.plan.Plan;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,4 +25,7 @@ public class Family {
 
     @OneToMany(mappedBy = "family", cascade = CascadeType.PERSIST)
     private List<Plan> plans = new ArrayList<>();
+
+    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
+    private List<Baby> babies = new ArrayList<>();
 }
