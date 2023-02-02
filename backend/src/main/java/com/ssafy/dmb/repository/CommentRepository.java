@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    @Query("select r from Comment r where r.record.id =: recordId")
+    @Query("select r from Comment r where r.record.id = :recordId")
     public List<Comment> findAllByRecordId(@Param("recordId") Long recordId);
 
 

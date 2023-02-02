@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Record {
     @Id @GeneratedValue
@@ -18,24 +18,26 @@ public class Record {
     private Long id;
 
     // day_id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "day_id")
     private Day day;
 
+    @Column(nullable = false)
     private int recordType;
 
+    @Column(nullable = false)
     private String recordFile;
 
     private String recordText;
 
     private String fileUrl;
 
-    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "record")
     private List<Comment> comments = new ArrayList<>();
 
-    // 위도
     @Embedded
     private Coordinate recordCoordinate;
+
     @Column(columnDefinition = "DATETIME default now()")
     private LocalDateTime recordDate;
 

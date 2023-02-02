@@ -11,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommentDto {
     private Long recordId;
-    private Long userId;
+    private Long userNo;
     private String commentText;
 }

@@ -14,10 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
-    private CommentService commentService;
+    private final CommentService commentService;
 
     @PostMapping()
-    public String saveComment(@RequestParam("commentText") CommentDto commentDto) throws IOException {
+    public String saveComment(@RequestBody CommentDto commentDto) throws IOException {
+        System.out.println("요청옴");
         commentService.saveComment(commentDto);
         return "ok";
     }
@@ -27,6 +28,7 @@ public class CommentController {
         return commentService.getCommentList(recordId);
     }
 
+    @DeleteMapping()
     public void deleteComment(@RequestParam("commentId") Long commentId) throws IOException {
         commentService.deleteComment(commentId);
     }

@@ -1,12 +1,9 @@
 package com.ssafy.dmb.domain.location;
 
-import com.ssafy.dmb.domain.plan.Bookmark;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -19,21 +16,16 @@ public class Location {
 
     private String locationName;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private LocationType locationType;
 
     private String locationAddress;
 
-    @Embedded
-    private Coordinate locationCoordinate;
+    private String locationLatitude;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private String locationLongitude;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Region region;
 
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    private List<Bookmark> bookmarks = new ArrayList<>();
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    private List<Place> places = new ArrayList<>();
 }

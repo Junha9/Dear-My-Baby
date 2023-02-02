@@ -5,10 +5,10 @@ import com.ssafy.dmb.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
@@ -26,16 +26,16 @@ public class Comment {
     @JoinColumn(name = "user_no")
     private User user;
 
+    @Column(nullable = false)
     private String commentText;
 
-    private LocalDate commentDate;
+    @Column(columnDefinition = "DATETIME default now()")
+    private LocalDateTime commentDate;
 
     @Builder
-    public Comment(Record record, User user, String commentText, LocalDate commentDate) {
+    public Comment(Record record, User user, String commentText) {
         this.record = record;
         this.user = user;
         this.commentText = commentText;
-        this.commentDate = commentDate;
     }
-
 }
