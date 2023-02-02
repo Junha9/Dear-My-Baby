@@ -1,9 +1,10 @@
 package com.ssafy.dmb.controller;
 
-import com.ssafy.dmb.dto.RecordDetailResponseDto;
-import com.ssafy.dmb.dto.RecordDto;
-import com.ssafy.dmb.dto.RecordResponseDto;
-import com.ssafy.dmb.service.RecordServiceImpl;
+import com.ssafy.dmb.dto.record.RecordDetailResponseDto;
+import com.ssafy.dmb.dto.record.RecordDto;
+import com.ssafy.dmb.dto.record.RecordResponseDto;
+import com.ssafy.dmb.service.RecordService;
+import com.ssafy.dmb.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,13 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/record")
 public class RecordController {
-    private final RecordServiceImpl recordService;
+    private final RecordService recordService;
+    private final S3Service s3Service;
 
     @PostMapping()
     public String saveRecord(@RequestPart MultipartFile multipartFile
             , @RequestPart RecordDto recordDto) throws IOException {
 
-        String url = recordService.upload(multipartFile, "dearmybucket", "dmb");
+        String url = s3Service.upload(multipartFile, "dearmybucket", "dmb");
 
         recordService.saveRecord(url, recordDto);
         return url;

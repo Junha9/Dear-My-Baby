@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.record;
 
 import com.ssafy.dmb.domain.location.Coordinate;
 import com.ssafy.dmb.domain.record.Record;
@@ -33,7 +33,7 @@ public class RecordDetailResponseDto {
     // record 시간
     private LocalDateTime recordDate;
 
-    private List<CommentResponseDto> comments;
+    private List<RecordDetailCommentDto> comments;
 
     public RecordDetailResponseDto(Record record){
         this.recordId = record.getId();
@@ -48,7 +48,7 @@ public class RecordDetailResponseDto {
         this.longitude = coordinate.getLongitude();
 
         this.comments = record.getComments().stream()
-                .map(c->new CommentResponseDto(c))
+                .map(c->new RecordDetailCommentDto(c))
                 .collect(Collectors.toList());
     }
 

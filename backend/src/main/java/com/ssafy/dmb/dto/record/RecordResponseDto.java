@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.record;
 
 import com.ssafy.dmb.domain.location.Coordinate;
 import com.ssafy.dmb.domain.record.Record;

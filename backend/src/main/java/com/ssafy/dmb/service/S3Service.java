@@ -3,13 +3,6 @@ package com.ssafy.dmb.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.ssafy.dmb.domain.location.Coordinate;
-import com.ssafy.dmb.domain.plan.Day;
-import com.ssafy.dmb.domain.record.Record;
-import com.ssafy.dmb.dto.CommentResponseDto;
-import com.ssafy.dmb.dto.RecordDetailResponseDto;
-import com.ssafy.dmb.dto.RecordDto;
-import com.ssafy.dmb.dto.RecordResponseDto;
 import com.ssafy.dmb.repository.DayRepository;
 import com.ssafy.dmb.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class RecordServiceImpl implements RecordService{
+public class S3Service{
 
-    private final Logger LOGGER = LoggerFactory.getLogger(RecordServiceImpl.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(S3Service.class);
 
     private final RecordRepository recordRepository;
     private final DayRepository dayRepository;
@@ -128,84 +121,5 @@ public class RecordServiceImpl implements RecordService{
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
-    }
-
-    @Override
-    public List<RecordResponseDto> getDayRecordList(Long dayId, Long planId) {
-        LOGGER.info("[getDayRecordList] input dayId: {}", dayId);
-        List<Record> recordList = recordRepository.findAllByDayId(dayId, planId);
-
-        List<RecordResponseDto> dayRecordDtoList = recordList.stream()
-                .map(r->new RecordResponseDto(r))
-                .collect(Collectors.toList());
-
-        return dayRecordDtoList;
-    }
-
-    @Override
-    public List<RecordResponseDto> getPlanRecordList(Long planId) {
-        LOGGER.info("[getPlanRecordList] input planId: {}", planId);
-        List<Record> recordList = recordRepository.findAllByPlanId(planId);
-
-        List<RecordResponseDto> planRecordDtoList = recordList.stream()
-                .map(r->new RecordResponseDto(r))
-                .collect(Collectors.toList());
-
-        return planRecordDtoList;
-    }
-
-    @Override
-    public RecordDetailResponseDto getRecord(Long recordId) {
-        Record recordDetail = recordRepository.findById(recordId).
-                orElseThrow(() -> new NoSuchElementException());
-
-        RecordDetailResponseDto recordDetailResponseDto = new RecordDetailResponseDto(recordDetail);
-        System.out.println(recordDetailResponseDto.toString());
-//        List<Comment> commentList = recordDetail.getComments();
-//        List<CommentResponseDto> comments = commentList.stream()
-//                .map(c->new CommentResponseDto(c))
-//                .collect(Collectors.toList());
-//
-//        recordDetailResponseDto.setComments(comments);
-
-        return recordDetailResponseDto;
-    }
-
-    @Override
-    public void saveRecord(String url, RecordDto recordDto) {
-        LOGGER.info("[saveRecord] input dto: {}", recordDto);
-        Long dayId = recordDto.getDayId();
-
-        Day day = dayRepository.findById(dayId).
-                orElseThrow(() -> new NoSuchElementException());
-
-        Coordinate recordCoordinate = new Coordinate(recordDto.getLatitude(), recordDto.getLongitude());
-
-        Record record = Record.builder().
-                day(day).
-                recordType(recordDto.getRecordType()).
-                recordFile(recordDto.getRecordFile()).
-                recordText(recordDto.getRecordText()).
-                recordCoordinate(recordCoordinate).
-                fileUrl(url).
-                build();
-
-        Record recordResponse = recordRepository.save(record);
-        // 뭐가 필요한지 말해라 front
-
-    }
-
-    @Override
-    public RecordResponseDto changeRecordText(Long recordId, String recordText) {
-        Record foundRecord = recordRepository.findById(recordId).get();
-        foundRecord.setRecordText(recordText);
-        recordRepository.save(foundRecord);
-
-        return null;
-    }
-
-    @Override
-    public void deleteRecord(Long recordId) {
-        recordRepository.deleteById(recordId);
     }
 }

@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.record;
 
 import com.ssafy.dmb.domain.record.Comment;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentResponseDto {
+public class RecordDetailCommentDto {
     private Long commentId;
 
     private String userId;
@@ -21,7 +21,7 @@ public class CommentResponseDto {
 
     private LocalDateTime commentDate;
 
-    public CommentResponseDto(Comment comment){
+    public RecordDetailCommentDto(Comment comment){
         this.commentId = comment.getId();
         this.userId = comment.getUser().getUserId();
         this.userName = comment.getUser().getUserName();
