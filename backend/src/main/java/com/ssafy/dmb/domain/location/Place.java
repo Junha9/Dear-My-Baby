@@ -15,13 +15,20 @@ public class Place {
     @Column(name = "place_id")
     private Long id;
 
-    private int placeOrder;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "day_id")
     private Day day;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private Location location;
+    private int placeOrder;
+
+    private String placeName;
+
+    private LocationType placeType;
+
+    private String placeLatitude;
+
+    private String placeLongitude;
+
+    private String placeAddress;
+
 }

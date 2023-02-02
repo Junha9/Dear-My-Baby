@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -17,7 +17,7 @@ public class Comment {
     private Long id;
 
     // FK
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="record_id")
     private Record record;
 
@@ -26,7 +26,9 @@ public class Comment {
     @JoinColumn(name = "user_no")
     private User user;
 
-    private String comment_text;
+    @Column(nullable = false)
+    private String commentText;
 
-    private LocalDate comment_date;
+    @Column(columnDefinition = "DATETIME default now()")
+    private LocalDateTime commentDate;
 }

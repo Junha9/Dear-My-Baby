@@ -14,7 +14,10 @@ public class Family {
 
     @Id @GeneratedValue
     @Column(name = "family_id")
-    private Long no;
+    private Long id;
+
+    @Column(nullable = false)
+    private String familyName;
 
     @OneToMany(mappedBy = "family")
     private List<FamilyUser> FamilyUser = new ArrayList<>();

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +18,14 @@ public class Day {
     @Column(name = "day_id")
     private Long id;
 
-    private LocalDate dayDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "day")
     private List<Place> places = new ArrayList<>();
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "day")
     private List<Record> records = new ArrayList<>();
 
 }

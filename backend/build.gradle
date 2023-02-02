@@ -12,32 +12,46 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-}
 
+}
 repositories {
 	mavenCentral()
 }
 
 dependencies {
+	// boot starter
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// mysql
 	implementation 'com.mysql:mysql-connector-j:8.0.32'
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation("org.junit.vintage:junit-vintage-engine") {
-		exclude group: "org.hamcrest", module: "hamcrest-core"
-	}
+//	testImplementation("org.junit.vintage:junit-vintage-engine") {
+//		exclude group: "org.hamcrest", module: "hamcrest-core"
+//	}
 
 	// swagger dependencies
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// S3 dependence
+	implementation platform('software.amazon.awssdk:bom:2.17.53')
+	implementation 'software.amazon.awssdk:s3'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
