@@ -7,16 +7,14 @@ import javax.persistence.*;
 
 @Getter @Setter
 @Entity
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Bookmark {
 
     @Id @GeneratedValue
     @Column(name = "bookmark_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
@@ -29,5 +27,16 @@ public class Bookmark {
     private String bookmarkLongitude;
 
     private LocationType bookmarkType;
+
+    @Builder
+    public Bookmark (Plan plan, String bookmarkName, String bookmarkAddress,
+                     String bookmarkLatitude, String bookmarkLongitude, LocationType bookmarkType) {
+        this.plan = plan;
+        this.bookmarkName = bookmarkName;
+        this.bookmarkAddress = bookmarkAddress;
+        this.bookmarkLatitude = bookmarkLatitude;
+        this.bookmarkLongitude = bookmarkLongitude;
+        this.bookmarkType = bookmarkType;
+    }
 
 }

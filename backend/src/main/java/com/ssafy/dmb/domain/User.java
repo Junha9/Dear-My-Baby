@@ -29,7 +29,7 @@ public class User {
 
     private String userImg;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<FamilyUser> familyUser = new ArrayList<>();
 
 }
