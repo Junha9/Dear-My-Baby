@@ -10,7 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/dist/assets/");
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/dist/");
+        registry.addResourceHandler("/swagger-ui/**").addResourceLocations("classpath:/META-INF/resources/");
     }
 
 }
