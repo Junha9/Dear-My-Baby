@@ -1,0 +1,28 @@
+.placeItem {
+  /* display: flex; */
+  justify-content: space-between;
+  border: none;
+  margin: 1%;
+}
+
+.placeFrame {
+  display: flex;
+  /* margin: 5vw; */
+  justify-content: center;
+}
+.mainFrame {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-block: 5vh;
+}
+
+.recommandCard {
+  padding: 2.5%;
+  margin-inline: 5%;
+  margin-block: 15%;
+}
+
+.recomandCityCard {
+  margin-inline: 5%;
+}

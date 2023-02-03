@@ -1,12 +1,12 @@
 import '@/App.css';
-import Home from '@/pages/home/home.jsx';
+import { Outlet } from 'react-router-dom';
+import HeadBar from '@/commons/components/HeadBar';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <Home></Home>
+      <HeadBar></HeadBar>
+      <Outlet></Outlet>
     </div>
   );
 }
-
-export default App;

@@ -1,6 +1,33 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gamja+Flower&family=Nanum+Pen+Script&display=swap');
+
+body {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+/* Material UI에 도현체 적용 */
+[class^='MuiTypography'] {
+  font-family: 'Do Hyeon', sans-serif !important;
+}
+
+/* 화면 크기별 css 설계하기
+반응형 웹 구현하는데 씀 */
+@media (min-width: 650px) {
+  .App {
+    height: auto;
+    width: 100vw;
+    justify-items: center;
+    /* background-color: black; */
+  }
+}
+
+@media (max-width: 650px) {
+  .App {
+    /* background-color: green; */
+    height: auto;
+    width: 100vw;
+    justify-items: center;
+    text-align: left;
+  }
 }

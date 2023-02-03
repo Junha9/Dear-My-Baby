@@ -111,3 +111,28 @@ path alias를 이용한 <code>import</code>에서 <kbd>ctrl</kbd>+<kbd>click</kb
 ```
 npm install @reduxjs/toolkit
 ```
+
+## Router
+
+```
+npm install react-router-dom@6
+```
+
+## TailWinds
+
+```
+npm install -D tailwindcss
+npx tailwindcss init
+```
+
+
+
+## Install Libraries
+
+달력 사용을 위한 라이브러리 설치
+
+```
+npm add react-calendar
+npm add moment
+```
+

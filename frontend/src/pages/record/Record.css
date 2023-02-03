@@ -1,0 +1,9 @@
+@media (min-width: 320px) and (max-width: 768px) {
+  .record {
+    width: 100%;
+  }
+}
+
+div {
+  border: none;
+}
