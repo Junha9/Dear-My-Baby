@@ -15,20 +15,27 @@ public class BabyDto {
     @Builder
     @AllArgsConstructor
     public static class Response{
+
+        private Long babyId;
+
+        private String babyName;
+
+        private int babyAge;
         private Long familyId;
 
         private Set<String> favoriteSpot = new HashSet<String>();
 
-        private Set<String> babyCharacter = new HashSet<String>();
 
         private Set<String> favoriteFood = new HashSet<String>();
 
 //        private Set<BabyCharacter> babyCharacterSet = new HashSet<BabyCharacter>();
 
         public Response(Baby baby) {
+            this.babyId = baby.getId();
             this.familyId = baby.getFamily().getId();
+            this.babyName = baby.getBabyName();
+            this.babyAge = baby.getBabyAge();
             this.favoriteSpot = baby.getFavoriteSpot();
-            this.babyCharacter = baby.getBabyCharacter();
             this.favoriteFood = baby.getFavoriteFood();
         }
 
@@ -42,9 +49,11 @@ public class BabyDto {
 
         private Set<String> favoriteSpot = new HashSet<String>();
 
-        private Set<String> babyCharacter = new HashSet<String>();
-
         private Set<String> favoriteFood = new HashSet<String>();
+
+        private String babyName;
+
+        private int babyAge;
 
     }
 

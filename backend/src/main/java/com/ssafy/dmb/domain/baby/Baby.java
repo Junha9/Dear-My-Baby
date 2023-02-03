@@ -17,26 +17,30 @@ import java.util.Set;
 public class Baby {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="baby_id")
     private Long id;
 
     @ElementCollection(fetch = FetchType.LAZY)
     private Set<String> favoriteSpot = new HashSet<String>();
 
+    private String babyName;
+
+    private int babyAge;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "family_id")
     private Family family;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    private Set<String> babyCharacter = new HashSet<String>();
 
     @ElementCollection(fetch = FetchType.LAZY)
     private Set<String> favoriteFood = new HashSet<String>();
 
     @Builder
-    public Baby (Set<String> favoriteSpot, Family family, Set<String> babyCharacter, Set<String> favoriteFood) {
+    public Baby (String babyName, int babyAge, Set<String> favoriteSpot, Family family, Set<String> favoriteFood) {
+        this.babyName = babyName;
+        this.babyAge = babyAge;
         this.favoriteSpot = favoriteSpot;
         this.family = family;
-        this.babyCharacter = babyCharacter;
         this.favoriteFood = favoriteFood;
     }
 

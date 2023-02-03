@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -35,8 +38,9 @@ public class BabyServiceImpl implements BabyService{
 
         Baby baby = Baby.builder()
                 .family(family)
+                .babyName(request.getBabyName())
+                .babyAge(request.getBabyAge())
                 .favoriteSpot(request.getFavoriteSpot())
-                .babyCharacter(request.getBabyCharacter())
                 .favoriteFood(request.getFavoriteFood())
                 .build();
 
@@ -53,8 +57,9 @@ public class BabyServiceImpl implements BabyService{
 
         Baby baby = Baby.builder()
                 .family(family)
+                .babyName(request.getBabyName())
+                .babyAge(request.getBabyAge())
                 .favoriteSpot(request.getFavoriteSpot())
-                .babyCharacter(request.getBabyCharacter())
                 .favoriteFood(request.getFavoriteFood())
                 .build();
 
@@ -64,5 +69,18 @@ public class BabyServiceImpl implements BabyService{
         return babyInfo;
 
 
+    }
+
+    public List<BabyDto.Response> getBabyList(Long familyId) {
+        List<Baby> babies = babyRepository.findByFamily(familyId);
+
+        List<BabyDto.Response> babyDtoList = babies.stream()
+                .map(b -> new BabyDto.Response(b))
+                .collect(Collectors.toList());
+        return babyDtoList;
+    }
+
+    public void deleteBaby(Long babyId) {
+        babyRepository.deleteById(babyId);
     }
 }

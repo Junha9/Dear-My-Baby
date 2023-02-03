@@ -93,7 +93,6 @@ public class PlanService {
         plan.setId(planId);
         planRepository.save(plan);
         return getPlanDetail(planId);
-
     }
 
     public void deletePlan(Long planId) {
