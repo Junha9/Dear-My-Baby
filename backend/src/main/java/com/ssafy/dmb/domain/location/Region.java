@@ -18,10 +18,15 @@ public class Region {
 
     private String regionName;
 
-    @Embedded
-    private Coordinate regionCoordinate;
+    private String regionImgUrl;
 
     @OneToMany(mappedBy = "region")
-    private List<Location> locations = new ArrayList<>();
+    private List<Restaurant> restaurants = new ArrayList<>();
+
+    @OneToMany(mappedBy = "region")
+    private List<Tour> tours = new ArrayList<>();
+
+    @OneToMany(mappedBy = "region")
+    private List<Festival> festivals = new ArrayList<>();
 
 }

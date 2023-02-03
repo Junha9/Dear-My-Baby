@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Baby {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     @Column(name="baby_id")
     private Long id;
 
@@ -30,7 +30,6 @@ public class Baby {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "family_id")
     private Family family;
-
 
     @ElementCollection(fetch = FetchType.LAZY)
     private Set<String> favoriteFood = new HashSet<String>();

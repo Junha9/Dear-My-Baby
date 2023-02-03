@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/record")
+@RequestMapping("/api/record")
 public class RecordController {
     private final RecordService recordService;
     private final S3Service s3Service;

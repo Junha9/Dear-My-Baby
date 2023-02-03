@@ -3,7 +3,6 @@ package com.ssafy.dmb.service;
 import com.ssafy.dmb.domain.Family;
 import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.plan.Plan;
-import com.ssafy.dmb.dto.LocationDto;
 import com.ssafy.dmb.dto.Plan.PlanDto;
 import com.ssafy.dmb.repository.DayRepository;
 import com.ssafy.dmb.repository.FamilyRepository;

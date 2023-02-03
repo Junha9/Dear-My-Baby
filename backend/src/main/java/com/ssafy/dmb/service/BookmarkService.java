@@ -42,7 +42,6 @@ public class BookmarkService {
                 bookmarkAddress(request.getBookmarkAddress()).
                 bookmarkLongitude(request.getBookmarkLongitude()).
                 bookmarkLatitude(request.getBookmarkLatitude()).
-                bookmarkType(request.getBookmarkType()).
                 build();
 
         validateDuplicateBookmark(bookmark);

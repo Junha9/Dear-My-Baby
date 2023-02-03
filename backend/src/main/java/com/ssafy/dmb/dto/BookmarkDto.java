@@ -1,15 +1,10 @@
 package com.ssafy.dmb.dto;
 
-import com.ssafy.dmb.domain.location.LocationType;
+import com.amazonaws.services.ec2.model.LocationType;
 import com.ssafy.dmb.domain.plan.Bookmark;
-import com.ssafy.dmb.domain.plan.Plan;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 public class BookmarkDto {
     @Getter
@@ -21,7 +16,6 @@ public class BookmarkDto {
         private String bookmarkAddress;
         private String bookmarkLatitude;
         private String bookmarkLongitude;
-        private LocationType bookmarkType;
 
         public Detail(Bookmark bookmark) {
             this.planId = bookmark.getPlan().getId();
@@ -29,7 +23,6 @@ public class BookmarkDto {
             this.bookmarkAddress = bookmark.getBookmarkAddress();
             this.bookmarkLatitude = bookmark.getBookmarkLatitude();
             this.bookmarkLongitude = bookmark.getBookmarkLongitude();
-            this.bookmarkType = bookmark.getBookmarkType();
         }
 
     }
@@ -42,7 +35,6 @@ public class BookmarkDto {
         private String bookmarkAddress;
         private String bookmarkLatitude;
         private String bookmarkLongitude;
-        private LocationType bookmarkType;
     }
 
     @Getter
@@ -55,7 +47,6 @@ public class BookmarkDto {
         private String bookmarkAddress;
         private String bookmarkLatitude;
         private String bookmarkLongitude;
-        private LocationType bookmarkType;
 
     }
 }

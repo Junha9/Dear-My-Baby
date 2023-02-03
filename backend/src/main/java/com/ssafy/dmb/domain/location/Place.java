@@ -24,8 +24,6 @@ public class Place {
 
     private String placeName;
 
-    private LocationType placeType;
-
     private String placeLatitude;
 
     private String placeLongitude;
@@ -33,23 +31,22 @@ public class Place {
     private String placeAddress;
 
     @Builder
-    public Place(Day day, int placeOrder, String placeName, LocationType placeType, String placeLatitude, String placeLongitude, String placeAddress) {
+    public Place(Day day, int placeOrder, String placeName, String placeLatitude, String placeLongitude, String placeAddress) {
         this.day = day;
         this.placeOrder = placeOrder;
         this.placeName = placeName;
-        this.placeType = placeType;
         this.placeLatitude = placeLatitude;
         this.placeLongitude = placeLongitude;
         this.placeAddress = placeAddress;
     }
 
-    public Place(int placeOrder, String placeName, LocationType placeType, String placeLatitude, String placeLongitude, String placeAddress) {
+    public Place(int placeOrder, String placeName, String placeLatitude, String placeLongitude, String placeAddress) {
         this.placeOrder = placeOrder;
         this.placeName = placeName;
-        this.placeType = placeType;
         this.placeLatitude = placeLatitude;
         this.placeLongitude = placeLongitude;
         this.placeAddress = placeAddress;
     }
+
 
 }
