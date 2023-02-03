@@ -1,5 +1,6 @@
 package com.ssafy.dmb.domain;
 
+import com.ssafy.dmb.domain.record.Comment;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,5 +32,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<FamilyUser> familyUser = new ArrayList<>();
+
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
 }

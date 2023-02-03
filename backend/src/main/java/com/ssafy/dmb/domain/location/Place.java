@@ -1,17 +1,18 @@
 package com.ssafy.dmb.domain.location;
 
 import com.ssafy.dmb.domain.plan.Day;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Place {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "place_id")
     private Long id;
 
@@ -30,5 +31,25 @@ public class Place {
     private String placeLongitude;
 
     private String placeAddress;
+
+    @Builder
+    public Place(Day day, int placeOrder, String placeName, LocationType placeType, String placeLatitude, String placeLongitude, String placeAddress) {
+        this.day = day;
+        this.placeOrder = placeOrder;
+        this.placeName = placeName;
+        this.placeType = placeType;
+        this.placeLatitude = placeLatitude;
+        this.placeLongitude = placeLongitude;
+        this.placeAddress = placeAddress;
+    }
+
+    public Place(int placeOrder, String placeName, LocationType placeType, String placeLatitude, String placeLongitude, String placeAddress) {
+        this.placeOrder = placeOrder;
+        this.placeName = placeName;
+        this.placeType = placeType;
+        this.placeLatitude = placeLatitude;
+        this.placeLongitude = placeLongitude;
+        this.placeAddress = placeAddress;
+    }
 
 }

@@ -18,7 +18,7 @@ public class Record {
     private Long id;
 
     // day_id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "day_id")
     private Day day;
 
@@ -32,7 +32,7 @@ public class Record {
 
     private String fileUrl;
 
-    @OneToMany(mappedBy = "record")
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     @Embedded
