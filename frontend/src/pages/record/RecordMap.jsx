@@ -2,6 +2,7 @@ import { CustomOverlayMap, Map, MapMarker, Polyline } from 'react-kakao-maps-sdk
 import { useState, useEffect } from 'react';
 import { Modal, Box } from '@mui/material';
 import './Record.css';
+import RecordUpload from './RecordUpload';
 
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
@@ -114,7 +115,7 @@ const RecordMap = () => {
           {!state.errMsg ? (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <button className="recording-btn">카메라</button>
-              <button className="recording-btn">사진 앨범</button>
+              <RecordUpload></RecordUpload>
             </div>
           ) : (
             <div>위치를 불러올 수 없어요!</div>

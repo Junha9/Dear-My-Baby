@@ -45,3 +45,7 @@ div {
   border: 1px solid black;
   color: black;
 }
+
+.Record_input {
+  display: none;
+}
