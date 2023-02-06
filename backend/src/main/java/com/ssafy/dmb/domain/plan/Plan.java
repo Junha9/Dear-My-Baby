@@ -42,6 +42,10 @@ public class Plan {
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
     private List<Day> days = new ArrayList<>();
 
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    private List<Checklist> checklists = new ArrayList<>();
+
+
     @Builder
     public Plan(String planDestination, LocalDate startDate, LocalDate endDate, Family family, String planName){
         this.planName = planName;
