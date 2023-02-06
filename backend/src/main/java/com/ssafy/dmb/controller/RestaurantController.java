@@ -3,7 +3,6 @@ package com.ssafy.dmb.controller;
 import com.ssafy.dmb.dto.recommend.RestaurantDetailResponseDto;
 import com.ssafy.dmb.dto.recommend.RestaurantResponseDto;
 import com.ssafy.dmb.service.RestaurantService;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
