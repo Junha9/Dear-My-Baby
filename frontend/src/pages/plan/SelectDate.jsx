@@ -1,10 +1,11 @@
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const SelectDate = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -38,7 +39,8 @@ const SelectDate = () => {
   // }
 
   return (
-    <div>
+    <div style={{padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <h2>여행하실 날짜를 선택해주세요</h2>
       <DateRange
         editableDateInputs={true}
         onChange={(item) => setState([item.selection])}
@@ -46,7 +48,14 @@ const SelectDate = () => {
         ranges={state}
       />
       <form onSubmit={saveTravelDates}>
-        <button>날짜 저장하기</button>
+        <button
+          onClick={() => {
+            navigate('../select-place');
+            // 날짜 저장
+          }}
+        >
+          날짜 저장하기
+        </button>
       </form>
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>

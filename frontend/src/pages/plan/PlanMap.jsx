@@ -23,10 +23,6 @@ export default function PlanMap() {
     // console.log(searchWord);
   };
 
-  // navigate 장소바구니
-  const toPlaceCart = () => {
-
-  }
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
@@ -49,12 +45,10 @@ export default function PlanMap() {
             placeURL: data[i].place_url,
             categoryCode: data[i].category_group_code,
             roadAddressName: data[i].road_address_name,
-
           });
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         setMarkers(markers);
-
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
@@ -80,7 +74,6 @@ export default function PlanMap() {
         onCreate={setMap}
       >
         {markers.map((marker) => (
-
           <>
             <MapMarker
               key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
@@ -92,7 +85,6 @@ export default function PlanMap() {
               }}
             />
             {isOpen && (
-
               <CustomOverlayMap
                 key={`${marker.position.lng}`}
                 position={{
@@ -104,10 +96,12 @@ export default function PlanMap() {
                   <div className="info">
                     <div className="title">
                       {info.content}
-                      <div> <button
-                        className="close"
-                        onClick={() => setIsOpen(false)}
-                        title="닫기">X</button></div>
+                      <div>
+                        {' '}
+                        <button className="close" onClick={() => setIsOpen(false)} title="닫기">
+                          X
+                        </button>
+                      </div>
                     </div>
                     <div className="body">
                       <div className="img">
@@ -119,40 +113,24 @@ export default function PlanMap() {
                         /> */}
                       </div>
                       <div className="desc">
-                        <div className="ellipsis">
-                          {info.roadAddressName}
-                        </div>
-                        <div className="jibun ellipsis">
-                          {info.addressName}
-                        </div>
+                        <div className="ellipsis">{info.roadAddressName}</div>
+                        <div className="jibun ellipsis">{info.addressName}</div>
                         <div>
-                          <a
-                            href={info.placeURL}
-                            target="_blank"
-                            className="link"
-                            rel="noreferrer"
-                          >
+                          <a href={info.placeURL} target="_blank" className="link" rel="noreferrer">
                             디테일
                           </a>
-                          <button >추가</button>
+                          <button>추가</button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </CustomOverlayMap>
             )}
           </>
         ))}
-
-
-
-
-
-
       </Map>
-    </div >
+    </div>
   );
 }
 

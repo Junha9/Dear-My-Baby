@@ -1,5 +1,6 @@
 .placeItem {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   border: none;
   margin: 1%;
@@ -7,16 +8,26 @@
 
 .placeFrame {
   display: flex;
-  /* margin: 5vw; */
+  margin: 5vw;
   justify-content: center;
-}
-.mainFrame {
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  padding-block: 5vh;
 }
 
+.carousel-slider {
+  padding: 1%;
+}
+
+.main-frame {
+  /* text-align: center; */
+  align-items: center;
+  justify-content: center;
+  padding-block: 3vh;
+  padding: 3vh;
+}
+
+.user-plan {
+  padding: 3vh;
+}
+/*
 .recommandCard {
   padding: 2.5%;
   margin-inline: 5%;
@@ -25,4 +36,19 @@
 
 .recomandCityCard {
   margin-inline: 5%;
+}
+*/
+
+/* 
+.main-div {
+  padding: 3% 2%
+} */
+
+.plus-plan:hover {
+  cursor: pointer;
+}
+
+.head-bar {
+  background-color: 'rgba(0, 55, 86, 1)';
+  box-shadow: '0';
 }

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import Home from '@/pages/home';
-import Plan, { PlanForm, FindCity, PlaceCart } from '@/pages/plan';
+import Plan, { PlanForm, FindCity, PlaceCart, SelectDate, SelectGroup, SelectPlace } from '@/pages/plan';
 import Record from '@/pages/record';
 import Album, { AlbumList, AlbumMap, AlbumRecordList } from '@/pages/album';
 import User from '@/pages/user';
@@ -30,6 +30,18 @@ const router = createBrowserRouter([
           {
             path: 'place-cart',
             element: <PlaceCart></PlaceCart>,
+          },
+          {
+            path: 'select-group',
+            element: <SelectGroup></SelectGroup>,
+          },
+          {
+            path: 'select-date',
+            element: <SelectDate></SelectDate>,
+          },
+          {
+            path: 'select-place',
+            element: <SelectPlace></SelectPlace>,
           },
         ],
       },

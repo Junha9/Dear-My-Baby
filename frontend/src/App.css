@@ -31,3 +31,20 @@ body {
     text-align: left;
   }
 }
+
+button {
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(252, 163, 17, 1);
+  padding: 5px 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+
+:root {
+  --main-orange: rgba(252, 163, 17, 1);
+}
