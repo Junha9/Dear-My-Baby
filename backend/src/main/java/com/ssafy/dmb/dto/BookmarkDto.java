@@ -40,7 +40,7 @@ public class BookmarkDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Request {
+    public static class BookmarkRequest {
 //        private Long id;
         private Long planId;
         private String bookmarkName;

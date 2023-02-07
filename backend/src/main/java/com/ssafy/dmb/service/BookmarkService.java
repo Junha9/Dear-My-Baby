@@ -28,7 +28,7 @@ public class BookmarkService {
 
 
     @Transactional
-    public BookmarkDto.Detail create(BookmarkDto.Request request){
+    public BookmarkDto.Detail create(BookmarkDto.BookmarkRequest request){
         LOGGER.info("[createBookmark] input request : {}", request);
         Long planId = request.getPlanId();
 

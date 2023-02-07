@@ -48,7 +48,7 @@ public class PlanService {
 
     }
 
-    public PlanDto.Detail createPlan(PlanDto.Request request) {
+    public PlanDto.Detail createPlan(PlanDto.PlanRequest request) {
         LOGGER.info("[createPlan] input request: {}", request);
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
@@ -76,7 +76,7 @@ public class PlanService {
 
     }
 
-    public PlanDto.Detail updatePlan(PlanDto.Request request, Long planId) {
+    public PlanDto.Detail updatePlan(PlanDto.PlanRequest request, Long planId) {
         LOGGER.info("[updatePlan] input request: {}, {}", request, planId );
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();

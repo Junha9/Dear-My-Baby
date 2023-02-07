@@ -34,12 +34,12 @@ public class PlanController {
 
     @Operation(summary = "여행 계획 생성", description = "여행 계획을 생성한다.")
     @PostMapping("/new")
-    public ResponseEntity<PlanDto.Detail> createPlan(@RequestBody PlanDto.Request request) {
+    public ResponseEntity<PlanDto.Detail> createPlan(@RequestBody PlanDto.PlanRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(planService.createPlan(request));
     }
     @Operation(summary = "여행 계획 수정", description = "<strong> planId </strong>를 통해 여행 계획을 수정한다.")
     @PutMapping("/update/{planId}")
-    public ResponseEntity<PlanDto.Detail> updatePlan(@PathVariable("planId") Long planId, @RequestBody PlanDto.Request request) {
+    public ResponseEntity<PlanDto.Detail> updatePlan(@PathVariable("planId") Long planId, @RequestBody PlanDto.PlanRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(planService.updatePlan(request, planId));
     }
 

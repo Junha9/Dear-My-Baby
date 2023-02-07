@@ -37,7 +37,7 @@ public class BookmarkController {
 
     @Operation(summary = "북마크 저장", description = "북마크 정보 저장 한다.")
     @PostMapping("/new")
-    public ResponseEntity<BookmarkDto.Detail> saveBookmark(@RequestBody BookmarkDto.Request request) {
+    public ResponseEntity<BookmarkDto.Detail> saveBookmark(@RequestBody BookmarkDto.BookmarkRequest request) {
 
         return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.create(request));
     }

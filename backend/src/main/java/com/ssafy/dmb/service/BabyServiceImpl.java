@@ -31,7 +31,7 @@ public class BabyServiceImpl implements BabyService{
         return babyInfo;
     }
 
-    public BabyDto.Response createBabyInfo(BabyDto.Request request) {
+    public BabyDto.Response createBabyInfo(BabyDto.BabyRequest request) {
         LOGGER.info("[createBabyInfo] input request : {}", request);
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
@@ -51,7 +51,7 @@ public class BabyServiceImpl implements BabyService{
 
     }
 
-    public BabyDto.Response updateBabyInfo(BabyDto.Request request, Long babyId) {
+    public BabyDto.Response updateBabyInfo(BabyDto.BabyRequest request, Long babyId) {
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
 

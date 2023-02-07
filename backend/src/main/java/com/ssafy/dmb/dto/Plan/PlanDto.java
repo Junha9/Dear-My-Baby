@@ -2,6 +2,7 @@ package com.ssafy.dmb.dto.Plan;
 
 import com.ssafy.dmb.domain.Family;
 import com.ssafy.dmb.domain.plan.Plan;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -39,8 +40,9 @@ public class PlanDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Request {
+    public static class PlanRequest {
         private Long familyId;
+        @Schema(description = "이름")
         private String planName;
         private String planDestination;
         private LocalDate startDate;

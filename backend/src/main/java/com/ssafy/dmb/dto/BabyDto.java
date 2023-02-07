@@ -2,6 +2,7 @@ package com.ssafy.dmb.dto;
 
 import com.ssafy.dmb.domain.baby.Baby;
 import com.ssafy.dmb.domain.baby.BabyCharacter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,7 +45,7 @@ public class BabyDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Request{
+    public static class BabyRequest{
         private Long familyId;
 
         private Set<String> favoriteSpot = new HashSet<String>();

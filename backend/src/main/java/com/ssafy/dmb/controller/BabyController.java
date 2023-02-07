@@ -40,7 +40,7 @@ public class BabyController {
     @PostMapping("/new")
     @Operation(summary = "아이 정보 등록", description = "아이 정보를 생성한다.")
     @ResponseBody
-    public ResponseEntity<BabyDto.Response> createBabyInfo(@RequestBody BabyDto.Request request) {
+    public ResponseEntity<BabyDto.Response> createBabyInfo(@RequestBody BabyDto.BabyRequest request) {
 
         return ResponseEntity.status(HttpStatus.OK).body(babyService.createBabyInfo(request));
     }
@@ -48,7 +48,7 @@ public class BabyController {
     @PutMapping("/{babyId}")
     @Operation(summary = "아이 정보 수정", description = "<strong>babyId</strong>를 통해 아이 정보를 수정한다.")
     @ResponseBody
-    public ResponseEntity<BabyDto.Response> updateBabyInfo(@RequestBody BabyDto.Request request,
+    public ResponseEntity<BabyDto.Response> updateBabyInfo(@RequestBody BabyDto.BabyRequest request,
                                                            @PathVariable("babyId") Long babyId) {
 
         return ResponseEntity.status(HttpStatus.OK).body(babyService.updateBabyInfo(request, babyId));
