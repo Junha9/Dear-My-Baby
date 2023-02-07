@@ -2,8 +2,7 @@ package com.ssafy.dmb.domain;
 
 import com.ssafy.dmb.domain.baby.Baby;
 import com.ssafy.dmb.domain.plan.Plan;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Family {
 
     @Id @GeneratedValue
@@ -20,6 +20,9 @@ public class Family {
     @Column(nullable = false)
     private String familyName;
 
+    @Column
+    private String invitation;
+
     @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
     private List<FamilyUser> FamilyUser = new ArrayList<>();
 
@@ -28,4 +31,10 @@ public class Family {
 
     @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
     private List<Baby> babies = new ArrayList<>();
+
+    @Builder
+    public Family(String familyName, String invitation) {
+        this.familyName = familyName;
+        this.invitation = invitation;
+    }
 }

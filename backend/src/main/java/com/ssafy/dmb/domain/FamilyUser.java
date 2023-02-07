@@ -1,12 +1,12 @@
 package com.ssafy.dmb.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FamilyUser {
 
     @Id @GeneratedValue
@@ -24,4 +24,12 @@ public class FamilyUser {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Builder
+    public FamilyUser(Family family, Member member, Role role) {
+        this.family = family;
+        this.member = member;
+        this.role = role;
+    }
+
 }
