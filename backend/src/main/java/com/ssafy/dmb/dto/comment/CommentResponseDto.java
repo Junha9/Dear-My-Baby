@@ -27,8 +27,8 @@ public class CommentResponseDto {
 
     public CommentResponseDto(Comment comment) {
         commentId = comment.getId();
-        userNo = comment.getUser().getNo();
-        userName = comment.getUser().getUserName();
+        userNo = comment.getMember().getNo();
+        userName = comment.getMember().getMemberName();
         recordId = comment.getRecord().getId();
         commentText = comment.getCommentText();
         commentDate = comment.getCommentDate();

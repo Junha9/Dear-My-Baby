@@ -9,15 +9,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserDto {
+public class MemberDto {
 
-    private String userName;
+    private String memberName;
 
-    private String userEmail;
+    private String memberEmail;
 
-    private String userPassword;
+    private String memberPassword;
 
-    private String userId;
+    private String memberId;
 
-    private String userImg;
+    private String memberImg;
 }

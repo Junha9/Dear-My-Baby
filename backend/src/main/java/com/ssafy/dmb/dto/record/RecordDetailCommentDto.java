@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 public class RecordDetailCommentDto {
     private Long commentId;
 
-    private String userId;
+    private String memberId;
 
-    private String userName;
+    private String memberName;
 
     private String commentText;
 
@@ -23,8 +23,8 @@ public class RecordDetailCommentDto {
 
     public RecordDetailCommentDto(Comment comment){
         this.commentId = comment.getId();
-        this.userId = comment.getUser().getUserId();
-        this.userName = comment.getUser().getUserName();
+        this.memberId = comment.getMember().getMemberId();
+        this.memberName = comment.getMember().getMemberName();
         this.commentText = comment.getCommentText();
         this.commentDate = comment.getCommentDate();
     }
@@ -33,8 +33,8 @@ public class RecordDetailCommentDto {
     public String toString() {
         return "CommentResponseDto{" +
                 "commentId=" + commentId +
-                ", userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", memberName='" + memberName + '\'' +
                 ", commentText='" + commentText + '\'' +
                 ", commentDate=" + commentDate +
                 '}';

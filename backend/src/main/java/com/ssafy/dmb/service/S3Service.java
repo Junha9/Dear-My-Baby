@@ -50,6 +50,8 @@ public class S3Service{
             this.fileDir = System.getProperty("user.dir") + this.basicDir;
         } else if(environment.equals("development")){
             this.fileDir = this.basicDir;
+        }else if(environment.equals("production")){
+            this.fileDir = this.basicDir;
         }
     }
 

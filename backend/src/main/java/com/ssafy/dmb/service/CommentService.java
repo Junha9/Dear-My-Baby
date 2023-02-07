@@ -1,13 +1,13 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.User;
+import com.ssafy.dmb.domain.Member;
 import com.ssafy.dmb.domain.record.Comment;
 import com.ssafy.dmb.domain.record.Record;
 import com.ssafy.dmb.dto.comment.CommentDto;
 import com.ssafy.dmb.dto.comment.CommentResponseDto;
 import com.ssafy.dmb.repository.CommentRepository;
 import com.ssafy.dmb.repository.RecordRepository;
-import com.ssafy.dmb.repository.UserRepository;
+import com.ssafy.dmb.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final RecordRepository recordRepository;
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
     public CommentResponseDto saveComment(CommentDto commentDto) {
         Long recordId = commentDto.getRecordId();
@@ -37,11 +37,11 @@ public class CommentService {
 
         Record record = recordRepository.findById(recordId).
                 orElseThrow(() -> new NoSuchElementException());
-        User user = userRepository.findById(userNo).
+        Member member = memberRepository.findById(userNo).
                 orElseThrow(() -> new NoSuchElementException());
         Comment comment = Comment.builder().
                 record(record).
-                user(user).
+                member(member).
                 commentText(commentDto.getCommentText()).
                 build();
 

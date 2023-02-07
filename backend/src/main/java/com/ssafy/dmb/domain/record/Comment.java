@@ -1,7 +1,7 @@
 package com.ssafy.dmb.domain.record;
 
 
-import com.ssafy.dmb.domain.User;
+import com.ssafy.dmb.domain.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +23,8 @@ public class Comment {
 
     // FK
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_no")
-    private User user;
+    @JoinColumn(name = "member_no")
+    private Member member;
 
     @Column(nullable = false)
     private String commentText;
@@ -33,9 +33,9 @@ public class Comment {
     private LocalDateTime commentDate;
 
     @Builder
-    public Comment(Record record, User user, String commentText) {
+    public Comment(Record record, Member member, String commentText) {
         this.record = record;
-        this.user = user;
+        this.member = member;
         this.commentText = commentText;
     }
 }

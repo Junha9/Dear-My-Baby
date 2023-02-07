@@ -19,8 +19,8 @@ public class FamilyUser {
 
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_no")
-    private User user;
+    @JoinColumn(name = "member_no")
+    private Member member;
 
     @Enumerated(EnumType.STRING)
     private Role role;
