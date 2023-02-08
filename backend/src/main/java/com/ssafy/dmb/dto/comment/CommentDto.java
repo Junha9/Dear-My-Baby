@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CommentDto {
     private Long recordId;
 
-    private Long userNo;
+    private String memberId;
 
     private String commentText;
 }

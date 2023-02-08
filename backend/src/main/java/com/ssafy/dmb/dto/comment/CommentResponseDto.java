@@ -15,7 +15,7 @@ public class CommentResponseDto {
 
     private Long commentId;
 
-    private Long userNo;
+    private String memberId;
 
     private String userName;
 
@@ -27,7 +27,7 @@ public class CommentResponseDto {
 
     public CommentResponseDto(Comment comment) {
         commentId = comment.getId();
-        userNo = comment.getMember().getNo();
+        memberId = comment.getMember().getMemberId();
         userName = comment.getMember().getMemberName();
         recordId = comment.getRecord().getId();
         commentText = comment.getCommentText();

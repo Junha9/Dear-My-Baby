@@ -10,12 +10,12 @@ public class FamilyDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Response {
+    public static class familyResponse {
 
         private String familyName;
         private String invitation;
 
-        public Response(Family family) {
+        public familyResponse(Family family) {
             this.familyName = family.getFamilyName();
             this.invitation = family.getInvitation();
         }
@@ -24,7 +24,7 @@ public class FamilyDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Request {
+    public static class familyRequest {
         private String familyName;
 
         private String memberId;

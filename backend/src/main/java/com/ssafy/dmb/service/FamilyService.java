@@ -24,7 +24,7 @@ public class FamilyService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public FamilyDto.Response createFamily(FamilyDto.Request request) {
+    public FamilyDto.familyResponse createFamily(FamilyDto.familyRequest request) {
         LOGGER.info("[createFamily] input request: {}", request);
 
         String memberId = request.getMemberId();
@@ -50,7 +50,7 @@ public class FamilyService {
                 .build();
 
         familyUserRepository.save(familyUser);
-        FamilyDto.Response result = new FamilyDto.Response(family);
+        FamilyDto.familyResponse result = new FamilyDto.familyResponse(family);
         return result;
 
     }
@@ -62,7 +62,7 @@ public class FamilyService {
     }
 
     @Transactional
-    public FamilyDto.Response joinFamily(String invitationCode, String memberId) {
+    public FamilyDto.familyResponse joinFamily(String invitationCode, String memberId) {
         LOGGER.info("[joinFamily] invitationCode: {}", invitationCode);
 
         Family family = familyRepository.findByInvitation(invitationCode).get();
@@ -80,15 +80,15 @@ public class FamilyService {
         LOGGER.info("[joinFamily] familyUser: {}", familyUser);
         FamilyUser saved = familyUserRepository.save(familyUser);
         LOGGER.info("[joinFamily] saved: {}", saved);
-        FamilyDto.Response result = new FamilyDto.Response(family);
+        FamilyDto.familyResponse result = new FamilyDto.familyResponse(family);
         LOGGER.info("[joinFamily] completed");
         return result;
     }
 
-    public FamilyDto.Response getFamilyDetail(Long familyId) {
+    public FamilyDto.familyResponse getFamilyDetail(Long familyId) {
         Family family = familyRepository.findById(familyId).get();
         LOGGER.info("[getFamilyDetail] family: {}", family.getFamilyUser());
-        FamilyDto.Response result = new FamilyDto.Response(family);
+        FamilyDto.familyResponse result = new FamilyDto.familyResponse(family);
         LOGGER.info("[getFamilyDetail] result: {}", result);
         return result;
     }

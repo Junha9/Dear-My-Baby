@@ -33,12 +33,11 @@ public class CommentService {
 
     public CommentResponseDto saveComment(CommentDto commentDto) {
         Long recordId = commentDto.getRecordId();
-        Long userNo = commentDto.getUserNo();
+        String memberId = commentDto.getMemberId();
 
         Record record = recordRepository.findById(recordId).
                 orElseThrow(() -> new NoSuchElementException());
-        Member member = memberRepository.findById(userNo).
-                orElseThrow(() -> new NoSuchElementException());
+        Member member = memberRepository.findByMemberId(memberId);
         Comment comment = Comment.builder().
                 record(record).
                 member(member).

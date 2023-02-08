@@ -18,7 +18,7 @@ public class FamilyController {
 
     @PostMapping("/new")
     @ResponseBody
-    public ResponseEntity<FamilyDto.Response> createFamily(@RequestBody FamilyDto.Request request) {
+    public ResponseEntity<FamilyDto.familyResponse> createFamily(@RequestBody FamilyDto.familyRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.createFamily(request));
     }
 
@@ -29,13 +29,14 @@ public class FamilyController {
     }
     @PostMapping("/join")
     @ResponseBody
-    public ResponseEntity<FamilyDto.Response> joinFamily(@RequestParam("invitationCode") String invitationCode, @RequestParam("memberId") String memberId) {
+    public ResponseEntity<FamilyDto.familyResponse> joinFamily(@RequestParam("invitationCode") String invitationCode
+            , @RequestParam("memberId") String memberId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.joinFamily(invitationCode, memberId));
     }
 
     @GetMapping("/detail/{familyId}")
     @ResponseBody
-    public ResponseEntity<FamilyDto.Response> getFamilyDetail(@PathVariable("familyId") Long familyId) {
+    public ResponseEntity<FamilyDto.familyResponse> getFamilyDetail(@PathVariable("familyId") Long familyId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.getFamilyDetail(familyId));
     }
 }
