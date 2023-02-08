@@ -1,0 +1,16 @@
+.question {
+    box-sizing: content-box;
+    border-radius: 10px;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    color: rgba(252, 163, 17, 1);
+}
+
+.noshow {
+    display: none;
+}
+
+.show {
+    display: block;
+}

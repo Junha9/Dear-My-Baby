@@ -19,14 +19,15 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-img,
+/*카카오 도형 svg이 보이지 않게 되어 주석 처리함*/
+/* img,
 picture,
 video,
 canvas,
 svg {
   display: block;
   max-width: 100%;
-}
+} */
 input,
 button,
 textarea,

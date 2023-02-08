@@ -35,11 +35,11 @@ export default function AlbumList() {
   return (
     <>
       <Box p={2}>
-        <Typography variant="h3">내 여행 기록들</Typography>
+        <Typography className='travel-record' variant="h4"> 내 여행 기록들 </Typography>
       </Box>
-      <List>
+      <List className='record-list'>
         {plans.map((plan) => (
-          <ListItem
+          <ListItem className='record-detail'
             key={plan.planId}
             secondaryAction={
               <IconButton component={Link} to="map" edge="end" aria-label="to-map">

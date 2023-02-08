@@ -1,3 +1,7 @@
+/* 배경 색 : rgba(255, 255, 255, 0.922) */
+/* 시그니쳐 색 : rgb(59, 45, 142) */
+
+
 .placeItem {
   display: flex;
   flex-direction: column;
@@ -22,10 +26,18 @@
   justify-content: center;
   padding-block: 3vh;
   padding: 3vh;
+  /* background-color: rgb(249, 255, 202); */
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
 }
 
 .user-plan {
   padding: 3vh;
+  /* background-color: rgb(249, 255, 202); */
+  background-color: rgba(255, 255, 255, 0.922);
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  box-shadow: 1px 1px 1px 1px rgb(255, 255, 255);
 }
 /*
 .recommandCard {
@@ -39,10 +51,12 @@
 }
 */
 
-/* 
+
 .main-div {
-  padding: 3% 2%
-} */
+  padding: 0% 0%;
+  background-color: rgb(59, 45, 142);
+  
+}
 
 .plus-plan:hover {
   cursor: pointer;
@@ -51,4 +65,42 @@
 .head-bar {
   background-color: 'rgba(0, 55, 86, 1)';
   box-shadow: '0';
+}
+
+.dday-alarm {
+  /* background-color: rgb(255, 243, 152); */
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: px 2px 0px rgba(255, 255, 255, 0.314);
+  
+}
+
+.dday-alarm-text {
+  padding: 10px;
+  padding-left: 20px;
+}
+
+.dday-alarm-button {
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+.plan-append {
+  /* background-color: rgb(255, 243, 152); */
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 2px 2px 1px rgba(255, 255, 255, 0.429);
+}
+
+.plan-append-text {
+  padding: 10px;
+  padding-left: 10px;
+}
+.plan-append-text {
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+.recommend {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.922);
 }

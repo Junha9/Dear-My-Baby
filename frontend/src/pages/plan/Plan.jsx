@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import './plan.css'
+import './plan.css';
 
 export default function Plan() {
   return (
-    <div>
+    <div className="planFrame">
       <Outlet></Outlet>
     </div>
   );

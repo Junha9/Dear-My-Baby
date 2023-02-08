@@ -39,13 +39,46 @@ div {
 }
 
 .recording-btn {
-  margin: 5px;
-  border-radius: 0;
   background-color: white;
-  border: 1px solid black;
   color: black;
+  border: 1px solid var(--main-orange);
+  font-size: 0.8rem;
+  border-radius: 5px;
+  width: 60%;
 }
 
-.Record_input {
+.record-input {
   display: none;
+}
+
+.upload-input {
+  box-shadow: 1px 1px 2px rgb(189, 189, 189);
+  border: none;
+  background-color: rgb(211, 208, 208, 0.3);
+}
+
+.upload-input:focus {
+  outline: none;
+  border: 2px solid rgb(230, 154, 56, 0.5);
+  background-color: white;
+}
+
+.recording-btn:focus {
+  outline: none;
+}
+
+.upload-title {
+  margin-bottom: 10%;
+  padding: 3px;
+}
+
+.upload-btn {
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(252, 163, 17, 1);
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  width: 30%;
 }

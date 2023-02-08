@@ -1,12 +1,10 @@
-import RecordMap from './RecordMap';
-// import RecordMapItem from "./RecordMapItem";
+import { Outlet } from 'react-router-dom';
 import './Record.css';
 
 const Record = () => {
   return (
     <div className="record">
-      <RecordMap />
-      {/* <RecordMapItem/> */}
+      <Outlet></Outlet>
     </div>
   );
 };

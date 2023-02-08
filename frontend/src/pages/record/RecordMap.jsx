@@ -3,10 +3,44 @@ import { useState, useEffect } from 'react';
 import { Modal, Box } from '@mui/material';
 import './Record.css';
 import RecordUpload from './RecordUpload';
+import RecordMapItem from './RecordMapItem';
+
+const dummyRecords = [
+  {
+    recordId: 1,
+    dayId: 1,
+    recordFile: 'string',
+    latitude: '37.5228',
+    longitude: '127.0184',
+    recordType: 0,
+    fileUrl: 'string',
+    recordDate: '2023-02-06T10:44:59.097Z',
+  },
+  {
+    recordId: 2,
+    dayId: 1,
+    recordFile: 'string',
+    latitude: '37.513',
+    longitude: '127.05',
+    recordType: 0,
+    fileUrl: 'string',
+    recordDate: '2023-02-06T10:44:59.097Z',
+  },
+  {
+    recordId: 3,
+    dayId: 1,
+    recordFile: 'string',
+    latitude: '37.514',
+    longitude: '127.04',
+    recordType: 0,
+    fileUrl: 'string',
+    recordDate: '2023-02-06T10:44:59.097Z',
+  },
+];
 
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
-
+  const [records, setRecords] = useState(dummyRecords);
   const [modalOpen, setModalOpen] = useState(false);
 
   const [state, setState] = useState({
@@ -17,6 +51,17 @@ const RecordMap = () => {
     errMsg: null,
     isLoading: true,
   });
+
+  //  const makeFootprint = () => {
+  //   const prev = records
+  //   setRecords(prev.map((e) => {
+  //     return {
+  //       ...e,
+  //       latitude: state.center.lat,
+  //       longitude: state.center.lng,
+  //     }
+  //   }))
+  //  }
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -48,6 +93,8 @@ const RecordMap = () => {
     }
   }, []);
 
+  const points = records.map((record) => ({ lat: record.latitude, lng: record.longitude }));
+
   return (
     <div>
       <Map
@@ -56,7 +103,7 @@ const RecordMap = () => {
           width: '100%',
           height: '100vh',
         }}
-        level={4}
+        level={5}
         draggable={true}
       >
         {!state.isLoading && state.errMsg ? (
@@ -89,13 +136,29 @@ const RecordMap = () => {
                   height: '40px',
                   marginBottom: '5px',
                 }}
-                onClick={() => setModalOpen(true)}
+                onClick={() => {
+                  // makeFootprint();
+                  setModalOpen(true);
+                }}
                 className="recording-foot"
+                alt="record foot"
               />
               <div className="center recording-msg">현재 위치에 발자국을 남겨보세요</div>
             </div>
           </CustomOverlayMap>
         )}
+
+        {records.map((record) => {
+          return <RecordMapItem key={record.recordId} record={record}></RecordMapItem>;
+        })}
+
+        <Polyline
+          path={[points]}
+          strokeWeight={5} // 선의 두께 입니다
+          strokeColor={'#FFAE00'} // 선의 색깔입니다
+          strokeOpacity={0.7} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+          strokeStyle={'solid'} // 선의 스타일입니다
+        />
       </Map>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
@@ -105,17 +168,19 @@ const RecordMap = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 200,
             bgcolor: 'background.paper',
-            border: '1px solid #000',
-            boxShadow: 24,
-            p: 4,
+            boxShadow: '50',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '10px',
+            p: 2,
           }}
         >
           {!state.errMsg ? (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <button className="recording-btn">카메라</button>
-              <RecordUpload></RecordUpload>
+            <div>
+              <RecordUpload recordLocation={state}></RecordUpload>
             </div>
           ) : (
             <div>위치를 불러올 수 없어요!</div>

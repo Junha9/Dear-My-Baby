@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import AlbumRecordItem from './AlbumRecordItem';
 import IconButton from '@mui/material/IconButton';
 import MapIcon from '@mui/icons-material/Map';
+// import { padding } from '@mui/system';
 
 const records = [
   {
@@ -35,20 +36,28 @@ const records = [
 export default function AlbumRecord() {
   return (
     <>
-      <Box p={2}>
-        <Typography variant="h3">제주도 여행</Typography>
-        <Box sx={{ display: 'flex', alignContent: 'center' }}>
-          <Typography variant="h6" sx={{ color: 'gray' }}>
-            2023-01-01 ~ 2023-01-03
+      {/* 여행 기록 제목  */}
+      <Box className='record-name-box' p={2}>
+        <Typography className='record-name' variant="h4">제주도 여행</Typography>
+ 
+        <Box className='date-map-link' sx={{ display: 'flex', alignContent: 'center' }}>
+          <Typography variant="h7" sx={{ color: 'gray' }} >
+              2023-01-01 ~ 2023-01-03
           </Typography>
           <IconButton component={Link} to="../map" edge="end" aria-label="to-map">
             <MapIcon />
           </IconButton>
         </Box>
       </Box>
-      {records.map((record) => (
-        <AlbumRecordItem key={record.recordId} record={record}></AlbumRecordItem>
-      ))}
+
+      <div className='record-list-box'>
+        <div className='record-list-text'>
+          <p>여행을 추억해보세요</p>
+        </div>
+        {records.map((record) => (
+          <AlbumRecordItem key={record.recordId} record={record}></AlbumRecordItem>
+        ))}
+      </div>
     </>
   );
 }

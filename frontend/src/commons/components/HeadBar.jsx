@@ -35,7 +35,7 @@ export default function HeadBar() {
   }
 
   return (
-    <AppBar color="inherit" position="sticky" style={{ backgroundColor: 'rgba(0, 55, 86, 1)', boxShadow: '0 0' }}>
+    <AppBar color="inherit" position="sticky" style={{ backgroundColor: 'rgb(59, 45, 142)', boxShadow: '0 0' }}>
       <Toolbar>
         <IconButton
           size="large"
@@ -48,8 +48,8 @@ export default function HeadBar() {
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}>
-            <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '10px' }}></img>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
+            <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '10px'}}></img>
             DearMyBaby
           </Link>
         </Typography>
