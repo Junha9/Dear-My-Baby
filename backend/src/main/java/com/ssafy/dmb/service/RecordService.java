@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -76,6 +77,7 @@ public class RecordService {
                 recordFile(recordDto.getRecordFile()).
                 recordText(recordDto.getRecordText()).
                 recordCoordinate(recordCoordinate).
+                recordDate(LocalDateTime.now()).
                 fileUrl(url).
                 build();
 

@@ -38,17 +38,17 @@ public class Record {
     @Embedded
     private Coordinate recordCoordinate;
 
-    @Column(columnDefinition = "DATETIME default now()")
     private LocalDateTime recordDate;
 
     @Builder
-    public Record(String fileUrl, String recordFile, String recordText, int recordType, Day day, Coordinate recordCoordinate) {
+    public Record(String fileUrl, String recordFile, String recordText, int recordType, Day day, Coordinate recordCoordinate, LocalDateTime recordDate) {
         this.fileUrl = fileUrl;
         this.recordFile = recordFile;
         this.recordText = recordText;
         this.recordType = recordType;
         this.day = day;
         this.recordCoordinate = recordCoordinate;
+        this.recordDate = recordDate;
     }
 
 }

@@ -29,13 +29,13 @@ public class Comment {
     @Column(nullable = false)
     private String commentText;
 
-    @Column(columnDefinition = "DATETIME default now()")
     private LocalDateTime commentDate;
 
     @Builder
-    public Comment(Record record, Member member, String commentText) {
+    public Comment(Record record, Member member, String commentText, LocalDateTime commentDate) {
         this.record = record;
         this.member = member;
         this.commentText = commentText;
+        this.commentDate = commentDate;
     }
 }

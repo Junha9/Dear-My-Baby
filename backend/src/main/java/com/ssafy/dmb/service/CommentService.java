@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -42,6 +43,7 @@ public class CommentService {
                 record(record).
                 member(member).
                 commentText(commentDto.getCommentText()).
+                commentDate(LocalDateTime.now()).
                 build();
 
         commentRepository.save(comment);
