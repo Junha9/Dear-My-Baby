@@ -1,7 +1,7 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.Member;
-import com.ssafy.dmb.dto.jwt.JwtTokenProvider;
+import com.ssafy.dmb.domain.user.Member;
+import com.ssafy.dmb.jwt.JwtTokenProvider;
 import com.ssafy.dmb.dto.login.TokenInfo;
 import com.ssafy.dmb.dto.user.MemberDto;
 import com.ssafy.dmb.dto.user.MemberResponseDto;

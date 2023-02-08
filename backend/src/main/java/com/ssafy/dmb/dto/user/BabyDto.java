@@ -1,11 +1,9 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.user;
 
 import com.ssafy.dmb.domain.baby.Baby;
-import com.ssafy.dmb.domain.baby.BabyCharacter;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +11,8 @@ import java.util.Set;
 public class BabyDto {
 
     @Getter
-    @Builder
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class Response{
 
         private Long babyId;
@@ -29,7 +27,6 @@ public class BabyDto {
 
         private Set<String> favoriteFood = new HashSet<String>();
 
-//        private Set<BabyCharacter> babyCharacterSet = new HashSet<BabyCharacter>();
 
         public Response(Baby baby) {
             this.babyId = baby.getId();
@@ -43,8 +40,8 @@ public class BabyDto {
     }
 
     @Getter
-    @Builder
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class BabyRequest{
         private Long familyId;
 

@@ -1,6 +1,6 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.Family;
+import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.dto.Plan.PlanDto;

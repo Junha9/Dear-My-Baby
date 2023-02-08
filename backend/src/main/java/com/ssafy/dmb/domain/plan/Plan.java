@@ -1,6 +1,6 @@
 package com.ssafy.dmb.domain.plan;
 
-import com.ssafy.dmb.domain.Family;
+import com.ssafy.dmb.domain.user.Family;
 import lombok.*;
 
 import javax.persistence.*;

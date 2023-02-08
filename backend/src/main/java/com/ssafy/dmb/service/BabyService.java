@@ -1,6 +1,6 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.dto.BabyDto;
+import com.ssafy.dmb.dto.user.BabyDto;
 
 public interface BabyService {
 

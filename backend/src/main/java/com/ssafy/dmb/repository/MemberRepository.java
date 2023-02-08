@@ -1,6 +1,6 @@
 package com.ssafy.dmb.repository;
 
-import com.ssafy.dmb.domain.Member;
+import com.ssafy.dmb.domain.user.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.ssafy.dmb.domain;
+package com.ssafy.dmb.domain.user;
 
 import java.util.Random;
 

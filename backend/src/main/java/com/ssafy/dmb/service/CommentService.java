@@ -1,6 +1,6 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.Member;
+import com.ssafy.dmb.domain.user.Member;
 import com.ssafy.dmb.domain.record.Comment;
 import com.ssafy.dmb.domain.record.Record;
 import com.ssafy.dmb.dto.comment.CommentDto;

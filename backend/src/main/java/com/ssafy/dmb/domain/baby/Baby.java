@@ -1,6 +1,6 @@
 package com.ssafy.dmb.domain.baby;
 
-import com.ssafy.dmb.domain.Family;
+import com.ssafy.dmb.domain.user.Family;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

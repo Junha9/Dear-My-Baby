@@ -1,7 +1,7 @@
 package com.ssafy.dmb.domain.record;
 
 
-import com.ssafy.dmb.domain.Member;
+import com.ssafy.dmb.domain.user.Member;
 import lombok.*;
 
 import javax.persistence.*;

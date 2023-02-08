@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.Plan;
 
 import com.amazonaws.services.ec2.model.LocationType;
 import com.ssafy.dmb.domain.plan.Bookmark;

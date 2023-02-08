@@ -1,6 +1,6 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.Member;
+import com.ssafy.dmb.domain.user.Member;
 import com.ssafy.dmb.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;

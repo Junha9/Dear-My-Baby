@@ -1,15 +1,15 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.user;
 
-import com.ssafy.dmb.domain.Family;
+import com.ssafy.dmb.domain.user.Family;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class FamilyDto {
 
     @Getter
-    @Builder
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class familyResponse {
 
         private String familyName;
@@ -22,8 +22,8 @@ public class FamilyDto {
 
     }
     @Getter
-    @Builder
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class familyRequest {
         private String familyName;
 

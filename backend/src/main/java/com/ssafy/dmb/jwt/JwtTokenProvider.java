@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto.jwt;
+package com.ssafy.dmb.jwt;
 
 import com.ssafy.dmb.dto.login.TokenInfo;
 import io.jsonwebtoken.*;

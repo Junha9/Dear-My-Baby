@@ -1,8 +1,8 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.Family;
+import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.baby.Baby;
-import com.ssafy.dmb.dto.BabyDto;
+import com.ssafy.dmb.dto.user.BabyDto;
 import com.ssafy.dmb.repository.BabyRepository;
 import com.ssafy.dmb.repository.FamilyRepository;
 import lombok.RequiredArgsConstructor;

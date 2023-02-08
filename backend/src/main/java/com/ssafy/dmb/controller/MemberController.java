@@ -1,6 +1,6 @@
 package com.ssafy.dmb.controller;
 
-import com.ssafy.dmb.dto.jwt.JwtTokenProvider;
+import com.ssafy.dmb.jwt.JwtTokenProvider;
 import com.ssafy.dmb.dto.login.MemberLoginRequestDto;
 import com.ssafy.dmb.dto.login.TokenInfo;
 import com.ssafy.dmb.dto.user.MemberDto;
@@ -85,6 +85,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "로그인", description = "<strong> Id, Password</strong>을 통해 로그인한다.")
     public String memberLogin(@RequestBody MemberLoginRequestDto memberLoginRequestDto
             , HttpServletResponse httpServletResponse) throws IOException {
         String memberId = memberLoginRequestDto.getMemberId();

@@ -1,6 +1,5 @@
 package com.ssafy.dmb.dto.Plan;
 
-import com.ssafy.dmb.domain.Family;
 import com.ssafy.dmb.domain.plan.Plan;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;

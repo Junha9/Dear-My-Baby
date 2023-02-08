@@ -1,7 +1,7 @@
 package com.ssafy.dmb.config;
 
-import com.ssafy.dmb.dto.jwt.JwtAuthenticationFilter;
-import com.ssafy.dmb.dto.jwt.JwtTokenProvider;
+import com.ssafy.dmb.jwt.JwtAuthenticationFilter;
+import com.ssafy.dmb.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

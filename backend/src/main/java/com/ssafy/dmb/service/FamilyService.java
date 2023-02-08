@@ -1,7 +1,7 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.*;
-import com.ssafy.dmb.dto.FamilyDto;
+import com.ssafy.dmb.domain.user.*;
+import com.ssafy.dmb.dto.user.FamilyDto;
 import com.ssafy.dmb.repository.FamilyRepository;
 import com.ssafy.dmb.repository.FamilyUserRepository;
 import com.ssafy.dmb.repository.MemberRepository;

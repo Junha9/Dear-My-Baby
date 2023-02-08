@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto.jwt;
+package com.ssafy.dmb.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

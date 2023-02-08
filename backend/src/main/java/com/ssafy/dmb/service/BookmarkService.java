@@ -3,7 +3,7 @@ package com.ssafy.dmb.service;
 import com.ssafy.dmb.domain.plan.Bookmark;
 import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.repository.PlanRepository;
-import com.ssafy.dmb.dto.BookmarkDto;
+import com.ssafy.dmb.dto.Plan.BookmarkDto;
 import com.ssafy.dmb.repository.BookmarkRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

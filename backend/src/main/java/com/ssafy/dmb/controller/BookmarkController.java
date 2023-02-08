@@ -1,6 +1,5 @@
 package com.ssafy.dmb.controller;
-import io.swagger.annotations.ApiOperation;
-import com.ssafy.dmb.dto.BookmarkDto;
+import com.ssafy.dmb.dto.Plan.BookmarkDto;
 import com.ssafy.dmb.service.BookmarkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

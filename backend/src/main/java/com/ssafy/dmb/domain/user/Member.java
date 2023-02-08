@@ -1,4 +1,4 @@
-package com.ssafy.dmb.domain;
+package com.ssafy.dmb.domain.user;
 
 import com.ssafy.dmb.domain.record.Comment;
 import lombok.AllArgsConstructor;
