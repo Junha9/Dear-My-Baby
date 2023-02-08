@@ -10,11 +10,12 @@ import lombok.Setter;
 @Getter @Setter
 public class RecordDto {
 
-    // recordID
     private Long dayId;
-    // 서버에서 생성한 파일 이름
-    private String recordFile;
-    // 이미지, 영상과 함께 오는 text
+
+    private Long planId;
+
+    private String recordName;
+
     private String recordText;
 
     private String latitude;
@@ -22,4 +23,5 @@ public class RecordDto {
     private String longitude;
 
     private int recordType;
+
 }

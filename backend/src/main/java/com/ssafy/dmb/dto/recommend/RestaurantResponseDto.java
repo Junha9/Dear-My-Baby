@@ -21,4 +21,5 @@ public class RestaurantResponseDto {
         this.restaurantMeinMenu = restaurant.getRestaurantMainMenu();
         this.restaurantImgUrl = restaurant.getRestaurantImgUrl();
     }
+
 }

@@ -11,11 +11,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecordDetailCommentDto {
+
     private Long commentId;
 
     private String memberId;
 
     private String memberName;
+
+    private String recordName;
 
     private String commentText;
 
@@ -27,16 +30,19 @@ public class RecordDetailCommentDto {
         this.memberName = comment.getMember().getMemberName();
         this.commentText = comment.getCommentText();
         this.commentDate = comment.getCommentDate();
+        this.recordName = comment.getRecord().getRecordName();
     }
 
     @Override
     public String toString() {
-        return "CommentResponseDto{" +
+        return "RecordDetailCommentDto{" +
                 "commentId=" + commentId +
                 ", memberId='" + memberId + '\'' +
                 ", memberName='" + memberName + '\'' +
+                ", recordName='" + recordName + '\'' +
                 ", commentText='" + commentText + '\'' +
                 ", commentDate=" + commentDate +
                 '}';
     }
+
 }

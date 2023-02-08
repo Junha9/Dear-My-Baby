@@ -28,16 +28,16 @@ public class RestaurantService {
     private final BabyRepository babyRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(TourService.class);
 
-    public List<RestaurantResponseDto> getRecommendRestaurantList(Long familyId, Long RegionId) {
+    public List<RestaurantResponseDto> getRecommendRestaurantList(Long familyId) {
+
         List<Baby> babyList = babyRepository.findByFamily(familyId);
+
         Set<String> favorites = new HashSet<>();
         for(Baby b: babyList){
             Set<String> favoriteFood = b.getFavoriteFood();
             favorites.addAll(favoriteFood);
         }
-        for(String s : favorites){
-            System.out.println(s);
-        }
+
         List<Restaurant> restaurantList = restaurantRepository.findTourByFavoriteRestaurant(favorites);
 
         List<RestaurantResponseDto> restaurants = restaurantList.stream()
@@ -45,16 +45,15 @@ public class RestaurantService {
                 .collect(Collectors.toList());
 
         return restaurants;
+
     }
 
     public RestaurantDetailResponseDto getRecommendRestaurantDetail(Long restaurantId) {
-        LOGGER.info("[getRecommendRestaurantDetail] input tourId: {}", restaurantId);
+
         Restaurant restaurantDetail = restaurantRepository.findById(restaurantId).
                 orElseThrow(() -> new NoSuchElementException());
 
-        //생성자 사용 entity to DTO
-        RestaurantDetailResponseDto restaurantDetailResponseDto = new RestaurantDetailResponseDto(restaurantDetail);
+        return new RestaurantDetailResponseDto(restaurantDetail);
 
-        return restaurantDetailResponseDto;
     }
 }

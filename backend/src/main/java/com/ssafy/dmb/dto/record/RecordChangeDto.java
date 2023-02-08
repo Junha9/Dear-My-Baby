@@ -1,19 +1,20 @@
-package com.ssafy.dmb.dto.comment;
+package com.ssafy.dmb.dto.record;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDto {
+@Getter @Setter
+public class RecordChangeDto {
+
 
     private Long recordId;
 
-    private String memberId;
+    private String recordName;
 
-    private String commentText;
+    private String recordText;
 
 }

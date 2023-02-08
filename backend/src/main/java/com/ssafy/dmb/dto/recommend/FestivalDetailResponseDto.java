@@ -59,6 +59,7 @@ public class FestivalDetailResponseDto {
     private String festivalImgUrl;
 
     private Long regionId;
+
     public FestivalDetailResponseDto(Festival festival) {
         this.regionId = festival.getRegion().getId();
         this.festivalName = festival.getFestivalName();
@@ -78,4 +79,5 @@ public class FestivalDetailResponseDto {
         this.festivalAvlParking = festival.getFestivalAvlParking();
         this.festivalImgUrl = festival.getFestivalImgUrl();
     }
+
 }

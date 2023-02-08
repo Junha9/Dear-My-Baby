@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor
 public class RestaurantDetailResponseDto {
+
     // 식당명
     private String restaurantName;
 
@@ -45,6 +46,7 @@ public class RestaurantDetailResponseDto {
     private String restaurantImgUrl;
 
     private Long regionId;
+
     public RestaurantDetailResponseDto(Restaurant restaurant) {
         this.regionId = restaurant.getRegion().getId();
         this.restaurantName = restaurant.getRestaurantName();
@@ -60,4 +62,5 @@ public class RestaurantDetailResponseDto {
         this.restaurantMainMenu = restaurant.getRestaurantMainMenu();
         this.restaurantImgUrl = restaurant.getRestaurantImgUrl();
     }
+
 }

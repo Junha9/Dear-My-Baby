@@ -14,4 +14,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     @Query("select r from Restaurant r where r.restaurantCategory In (:favorites)")
     List<Restaurant> findTourByFavoriteRestaurant(@Param("favorites") Set<String> favorites);
+
 }

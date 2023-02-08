@@ -24,12 +24,15 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class TourService {
+
     private final TourRepository tourRepository;
     private final BabyRepository babyRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(TourService.class);
 
-    public List<TourResponseDto> getRecommendTourList(Long familyId, Long RegionId) {
+    public List<TourResponseDto> getRecommendTourList(Long familyId) {
+
         List<Baby> babyList = babyRepository.findByFamily(familyId);
+
         Set<String> favorites = new HashSet<>();
         for(Baby b: babyList){
             Set<String> favoriteSpot = b.getFavoriteSpot();
@@ -43,16 +46,16 @@ public class TourService {
                 .collect(Collectors.toList());
 
         return tours;
+
     }
 
     public TourDetailResponseDto getRecommendTourDetail(Long tourId) {
-        LOGGER.info("[getRecommendTourList] input tourId: {}", tourId);
+
         Tour tourDetail = tourRepository.findById(tourId).
                 orElseThrow(() -> new NoSuchElementException());
 
-        //생성자 사용 entity to DTO
-        TourDetailResponseDto tourDetailResponseDto = new TourDetailResponseDto(tourDetail);
+        return new TourDetailResponseDto(tourDetail);
 
-        return tourDetailResponseDto;
     }
+    
 }

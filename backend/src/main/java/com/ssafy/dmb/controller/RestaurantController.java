@@ -23,14 +23,18 @@ public class RestaurantController {
 
     @Operation(summary = "추천 식당 조회", description = "<strong> familyId </strong>를 통해 추천 식당 조회한다.")
     @GetMapping()
-    public  List<RestaurantResponseDto> getRecommendRestaurantList(@RequestParam("familyId") Long familyId, @RequestParam("regionId") Long regionId) {
-        return restaurantService.getRecommendRestaurantList(familyId, regionId);
+    public  List<RestaurantResponseDto> getRecommendRestaurantList(@RequestParam("familyId") Long familyId) {
+
+        return restaurantService.getRecommendRestaurantList(familyId);
+
     }
 
     @Operation(summary = "추천 식당 단일 조회", description = "<strong> familyId </strong>를 통해 추천식당 단일 조회한다.")
     @GetMapping("/detail")
     public RestaurantDetailResponseDto getRecommendRestaurantDetail(@RequestParam("restaurantId") Long restaurantId){
+
         return restaurantService.getRecommendRestaurantDetail(restaurantId);
+
     }
 
 }

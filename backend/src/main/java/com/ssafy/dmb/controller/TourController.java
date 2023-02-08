@@ -24,14 +24,18 @@ public class TourController {
 
     @Operation(summary = "여행 리스트 추천", description = "<strong> familyId </strong>를 통해 여행지 리스트를 조회한다.")
     @GetMapping()
-    public  List<TourResponseDto> getRecommendTourList(@RequestParam("familyId") Long familyId, @RequestParam("regionId") Long regionId) {
-        return tourService.getRecommendTourList(familyId, regionId);
+    public  List<TourResponseDto> getRecommendTourList(@RequestParam("familyId") Long familyId) {
+
+        return tourService.getRecommendTourList(familyId);
+
     }
 
     @Operation(summary = "추천 여행지 단일 조회", description = "<strong> tourId </strong>를 통해 추천 여행지를 조회한다.")
     @GetMapping("/detail")
     public TourDetailResponseDto getRecommendTourDetail(@RequestParam("tourId") Long tourId){
+
         return tourService.getRecommendTourDetail(tourId);
+
     }
 
 }

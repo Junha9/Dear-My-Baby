@@ -14,27 +14,27 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class RecordResponseDto {
-    // record pk
+
     private Long recordId;
-    // 몇일차껀지
+
     private Long dayId;
-    // 서버에서 생성한 파일 이름
-    private String recordFile;
-    // 위도
+
+    private String recordName;
+
     private String latitude;
-    // 경도
+
     private String longitude;
-    // 파일 타입
+
     private int recordType;
-    // 저장 url
+
     private String fileUrl;
-    // record 시간
+
     private LocalDateTime recordDate;
 
     public RecordResponseDto(Record record){
         recordId = record.getId();
         dayId = record.getDay().getId();
-        recordFile = record.getRecordFile();
+        recordName = record.getRecordName();
         recordType = record.getRecordType();
         fileUrl = record.getFileUrl();
         recordDate = record.getRecordDate();
@@ -43,4 +43,5 @@ public class RecordResponseDto {
         latitude = coordinate.getLatitude();
         longitude = coordinate.getLongitude();
     }
+
 }

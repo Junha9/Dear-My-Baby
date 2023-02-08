@@ -13,4 +13,5 @@ import java.util.Set;
 public interface FestivalRepository extends JpaRepository<Festival, Long> {
     @Query("select f from Festival f where f.festivalCategory In (:favorites)")
     List<Festival> findFestivalByFavoriteSpot(@Param("favorites") Set<String> favorites);
+
 }

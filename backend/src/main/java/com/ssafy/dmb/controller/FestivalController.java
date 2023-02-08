@@ -3,7 +3,6 @@ package com.ssafy.dmb.controller;
 import com.ssafy.dmb.dto.recommend.FestivalDetailResponseDto;
 import com.ssafy.dmb.dto.recommend.FestivalResponseDto;
 import com.ssafy.dmb.service.FestivalService;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +23,17 @@ public class FestivalController {
 
     @Operation(summary = "축제 추천 리스트 조회", description = "<strong> familyId </strong>를 통해 추천 축제 리스트을 조회한다.")
     @GetMapping()
-    public  List<FestivalResponseDto> getRecommendFestivalList(@RequestParam("familyId") Long familyId, @RequestParam("regionId") Long regionId) {
-        return festivalService.getRecommendFestivalList(familyId, regionId);
+    public  List<FestivalResponseDto> getRecommendFestivalList(@RequestParam("familyId") Long familyId) {
+
+        return festivalService.getRecommendFestivalList(familyId);
+
     }
     @Operation(summary = "추천 축제 단일 조회", description = "<strong> festival </strong>를 통해 추천 축제 정보를 조회한다.")
     @GetMapping("/detail")
     public FestivalDetailResponseDto getRecommendFestivalDetail(@RequestParam("festivalId") Long festivalId){
+
         return festivalService.getRecommendFestivalDetail(festivalId);
+
     }
 
 }

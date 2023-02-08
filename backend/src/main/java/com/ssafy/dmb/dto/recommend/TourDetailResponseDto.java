@@ -9,6 +9,7 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class TourDetailResponseDto {
+
     // 관광지 명
     private String tourName;
 
@@ -62,4 +63,5 @@ public class TourDetailResponseDto {
         this.tourAvlStrollerRental = tour.getTourAvlStrollerRental();
         this.tourImgUrl = tour.getTourImgUrl();
     }
+
 }

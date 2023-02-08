@@ -33,5 +33,6 @@ public class CommentResponseDto {
         commentText = comment.getCommentText();
         commentDate = comment.getCommentDate();
     }
+
 }
 

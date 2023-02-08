@@ -32,13 +32,16 @@ public class CommentService {
     private final RecordRepository recordRepository;
     private final MemberRepository memberRepository;
 
-    public CommentResponseDto saveComment(CommentDto commentDto) {
+    public void saveComment(CommentDto commentDto) {
+
         Long recordId = commentDto.getRecordId();
         String memberId = commentDto.getMemberId();
 
         Record record = recordRepository.findById(recordId).
                 orElseThrow(() -> new NoSuchElementException());
+
         Member member = memberRepository.findByMemberId(memberId);
+
         Comment comment = Comment.builder().
                 record(record).
                 member(member).
@@ -47,20 +50,25 @@ public class CommentService {
                 build();
 
         commentRepository.save(comment);
-        return null;
+
     }
 
     public List<CommentResponseDto> getCommentList(Long recordId) {
-//        LOGGER.info("[getCommentList] input recordId: {}", recordId);
+
         List<Comment> commentList = commentRepository.findAllByRecordId(recordId);
+
         List<CommentResponseDto> recordCommentList = commentList.stream()
                 .map(r -> new CommentResponseDto(r))
                 .collect(Collectors.toList());
+
         return recordCommentList;
+
     }
 
     public void deleteComment(Long commentId) {
+
         commentRepository.deleteById(commentId);
+
     }
 
 }

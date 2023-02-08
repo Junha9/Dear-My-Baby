@@ -14,4 +14,5 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
 
     @Query("select t from Tour t where t.tourCategory In (:favorites)")
     List<Tour> findTourByFavoriteSpot(@Param("favorites") Set<String> favorites);
+
 }

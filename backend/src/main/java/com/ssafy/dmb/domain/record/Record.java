@@ -13,11 +13,11 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Record {
+
     @Id @GeneratedValue
     @Column(name = "record_id")
     private Long id;
 
-    // day_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "day_id")
     private Day day;
@@ -26,7 +26,7 @@ public class Record {
     private int recordType;
 
     @Column(nullable = false)
-    private String recordFile;
+    private String recordName;
 
     private String recordText;
 
@@ -41,9 +41,9 @@ public class Record {
     private LocalDateTime recordDate;
 
     @Builder
-    public Record(String fileUrl, String recordFile, String recordText, int recordType, Day day, Coordinate recordCoordinate, LocalDateTime recordDate) {
+    public Record(String fileUrl, String recordName, String recordText, int recordType, Day day, Coordinate recordCoordinate, LocalDateTime recordDate) {
         this.fileUrl = fileUrl;
-        this.recordFile = recordFile;
+        this.recordName = recordName;
         this.recordText = recordText;
         this.recordType = recordType;
         this.day = day;

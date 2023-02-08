@@ -20,4 +20,5 @@ public class TourResponseDto {
         this.tourName = tour.getTourName();
         this.tourImgUrl = tour.getTourImgUrl();
     }
+
 }
