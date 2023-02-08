@@ -61,7 +61,6 @@ public class MemberController {
         System.out.println("ATK: " + ATK);
         Authentication authentication = jwtTokenProvider.getAuthentication(ATK);
         String memberId = authentication.getName();
-//        String memberId = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(accessToken).getBody().getSubject();
         return ResponseEntity.status(HttpStatus.OK).body(memberService.getMemberDetail(memberId));
     }
 
