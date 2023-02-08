@@ -1,17 +1,21 @@
-import LoginForm from "./LogInForm";
+import LoginForm from './LoginForm';
 import { useNavigate } from 'react-router-dom';
 
-
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <LoginForm></LoginForm>
 
-      <button onClick={() => { navigate(`sign-up`) }
-      }>회원 가입 하기</button>
+      <button
+        onClick={() => {
+          navigate(`sign-up`);
+        }}
+      >
+        회원 가입 하기
+      </button>
     </>
-  )
-}
+  );
+};
 
 export default Login;
