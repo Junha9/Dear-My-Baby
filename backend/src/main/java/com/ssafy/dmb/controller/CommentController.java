@@ -1,7 +1,10 @@
 package com.ssafy.dmb.controller;
 
+import com.ssafy.dmb.domain.record.Comment;
+import com.ssafy.dmb.domain.record.Record;
 import com.ssafy.dmb.dto.comment.CommentDto;
 import com.ssafy.dmb.dto.comment.CommentResponseDto;
+import com.ssafy.dmb.repository.CommentRepository;
 import com.ssafy.dmb.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +22,8 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
+
+    private final CommentRepository commentRepository;
 
     @Transactional
     @Operation(summary = "댓글 저장", description = "댓글을 저장한다.")
@@ -40,12 +45,15 @@ public class CommentController {
 
     @Transactional
     @Operation(summary = "댓글 삭제", description = "<strong> commentId </strong>를 통해 댓글을 삭제한다.")
-    @DeleteMapping()
-    public List<CommentResponseDto> deleteComment(@RequestParam("commentId") Long commentId
-            , @RequestParam("recordId") Long recordId) throws IOException {
+    @DeleteMapping("/{commentId}")
+    public List<CommentResponseDto> deleteComment(@PathVariable Long commentId) throws IOException {
+
+        Comment comment = commentRepository.findById(commentId).get();
+        Record record = comment.getRecord();
 
         commentService.deleteComment(commentId);
-        return commentService.getCommentList(recordId);
+
+        return commentService.getCommentList(record.getId());
 
     }
 

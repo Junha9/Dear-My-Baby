@@ -1,5 +1,9 @@
 package com.ssafy.dmb.controller;
+
+import com.ssafy.dmb.domain.plan.Bookmark;
+import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.dto.Plan.BookmarkDto;
+import com.ssafy.dmb.repository.BookmarkRepository;
 import com.ssafy.dmb.service.BookmarkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,35 +20,36 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookmarkController {
 
-
     private final BookmarkService bookmarkService;
 
-//    @GetMapping("/bookmarks/{planId}")
-//    @ResponseBody
-//    public ResponseEntity<List<BookmarkDto.Detail>> getBookmarks(@PathVariable("planId")Long planId) {
-//        List<Bookmark> findBookmarks = bookmarkService.findBookmarks(planId);
-//        List<BookmarkDto.Detail> collect = findBookmarks.stream()
-//                .map(m-> new BookmarkDto.Detail(m))
-//                .collect(Collectors.toList());
-//        return ResponseEntity.status(HttpStatus.OK).body(collect);
-//    }
+    private final BookmarkRepository bookmarkRepository;
+
     @Operation(summary = "북마크 리스트 조회", description = "<strong> planId </strong>를 통해 북마크 리스트를 조회 한다.")
     @GetMapping("/{planId}")
     public ResponseEntity<List<BookmarkDto.Detail>> getBookmarkList(@PathVariable("planId") Long planId) {
+
         return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.getBookmarkList(planId));
+
     }
 
     @Operation(summary = "북마크 저장", description = "북마크 정보 저장 한다.")
     @PostMapping("/new")
-    public ResponseEntity<BookmarkDto.Detail> saveBookmark(@RequestBody BookmarkDto.BookmarkRequest request) {
+    public ResponseEntity<List<BookmarkDto.Detail>> saveBookmark(@RequestBody BookmarkDto.BookmarkRequest request) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.create(request));
+        bookmarkService.create(request);
+
+        return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.getBookmarkList(request.getPlanId()));
+
     }
 
     @Operation(summary = "북마크 리스트 삭제", description = "<strong> bookmarkId </strong>를 통해 북마크를 삭제 한다.")
     @DeleteMapping("/{bookmarkId}")
-    public void deleteBookmark(@PathVariable("bookmarkId") Long bookmarkId) {
+    public ResponseEntity<List<BookmarkDto.Detail>> deleteBookmark(@PathVariable("bookmarkId") Long bookmarkId) {
+        Bookmark bookmark = bookmarkRepository.findById(bookmarkId).get();
+        Plan plan = bookmark.getPlan();
         bookmarkService.delete(bookmarkId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.getBookmarkList(plan.getId()));
     }
 
 

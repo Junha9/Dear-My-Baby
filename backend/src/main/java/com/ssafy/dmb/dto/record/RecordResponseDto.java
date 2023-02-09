@@ -21,6 +21,8 @@ public class RecordResponseDto {
 
     private String recordName;
 
+    private String recordText;
+
     private String latitude;
 
     private String longitude;
@@ -38,7 +40,7 @@ public class RecordResponseDto {
         recordType = record.getRecordType();
         fileUrl = record.getFileUrl();
         recordDate = record.getRecordDate();
-
+        recordText = record.getRecordText();
         Coordinate coordinate = record.getRecordCoordinate();
         latitude = coordinate.getLatitude();
         longitude = coordinate.getLongitude();

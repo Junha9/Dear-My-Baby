@@ -28,9 +28,9 @@ public class RecordService {
     private final RecordRepository recordRepository;
     private final DayRepository dayRepository;
 
-    public List<RecordResponseDto> getDayRecordList(Long dayId, Long planId) {
+    public List<RecordResponseDto> getDayRecordList(Long dayNumber) {
 
-        List<Record> recordList = recordRepository.findAllByDayId(dayId, planId);
+        List<Record> recordList = recordRepository.findAllByDayId(dayNumber);
 
         List<RecordResponseDto> dayRecordDtoList = recordList.stream()
                 .map(r->new RecordResponseDto(r))

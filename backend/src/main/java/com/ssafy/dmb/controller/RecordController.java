@@ -33,16 +33,15 @@ public class RecordController {
 
         recordService.saveRecord(url, recordDto);
 
-        return recordService.getDayRecordList(recordDto.getDayId(),recordDto.getPlanId());
+        return recordService.getDayRecordList(recordDto.getDayId());
 
     }
 
     @Operation(summary = "날짜별 여행 기록 전체 조회", description = "<strong> dayId </strong>를 통해 날짜별 여행 기록을 전체 조회한다.")
-    @GetMapping("/day")
-    public List<RecordResponseDto> getDayRecordList(@RequestParam("dayId") Long dayId
-            , @RequestParam("planId") Long planId ) throws IOException {
+    @GetMapping("/day/{dayId}")
+    public List<RecordResponseDto> getDayRecordList(@PathVariable Long dayId) throws IOException {
 
-        return recordService.getDayRecordList(dayId, planId);
+        return recordService.getDayRecordList(dayId);
 
     }
 

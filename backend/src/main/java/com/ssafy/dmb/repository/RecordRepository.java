@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Long> {
 
-    @Query("select r from Record r where r.day.id = :dayId and r.day.plan.id = :planId")
-    List<Record> findAllByDayId(@Param("dayId") Long dayId, @Param("planId") Long planId);
+    @Query("select r from Record r where r.day.id = :dayId")
+    List<Record> findAllByDayId(@Param("dayId") Long dayId);
 
     @Query("select r from Record r join fetch r.day d where r.day.plan.id = :planId")
     List<Record> findAllByPlanId(@Param("planId") Long planId);
