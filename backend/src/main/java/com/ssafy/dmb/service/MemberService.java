@@ -1,10 +1,13 @@
 package com.ssafy.dmb.service;
 
+import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.user.Member;
+import com.ssafy.dmb.dto.user.FamilyDto;
 import com.ssafy.dmb.jwt.JwtTokenProvider;
 import com.ssafy.dmb.dto.login.TokenInfo;
 import com.ssafy.dmb.dto.user.MemberDto;
 import com.ssafy.dmb.dto.user.MemberResponseDto;
+import com.ssafy.dmb.repository.FamilyUserRepository;
 import com.ssafy.dmb.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,15 +32,31 @@ public class MemberService {
     private final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
     private final MemberRepository memberRepository;
+    private final FamilyUserRepository familyUserRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
 
     public MemberResponseDto getMemberDetail(String memberId) {
+
         Member memberDetail = memberRepository.findByMemberId(memberId);
 
         MemberResponseDto memberResponseDto = new MemberResponseDto(memberDetail);
 
         return memberResponseDto;
+    }
+
+    public List<FamilyDto.familyList> getFamilyList(Long memberNo) {
+
+        List<Family> families = familyUserRepository.findFamilyIdByMemberNo(memberNo);
+
+        List<FamilyDto.familyList> familyLists = new ArrayList<>();
+        for(Family f:families){
+            FamilyDto.familyList familyList = new FamilyDto.familyList(f);
+            familyLists.add(familyList);
+        }
+
+        return familyLists;
+
     }
 
     public void saveMember(String url, MemberDto memberDto) {
@@ -100,6 +119,7 @@ public class MemberService {
 
     @Transactional
     public TokenInfo login(String memberId, String password) {
+
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
         // 이때 authentication 는 인증 여부를 확인하는 authenticated 값이 false
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberId, password);
@@ -112,10 +132,12 @@ public class MemberService {
         TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
 
         return tokenInfo;
+
     }
 
     @Transactional
     public String getMemberToken(String refreshToken) {
+
         Member member = memberRepository.findByRefreshToken(refreshToken);
 
         if (member != null) {
@@ -129,11 +151,14 @@ public class MemberService {
         }
 
         return null;
+
     }
     public void deleteMemberToken(String memberId) {
+
         Member tokenDeleteMember = memberRepository.findByMemberId(memberId);
         tokenDeleteMember.setRefreshToken(null);
         memberRepository.save(tokenDeleteMember);
+
     }
 
 }

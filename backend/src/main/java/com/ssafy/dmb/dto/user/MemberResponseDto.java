@@ -12,6 +12,8 @@ import lombok.Setter;
 @Setter
 public class MemberResponseDto {
 
+    private Long memberNo;
+
     private String memberName;
 
     private String memberEmail;
@@ -19,10 +21,13 @@ public class MemberResponseDto {
     private String memberId;
 
     private String memberImg;
+
     public MemberResponseDto(Member member){
+        this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
         this.memberEmail = member.getMemberEmail();
         this.memberImg = member.getMemberImg();
     }
+
 }

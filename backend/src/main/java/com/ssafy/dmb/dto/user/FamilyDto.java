@@ -25,6 +25,22 @@ public class FamilyDto {
         }
 
     }
+
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class familyList {
+
+        private String familyName;
+        private Long familyId;
+
+        public familyList(Family family) {
+            this.familyName = family.getFamilyName();
+            this.familyId = family.getId();
+        }
+
+    }
+
     @Getter
     @AllArgsConstructor
     public static class FamilyUserList {
@@ -41,12 +57,12 @@ public class FamilyDto {
     }
 
     @Getter
-    @Builder
     @AllArgsConstructor
     public static class FamilyRequest {
-        private String familyName;
 
+        private String familyName;
         private String memberId;
+
     }
 
 }

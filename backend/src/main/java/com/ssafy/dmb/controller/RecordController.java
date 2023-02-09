@@ -76,7 +76,6 @@ public class RecordController {
     @Operation(summary = "기록 내용 수정", description = "<strong> recordId </strong>를 통해 여행 기록을 수정한다.")
     @PutMapping()
     public RecordDetailResponseDto changeRecord(@RequestBody RecordChangeDto recordChangeDto) throws IOException {
-        // recordchangedto 만들어서 이름, 내용 수정할 수 있도록 하자.
         recordService.changeRecord(recordChangeDto);
 
         return recordService.getRecord(recordChangeDto.getRecordId());
