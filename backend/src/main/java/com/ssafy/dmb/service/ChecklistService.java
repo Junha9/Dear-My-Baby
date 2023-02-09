@@ -48,8 +48,8 @@ public class ChecklistService {
 
     }
 
-    public void deleteItem(Long itemId) {
-        checklistRepository.deleteById(itemId);
+    public void deleteItem(Long checkListId) {
+        checklistRepository.deleteById(checkListId);
     }
 
 
