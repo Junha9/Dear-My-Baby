@@ -103,10 +103,14 @@ export default function AlbumMap() {
               </Box>
               <CardContent>
                 <ul>
+                  <li>레코드 제목</li>
+                  <li>레코드 text</li>
                   <li>recordId : {records[activeStep].recordId}</li>
                   <li>recordType : {records[activeStep].recordType}</li>
                   <li>latitude : {records[activeStep].lat}</li>
                   <li>longitude : {records[activeStep].lng}</li>
+                  <textarea></textarea>
+                  <button>댓글 작성</button>
                 </ul>
               </CardContent>
             </Card>

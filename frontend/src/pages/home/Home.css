@@ -1,4 +1,4 @@
-/* 배경 색 : rgba(255, 255, 255, 0.922) */
+/* 배경 색 : rgba(255, 255, 255, 0.922)
 /* 시그니쳐 색 : rgb(59, 45, 142) */
 
 
@@ -35,8 +35,8 @@
   padding: 3vh;
   /* background-color: rgb(249, 255, 202); */
   background-color: rgba(255, 255, 255, 0.922);
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
+  border-top-left-radius: 6%;
+  border-top-right-radius: 6%;
   box-shadow: 1px 1px 1px 1px rgb(255, 255, 255);
 }
 /*
@@ -55,7 +55,6 @@
 .main-div {
   padding: 0% 0%;
   background-color: rgb(59, 45, 142);
-  
 }
 
 .plus-plan:hover {
@@ -71,7 +70,9 @@
   /* background-color: rgb(255, 243, 152); */
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
-  box-shadow: px 2px 0px rgba(255, 255, 255, 0.314);
+  box-shadow: 0px 0.1px 0px rgba(18, 18, 18, 0.314);
+  /* animation-duration: 3s;
+  animation-name: slidein; */
   
 }
 
@@ -81,20 +82,29 @@
 }
 
 .dday-alarm-button {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   margin-left: 15px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(95, 67, 255);
+  padding: 5px 10px;
+
 }
 .plan-append {
   /* background-color: rgb(255, 243, 152); */
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  box-shadow: 2px 2px 1px rgba(255, 255, 255, 0.429);
+  box-shadow: 0px 0.1px 0px rgba(18, 18, 18, 0.314);
+  /* animation-duration: 3s; */
+  /* animation-name: slidein; */
 }
 
 .plan-append-text {
   padding: 10px;
   padding-left: 10px;
 }
+
 .plan-append-text {
   margin-bottom: 10px;
   margin-left: 15px;
@@ -104,3 +114,63 @@
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.922);
 }
+
+.main-animation {
+  animation: fadein 5s;
+  -moz-animation: fadein 5s;
+  -webkit-animation: fadein 5s;
+  -o-animation: fadein 5s;
+  
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+
+}
+
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadein {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+@-o-keyframes fadein {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+
+
+/* .family-photo-animation {
+  animation-duration: 3s;
+  animation-name: slidein;
+} */
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-right: 0%;
+    width: 100%
+  }
+} 

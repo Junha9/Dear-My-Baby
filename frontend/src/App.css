@@ -19,16 +19,18 @@ body {
     width: 100vw;
     justify-items: center;
     /* background-color: black; */
+    overflow: hidden;
   }
 }
 
 @media (max-width: 650px) {
   .App {
-    background-color: rgb(241, 244, 255);
+    background-color: rgba(255, 255, 255, 0.922);
     height: auto;
     width: 100vw;
     justify-items: center;
     text-align: left;
+    overflow-x: hidden;
   }
 }
 
@@ -36,14 +38,13 @@ button {
   color: white;
   border: none;
   border-radius: 10px;
-  background-color: rgb(58, 89, 212);
+  background-color: rgb(89, 56, 255);
   padding: 5px 10px;
 }
 
 button:hover {
   cursor: pointer;
 }
-
 
 :root {
   --main-orange: rgba(252, 163, 17, 1);

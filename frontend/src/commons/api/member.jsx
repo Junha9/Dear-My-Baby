@@ -35,10 +35,22 @@ export async function apiCreateMember(member, imgFile) {
 // 회원을 로그인시키며 refresh-token을 Cookie로, access-token을 body로 받아온다
 export async function apiLoginMember(memberId, password) {
   if (memberId != null && password != null) {
-    const response = await api.post(`/member/login`, { memberId, password });
+    const response = await api.post(`/member/login`, { memberId, password }, { withCredentials: true });
     return response;
   }
-  throw new Error('apiCreateMember : memberId, password must be provided');
+  throw new Error('apiLoginMember : memberId, password must be provided');
+}
+
+export async function apiLogoutMember(accessToken) {
+  if (accessToken != null) {
+    const response = await api.put(`/member/logout`, null, {
+      headers: {
+        'Access-Token': accessToken,
+      },
+    });
+    return response;
+  }
+  throw new Error('apiLogoutMember : accessToken must be provided');
 }
 
 // access-token으로 회원 정보를 가져온다
@@ -46,7 +58,7 @@ export async function apiGetMember(accessToken) {
   if (accessToken != null) {
     const response = await api.get(`/member/detail`, {
       headers: {
-        Authorization: accessToken,
+        'Access-Token': accessToken,
       },
     });
     return response;
@@ -57,7 +69,7 @@ export async function apiGetMember(accessToken) {
 // refresh-token을 Cookie로 보내 access-token을 재발급한다
 export async function apiGetMemberToken() {
   // Cookie가 넘어가게 설정해야 성공한다
-  const response = await api.get(`/member/token`);
+  const response = await api.get(`/member/token`, { withCredentials: true });
   return response;
 }
 
@@ -66,7 +78,7 @@ export async function apiUpdateMember(member, accessToken) {
   if (member != null && accessToken != null) {
     const response = await api.put(`/member`, member, {
       headers: {
-        Authorization: accessToken,
+        'Access-Token': accessToken,
       },
     });
     return response;
@@ -79,10 +91,20 @@ export async function apiDeleteMember(memberId, accessToken) {
   if (memberId != null && accessToken != null) {
     const response = await api.delete(`/member/${memberId}`, {
       headers: {
-        Authorization: accessToken,
+        'Access-Token': accessToken,
       },
     });
     return response;
   }
   throw new Error('apiDeleteMember : memberId, accessToken must be provided');
+}
+
+// 회원이 가진 가족 list 구하기
+export async function apiGetMemberFamilys(memberNo) {
+  if (memberNo != null) {
+    const response = await api.get(`/member/familylist?memberNo=${memberNo}`);
+    // console.log(response);
+    return response;
+  }
+  throw Error('apiGetFamily : familyId and familyName must be provided');
 }

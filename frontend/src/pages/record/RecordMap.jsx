@@ -4,6 +4,7 @@ import { Modal, Box } from '@mui/material';
 import './Record.css';
 import RecordUpload from './RecordUpload';
 import RecordMapItem from './RecordMapItem';
+import { apiGetRecordList } from '@/commons/api/record';
 
 const dummyRecords = [
   {
@@ -41,6 +42,8 @@ const dummyRecords = [
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
   const [records, setRecords] = useState(dummyRecords);
+
+  console.log(records);
   const [modalOpen, setModalOpen] = useState(false);
 
   const [state, setState] = useState({
@@ -95,6 +98,13 @@ const RecordMap = () => {
 
   const points = records.map((record) => ({ lat: record.latitude, lng: record.longitude }));
 
+  const handleRecordReload = () => {
+    apiGetRecordList(6, 13).then(({ data }) => {
+      setRecords(data);
+      console.log(data);
+    });
+  };
+
   return (
     <div>
       <Map
@@ -132,8 +142,8 @@ const RecordMap = () => {
               <img
                 src="/assets/footprint.png"
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '35px',
+                  height: '35px',
                   marginBottom: '5px',
                 }}
                 onClick={() => {
@@ -180,7 +190,7 @@ const RecordMap = () => {
         >
           {!state.errMsg ? (
             <div>
-              <RecordUpload recordLocation={state}></RecordUpload>
+              <RecordUpload handleRecordReload={handleRecordReload} recordLocation={state}></RecordUpload>
             </div>
           ) : (
             <div>위치를 불러올 수 없어요!</div>

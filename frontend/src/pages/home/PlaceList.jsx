@@ -18,7 +18,7 @@ const PlaceList = ({ places }) => {
   };
 
   return (
-    <div>
+    <div className="SSlider">
       {/* {places.map((place, index) => (
         <>
         <img src={place.placeImg}></img>

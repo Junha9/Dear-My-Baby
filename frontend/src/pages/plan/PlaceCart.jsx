@@ -1,3 +1,4 @@
+import { apiCreatePlan } from '@/commons/api/plan';
 import { useState, useEffect, Fragment } from 'react';
 import { Map as KakaoMap, MapMarker, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { Link } from 'react-router-dom';
@@ -211,7 +212,11 @@ const PlaceCart = () => {
     // console.log(dummyDays);
     // alert('경로가 저장되었습니다.');
   }
-
+  
+  const createNewPlan = () => {
+    // data에는 
+  apiCreatePlan(data)
+  }
   return (
     <div>
       <div
@@ -265,7 +270,7 @@ const PlaceCart = () => {
         <button onClick={pushPlacePerDay}>경로 추가</button>
         {/* 이어진 경로가 있는 상태에서 경로 추가 누르면 선 안 없어지고 냅두기, 경로가 추가되지 않은 상태에서 다른날 누르면 이어진선 사라지게하기 */}
         <Link to={'/'}>
-          <button>계획 완료하기</button>
+          <button onClick={createNewPlan}>계획 완료하기</button>
         </Link>
       </div>
     </div>

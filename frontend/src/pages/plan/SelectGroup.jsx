@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-
+import './SelectGroup.css';
 const dummyGroup = [
   {
     userId: 1,
@@ -21,23 +21,30 @@ const dummyGroup = [
 const SelectGroup = () => {
   const navigate = useNavigate();
   return (
-    <div style={{ padding: '3vh', textAlign: 'center' }}>
-      <h2>함께 여행하실 그룹을 선택해주세요</h2>
-      <form style={{ display: 'flex', flexDirection: 'column' }} action="#">
+    <div className="plan-frame" style={{ padding: '3vh', textAlign: 'center' }}>
+      <h2 className='fadein-animation'>함께 여행하실 그룹을 선택해주세요</h2>
+      <div className='select-group-plan-div'>
         {dummyGroup.map((group, index) => (
-          <button
+          <button className='select-group-button'
             onClick={() => {
               navigate(`select-date`);
             }}
             key={index}
-            style={{ margin: '5px', padding: '3px' }}
           >
             그룹 {group.groupId}
           </button>
         ))}
-      </form>
-      <button style={{ display: 'flex', flexDirection: 'column' }} onClick={() => {navigate('../user/make-group')}} > 새로운 그룹 생성하기</button>
-      <p>  user/ groupCreation 만들기</p>
+      
+        <button className='append-group-button'
+          onClick={() => {
+            navigate('../user/make-group');
+          }}
+        >
+          {' '}
+          새로운 그룹
+        </button>
+      </div>
+      <p> user/ groupCreation 만들기</p>
     </div>
   );
 };

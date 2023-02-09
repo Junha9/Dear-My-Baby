@@ -2,66 +2,66 @@ import { getApiInstance } from './http';
 import axios from 'axios';
 const api = getApiInstance();
 
+// 여행 계획 생성
 export async function apiCreatePlan(data) {
-  // const data = {
-  //   familyId: 211,
-  //   planName: '제주제주',
-  //   planDestination: '어디냐',
-  //   startDate: '2023-02-07',
-  //   endDate: '2023-02-22',
-  // }
-  // if (familyId != null) {
-  //   const response = api.post(
-  //     `/plan/new`,
-  //     // JSON.stringify(data),
-  //     data,
-  //     {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     },
-  //   );
-  //   console.log(response);
-  //   return response;
-  // }
-  // throw new Error('apiCheckMember : memberId must be provided');
-  await axios({
-    method: 'POST',
-    url: 'https://i8a206.p.ssafy.io/api/plan/new',
-    data: {
-      // familyId: 211,
-      // planName: '제주제주',
-      // planDestination: '어디냐',
-      // startDate: '2023-02-07',
-      // endDate: '2023-02-22',
-      data
-    },
-    headers: { 'Content-Type': 'application/json' },
-  })
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
-    .catch((e) => console.log(e));
+  data = {
+    familyId: 2,
+    planName: '호우',
+    planDestination: '한강',
+    startDate: '2023-02-08',
+    endDate: '2023-02-15',
+  };
+
+  if (data.familyId != null) {
+    const response = await api.post(`/plan/new`, data);
+    return response;
+  }
+  throw new Error('apiCreatePlan : familyId must be provided');
 }
 
-export async function apiGetPlans(data) {
-  await axios({
-    method: 'POST',
-    url: 'https://i8a206.p.ssafy.io/api/plan/new',
-    data: {
-      // familyId: 211,
-      // planName: '제주제주',
-      // planDestination: '어디냐',
-      // startDate: '2023-02-07',
-      // endDate: '2023-02-22',
-      data
-    },
-    headers: { 'Content-Type': 'application/json' },
-  })
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
-    .catch((e) => console.log(e));
+// familyId 를 통해 가족별 여행 계획 리스트를 조회한다.
+export async function apiGetPlanList(familyId) {
+  if (familyId != null) {
+    const response = await api.get(`/plan/${familyId}`);
+    return response;
+  }
+  throw new Error('apiGetPlanList : familyId must be provided');
+}
+
+// 여행 계획 단일 조회
+export async function apiGetPlan(planId) {
+  if (planId != null) {
+    const response = await api.get(`/plan/detail/${planId}`);
+    return response;
+  }
+  throw new Error('apiGetPlan : planId must be provided');
+}
+
+// 여행 계획 수정
+export async function apiUpdatePlan(planId) {
+  const planData = {
+    familyId: 211,
+    planName: '수정맨',
+    planDestination: '몽고르',
+    startDate: '2023-02-08',
+    endDate: '2023-02-10',
+  };
+  if (planId != null) {
+    const response = await api({
+      method: 'PUT',
+      url: `/plan/update/${planId}`,
+      data: planData,
+    });
+    return response;
+  }
+  throw new Error('apiUpdatePlan : planId must be provided');
+}
+
+//여행 계획 삭제
+export async function apiDeletePlan(planId) {
+  if (planId != null) {
+    const response = await api.delete(`/plan/${planId}`);
+    return response;
+  }
+  throw new Error('apiDeletePlan : planId must be provided');
 }

@@ -28,9 +28,6 @@ const SelectDate = () => {
     localStorage.setItem('travelDates', JSON.stringify(state));
   }
 
-  const travelDates = JSON.parse(localStorage.getItem('travelDates'));
-  // const navigate = useNavigate();
-
   // function checkTravelDates(e) {
   //   e.preventDefault();
   //   if (travelDates != null && isSameDate(new Date(), new Date(travelDates[0].startDate))) {
@@ -39,7 +36,10 @@ const SelectDate = () => {
   // }
 
   return (
-    <div style={{padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <div
+      className="plan-frame"
+      style={{ padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <h2>여행하실 날짜를 선택해주세요</h2>
       <DateRange
         editableDateInputs={true}

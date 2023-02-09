@@ -3,7 +3,7 @@ import './plan.css';
 
 export default function Plan() {
   return (
-    <div className="planFrame">
+    <div>
       <Outlet></Outlet>
     </div>
   );

@@ -7,10 +7,14 @@ import User from '@/pages/user';
 import Plan from '@/pages/plan';
 import Record from '@/pages/record';
 import Album from '@/pages/album';
+
 import KidsInformation from '@/pages/user/KidsInformation';
 import FamilyForm from '@/pages/user/FamilyForm';
 import Login from '@/pages/user/Login';
 import Signup from '@/pages/user/SignUp';
+
+// User, lazily loaded components
+const UserInfo = lazy(() => import('@/pages/user').then((module) => ({ default: module.UserInfo })));
 
 // Plan, lazily loaded components
 const FindCity = lazy(() => import('@/pages/plan').then((module) => ({ default: module.FindCity })));
@@ -39,9 +43,15 @@ const router = createBrowserRouter([
       {
         path: 'user',
         element: <User></User>,
-        children: [{ path: 'make-group', element: <FamilyForm></FamilyForm> },
-        { path: 'login', element: <Login></Login> },
-        { path: 'sign-up', element: <Signup></Signup> }],
+        children: [
+          {
+            index: true,
+            element: <UserInfo></UserInfo>,
+          },
+          { path: 'make-group', element: <FamilyForm></FamilyForm> },
+          { path: 'login', element: <Login></Login> },
+          { path: 'sign-up', element: <Signup></Signup> },
+        ],
       },
       { path: 'kids', element: <KidsInformation></KidsInformation> },
       {

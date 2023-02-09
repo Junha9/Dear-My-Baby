@@ -3,10 +3,11 @@
   background-color: white;
   z-index: '2';
 }
-/* .planFrame {
+
+.plan-frame {
   height: 95vh;
   width: 100vw;
   display: flex;
-  align-items: center;
-  padding: 4vw;
-} */
+  flex-direction: column;
+  justify-content: center;
+}

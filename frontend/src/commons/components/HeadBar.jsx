@@ -16,6 +16,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+import { useMember } from '@/commons/MemberContext';
+
 const links = [
   { name: 'Home', path: '/' },
   { name: 'Plan', path: 'plan' },
@@ -24,6 +26,8 @@ const links = [
 ];
 
 export default function HeadBar() {
+  const member = useMember();
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -35,60 +39,72 @@ export default function HeadBar() {
   }
 
   return (
-    <AppBar color="inherit" position="sticky" style={{ backgroundColor: 'rgb(59, 45, 142)', boxShadow: '0 0' }}>
-      <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          // sx={{ mr: 1 }}
-          onClick={() => navigate(-1)}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
-            <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '10px'}}></img>
-            DearMyBaby
-          </Link>
-        </Typography>
-        <IconButton
-          size="large"
-          edge="end"
-          color="inherit"
-          aria-label="menu"
-          // sx={{ mr: 1 }}
-          onClick={(event) => toggleDrawer(event, true)}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer anchor="right" open={open} onClose={(event) => toggleDrawer(event, false)}>
-          <Box
-            sx={{ width: '50vw' }}
-            role="presentation"
-            onClick={(event) => toggleDrawer(event, false)}
-            onKeyDown={(event) => toggleDrawer(event, false)}
+    <div>
+      <AppBar
+        color="inherit"
+        position="sticky"
+        style={{ width: '100vw', backgroundColor: 'rgb(59, 45, 142)', boxShadow: '0 0' }}
+      >
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            // sx={{ mr: 1 }}
+            onClick={() => navigate(-1)}
           >
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton component={Link} to="user">
-                  <Avatar sx={{ width: 32, height: 32, mr: 2 }}>M</Avatar>
-                  <ListItemText primary="MyAccount"></ListItemText>
-                </ListItemButton>
-              </ListItem>
-              <Divider></Divider>
-              {links.map((link) => (
-                <ListItem key={link.path} disablePadding>
-                  <ListItemButton component={Link} to={link.path}>
-                    <ListItemText primary={link.name}></ListItemText>
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
+              <img
+                src="/assets/logo.png"
+                style={{ height: '30px', width: '30px', marginRight: '10px' }}
+                alt="logo"
+              ></img>
+              DearMyBaby
+            </Link>
+          </Typography>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label="menu"
+            // sx={{ mr: 1 }}
+            onClick={(event) => toggleDrawer(event, true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer anchor="right" open={open} onClose={(event) => toggleDrawer(event, false)}>
+            <Box
+              sx={{ width: '50vw' }}
+              role="presentation"
+              onClick={(event) => toggleDrawer(event, false)}
+              onKeyDown={(event) => toggleDrawer(event, false)}
+            >
+              <List>
+                <ListItem disablePadding>
+                  <ListItemButton component={Link} to="user">
+                    <Avatar src={member != null && member.memberImg} sx={{ width: 32, height: 32, mr: 2 }}>
+                      M
+                    </Avatar>
+                    <ListItemText primary={member != null ? member.memberName : '회원정보'}></ListItemText>
                   </ListItemButton>
                 </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Drawer>
-      </Toolbar>
-    </AppBar>
+                <Divider></Divider>
+                {links.map((link) => (
+                  <ListItem key={link.path} disablePadding>
+                    <ListItemButton component={Link} to={link.path}>
+                      <ListItemText primary={link.name}></ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          </Drawer>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }

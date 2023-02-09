@@ -2,13 +2,13 @@ import { record } from './props';
 
 export default function AlbumRecordItem({ record }) {
   return (
-    <ul className='record-box'>
-      <div className='img-padding'>
+    <ul className="record-box">
+      <div className="img-padding">
         <li>
-          <img className='img-padding2' src={record.recordFile} alt="random" width="60" height="100"></img>
+          <img className="img-padding2" src={record.recordFile} alt="random" width="60" height="100"></img>
         </li>
       </div>
-      <div className='text-padding'>
+      <div className="text-padding">
         <li>recordId : {record.recordId}</li>
         <li>dayCount : {record.dayCount}</li>
         <li>recordType : {record.recordType}</li>

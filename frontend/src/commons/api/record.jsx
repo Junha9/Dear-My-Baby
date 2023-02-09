@@ -1,5 +1,4 @@
 import { getApiInstance } from './http';
-import axios from 'axios';
 // 날짜별 여행 기록 전체 조회
 const dummyRecords = [
   {
@@ -16,7 +15,9 @@ const dummyRecords = [
 
 const api = getApiInstance();
 
+// day별 기록 저장
 export async function apiCreateRecord(record, recordFile) {
+  console.log(record, recordFile);
   if (record != null && recordFile != null) {
     const formData = new FormData();
     formData.append(
@@ -27,20 +28,23 @@ export async function apiCreateRecord(record, recordFile) {
     );
     formData.append('multipartFile', recordFile);
 
-    console.log(record, recordFile);
-    await axios({
-      method: 'POST',
-      url: 'https://i8a206.p.ssafy.io/api/record',
-      data: formData,
+    console.log(formData);
+    const response = await api.post(`/record`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    })
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .catch((e) => console.log(e));
-    // console.log(response);
+    });
+    console.log(response);
+    return response;
   }
+  throw new Error('apiCreateRecord : record, recordFile must be provided');
+}
+
+// 날짜별 여행 기록 전체 조회
+export async function apiGetRecordList(dayId, planId) {
+  if (dayId != null && planId != null) {
+    const response = await api.get(`/record/day?dayId=${dayId}&planId=${planId}`);
+    return response;
+  }
+  throw new Error('apiGetRecordList : dayId and planId must be provided');
 }
