@@ -17,7 +17,7 @@ public class FamilyController {
     private final FamilyRepository familyRepository;
 
     @PostMapping("/new")
-    public ResponseEntity<FamilyDto.familyResponse> createFamily(@RequestBody FamilyDto.familyRequest request) {
+    public ResponseEntity<FamilyDto.familyResponse> createFamily(@RequestBody FamilyDto.FamilyRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.createFamily(request));
     }
 
@@ -32,7 +32,8 @@ public class FamilyController {
     }
 
     @GetMapping("/detail/{familyId}")
-    public ResponseEntity<FamilyDto.familyResponse> getFamilyDetail(@PathVariable("familyId") Long familyId) {
+    @ResponseBody
+    public ResponseEntity<FamilyDto.FamilyUserList> getFamilyDetail(@PathVariable("familyId") Long familyId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.getFamilyDetail(familyId));
     }
 }
