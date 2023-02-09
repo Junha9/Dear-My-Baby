@@ -3,6 +3,8 @@ package com.ssafy.dmb.service;
 import com.ssafy.dmb.domain.user.*;
 import com.ssafy.dmb.dto.user.FamilyDto;
 import com.ssafy.dmb.dto.user.MemberResponseDto;
+import com.ssafy.dmb.error.BusinessException;
+import com.ssafy.dmb.error.ErrorCode;
 import com.ssafy.dmb.repository.FamilyRepository;
 import com.ssafy.dmb.repository.FamilyUserRepository;
 import com.ssafy.dmb.repository.MemberRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 
@@ -33,6 +36,13 @@ public class FamilyService {
 
         String memberId = request.getMemberId();
         Member member = memberRepository.findByMemberId(memberId);
+
+        //member 유효성 검사
+        if ((member == null)) {
+            System.out.println("예외!예외!");
+            throw new BusinessException(ErrorCode.INVALID_INPUT_VALUE, "유효하지 않은 회원입니다.");
+        }
+
         String invitation = InvitationCode.create();
 
         // 중복이 아닐때까지 생성
@@ -69,11 +79,21 @@ public class FamilyService {
     public FamilyDto.familyResponse joinFamily(String invitationCode, String memberId) {
         LOGGER.info("[joinFamily] invitationCode: {}", invitationCode);
 
-        Family family = familyRepository.findByInvitation(invitationCode).get();
+        Family family = familyRepository.findByInvitation(invitationCode);
         LOGGER.info("[joinFamily] family: {}", family);
+
+        if (family == null) {
+            throw new BusinessException(ErrorCode.INVALID_INPUT_VALUE, "유효하지 않은 초대장입니다.");
+        }
 
         Member member = memberRepository.findByMemberId(memberId);
         LOGGER.info("[joinFamily] user: {}", member);
+
+        if (!(familyUserRepository.findByMemberAndFamily(member, family) == null)) {
+            throw new BusinessException(ErrorCode.INVALID_INPUT_VALUE, "이미 그룹에 속한 회원입니다.");
+        }
+
+
 
         FamilyUser familyUser = FamilyUser.builder()
                 .family(family)

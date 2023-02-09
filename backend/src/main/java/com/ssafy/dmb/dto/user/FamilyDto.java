@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 public class FamilyDto {
@@ -61,6 +62,7 @@ public class FamilyDto {
     public static class FamilyRequest {
 
         private String familyName;
+        @NotEmpty
         private String memberId;
 
     }

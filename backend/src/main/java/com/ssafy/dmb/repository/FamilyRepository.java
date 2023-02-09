@@ -16,7 +16,7 @@ public interface FamilyRepository extends JpaRepository<Family, Long> {
     List<Family> findAllByInvitation(@Param("invitation") String invitation);
 
     @Query("select f from Family f where f.invitation = :invitationCode")
-    Optional<Family> findByInvitation(@Param("invitationCode") String invitationCode);
+    Family findByInvitation(@Param("invitationCode") String invitationCode);
 
 }
 
