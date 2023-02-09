@@ -33,6 +33,8 @@ public class PlanService {
         Plan plan = planRepository.findById(planId).get();
 
         PlanDto.Detail planDetail = new PlanDto.Detail(plan);
+
+
         return planDetail;
     }
 

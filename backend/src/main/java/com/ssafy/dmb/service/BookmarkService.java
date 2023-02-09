@@ -2,9 +2,9 @@ package com.ssafy.dmb.service;
 
 import com.ssafy.dmb.domain.plan.Bookmark;
 import com.ssafy.dmb.domain.plan.Plan;
+import com.ssafy.dmb.repository.BookmarkRepository;
 import com.ssafy.dmb.repository.PlanRepository;
 import com.ssafy.dmb.dto.Plan.BookmarkDto;
-import com.ssafy.dmb.repository.BookmarkRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +46,7 @@ public class BookmarkService {
 
         validateDuplicateBookmark(bookmark);
         Long id = bookmarkRepository.save(bookmark).getId();
-        Bookmark findResult = bookmarkRepository.findOne(id);
+        Bookmark findResult = bookmarkRepository.findById(id).get();
         BookmarkDto.Detail result = new BookmarkDto.Detail(findResult);
         return result;
 //        return bookmark.getId();
@@ -61,7 +61,7 @@ public class BookmarkService {
 
     @Transactional
     public void delete(Long id) {
-        bookmarkRepository.remove(id);
+        bookmarkRepository.deleteById(id);
     }
 
     public List<Bookmark> findBookmarks(Long planId) {

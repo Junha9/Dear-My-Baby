@@ -52,7 +52,7 @@ public class Plan {
         this.planDestination = planDestination;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.planPeriod = Period.between(startDate, endDate).getDays();
+        this.planPeriod = Period.between(startDate, endDate).getDays() + 1;
         this.family = family;
     }
 

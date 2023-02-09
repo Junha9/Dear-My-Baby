@@ -2,7 +2,7 @@ package com.ssafy.dmb.controller;
 
 import com.ssafy.dmb.dto.user.BabyDto;
 import com.ssafy.dmb.repository.BabyRepository;
-import com.ssafy.dmb.service.BabyServiceImpl;
+import com.ssafy.dmb.service.BabyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class BabyController {
 
     private final BabyRepository babyRepository;
 
-    private final BabyServiceImpl babyService;
+    private final BabyService babyService;
 
     @GetMapping("/{babyId}")
     @Operation(summary = "아이 정보 조회"

@@ -1,45 +1,21 @@
 package com.ssafy.dmb.repository;
 
-
 import com.ssafy.dmb.domain.plan.Bookmark;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
-public class BookmarkRepository {
+public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 
-    private final EntityManager em;
+    @Query("select b from Bookmark b where b.plan.id = :planId")
+    List<Bookmark> findByPlan(@Param("planId") Long planId);
 
-    public Bookmark save(Bookmark bookmark) {
+    @Query("select b from Bookmark b where b.bookmarkAddress =:address")
+    List<Bookmark> findByAddress(@Param("address") String address);
 
-        em.persist(bookmark);
-        return bookmark;
-    }
-
-    public Bookmark findOne(Long id) {
-        return em.find(Bookmark.class, id);
-    }
-
-    public List<Bookmark> findByPlan(Long id) {
-        return em.createQuery("select b from Bookmark b where b.plan.id =:id", Bookmark.class)
-                .setParameter("id", id)
-                .getResultList();
-    }
-
-    public List<Bookmark> findByAddress(String address) {
-        return em.createQuery("select b from Bookmark b where b.bookmarkAddress =:address", Bookmark.class)
-                .setParameter("address", address)
-                .getResultList();
-    }
-
-    public void remove(Long id) {
-        Bookmark bookmark = em.find(Bookmark.class, id);
-        em.remove(bookmark);
-
-    }
 
 }

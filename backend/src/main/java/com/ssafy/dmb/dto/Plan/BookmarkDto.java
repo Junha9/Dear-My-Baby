@@ -11,6 +11,8 @@ public class BookmarkDto {
     @Builder
     @AllArgsConstructor
     public static class Detail {
+
+        private Long bookmarkId;
         private Long planId;
         private String bookmarkName;
         private String bookmarkAddress;
@@ -18,6 +20,7 @@ public class BookmarkDto {
         private String bookmarkLongitude;
 
         public Detail(Bookmark bookmark) {
+            this.bookmarkId = bookmark.getId();
             this.planId = bookmark.getPlan().getId();
             this.bookmarkName = bookmark.getBookmarkName();
             this.bookmarkAddress = bookmark.getBookmarkAddress();
