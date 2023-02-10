@@ -11,6 +11,7 @@ import com.ssafy.dmb.dto.user.MemberDetailResponseDto;
 import com.ssafy.dmb.dto.user.MemberDto;
 import com.ssafy.dmb.dto.user.MemberResponseDto;
 import com.ssafy.dmb.jwt.JwtTokenProvider;
+import com.ssafy.dmb.repository.FamilyRepository;
 import com.ssafy.dmb.repository.FamilyUserRepository;
 import com.ssafy.dmb.repository.MemberRepository;
 import com.ssafy.dmb.repository.PlanRepository;
@@ -43,6 +44,7 @@ public class MemberService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
     private final PlanRepository planRepository;
+    private final FamilyRepository familyRepository;
 
     public MemberDetailResponseDto getMemberDetail(String memberId) {
 
@@ -81,9 +83,10 @@ public class MemberService {
         Plan currentPlan = planRepository.findCurrentPlanByPlanState();
         PlanDto.PlanResponse currentPlanResponse = new PlanDto.PlanResponse(currentPlan);
 
-        List<Long> familyIdList = new ArrayList<>();
+        List<FamilyDto.familyList> familyIdList = new ArrayList<>();
         for (FamilyUser fu : familyUserList){
-            familyIdList.add(fu.getFamily().getId());
+            FamilyDto.familyList familyList = new FamilyDto.familyList(fu.getFamily());
+            familyIdList.add(familyList);
         }
         MemberDetailResponseDto memberDetailResponseDto = new MemberDetailResponseDto(memberDetail,closetPlanResponse,currentPlanResponse,familyIdList);
 

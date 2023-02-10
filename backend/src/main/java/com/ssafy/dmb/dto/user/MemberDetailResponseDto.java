@@ -29,9 +29,9 @@ public class MemberDetailResponseDto {
 
     private PlanDto.PlanResponse currentPlan;
 
-    private List<Long> familyIdList;
+    private List<FamilyDto.familyList> familyIdList;
 
-    public MemberDetailResponseDto(Member member, PlanDto.PlanResponse closetPlan, PlanDto.PlanResponse currentPlan,List<Long> familyIdList){
+    public MemberDetailResponseDto(Member member, PlanDto.PlanResponse closetPlan, PlanDto.PlanResponse currentPlan,List<FamilyDto.familyList> familyIdList){
         this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
