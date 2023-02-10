@@ -40,6 +40,26 @@ public class PlanService {
         return planDetail;
     }
 
+    public PlanDto.Detail startPlan(Long planId) {
+        Plan changeplan = planRepository.findById(planId).get();
+        changeplan.setPlanState(1);
+        planRepository.save(changeplan);
+        Plan plan = planRepository.findById(planId).get();
+        PlanDto.Detail planDetail = new PlanDto.Detail(plan);
+
+        return planDetail;
+    }
+
+    public PlanDto.Detail endPlan(Long planId) {
+        Plan changeplan = planRepository.findById(planId).get();
+        changeplan.setPlanState(2);
+        planRepository.save(changeplan);
+        Plan plan = planRepository.findById(planId).get();
+        PlanDto.Detail planDetail = new PlanDto.Detail(plan);
+
+        return planDetail;
+    }
+
     public List<PlanDto.Detail> getPlanDetailList(Long familyId) {
         LOGGER.info("[getPlanDetailList] input familyId: {}", familyId);
         List<Plan> planList = planRepository.findAllByFamily(familyId);
@@ -63,6 +83,7 @@ public class PlanService {
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
                 .family(family)
+                .planState(0)
                 .build();
 
         int period = plan.getPlanPeriod();

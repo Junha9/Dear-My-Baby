@@ -1,5 +1,6 @@
 package com.ssafy.dmb.domain.plan;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ssafy.dmb.domain.user.Family;
 import lombok.*;
 
@@ -31,8 +32,11 @@ public class Plan {
     @Column(nullable = false)
     private int planPeriod;
 
+    private int planState;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "family_id")
+    @JsonBackReference
     private Family family;
 
 
@@ -47,13 +51,14 @@ public class Plan {
 
 
     @Builder
-    public Plan(String planDestination, LocalDate startDate, LocalDate endDate, Family family, String planName){
+    public Plan(String planDestination, LocalDate startDate, LocalDate endDate, Family family, String planName, int planState){
         this.planName = planName;
         this.planDestination = planDestination;
         this.startDate = startDate;
         this.endDate = endDate;
         this.planPeriod = Period.between(startDate, endDate).getDays() + 1;
         this.family = family;
+        this.planState = planState;
     }
 
 }

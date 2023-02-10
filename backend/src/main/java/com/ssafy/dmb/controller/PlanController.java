@@ -1,6 +1,9 @@
 package com.ssafy.dmb.controller;
 
+import com.ssafy.dmb.domain.plan.Plan;
+import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.dto.Plan.PlanDto;
+import com.ssafy.dmb.repository.PlanRepository;
 import com.ssafy.dmb.service.PlanService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +22,7 @@ import java.util.List;
 public class PlanController {
 
     private final PlanService planService;
+    private final PlanRepository planRepository;
 
     @Operation(summary = "여행 계획 단일 조회", description = "<strong> planId </strong>를 통해 여행 계획을 단일 조회한다.")
     @GetMapping("/detail/{planId}")
@@ -51,12 +55,31 @@ public class PlanController {
 
     }
 
+    @Operation(summary = "여행 시작", description = "<strong> planId </strong>를 통해 planState를 시작으로 수정")
+    @PutMapping("/start/{planId}")
+    public ResponseEntity<PlanDto.Detail> startPlan(@PathVariable("planId") Long planId) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(planService.startPlan(planId));
+
+    }
+
+    @Operation(summary = "여행 끝", description = "<strong> planId </strong>를 통해 여행 종료로 수정.")
+    @PutMapping("/end/{planId}")
+    public ResponseEntity<PlanDto.Detail> endPlan(@PathVariable("planId") Long planId) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(planService.endPlan(planId));
+
+    }
+
     @Operation(summary = "여행 계획 삭제", description = "<strong> planId </strong>를 통해 여행 계획을 삭제한다.")
     @DeleteMapping("{planId}")
-    public void deletePlan(@PathVariable("planId") Long planId) {
+    public ResponseEntity<List<PlanDto.Detail>> deletePlan(@PathVariable("planId") Long planId) {
+        Plan plan = planRepository.findById(planId).get();
+        Family family = plan.getFamily();
 
         planService.deletePlan(planId);
 
+        return ResponseEntity.status(HttpStatus.OK).body(planService.getPlanDetailList(family.getId()));
     }
 
 }

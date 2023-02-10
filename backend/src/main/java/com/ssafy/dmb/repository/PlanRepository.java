@@ -13,5 +13,8 @@ public interface PlanRepository extends JpaRepository<Plan,Long> {
 
     @Query("select p from Plan p where p.family.id = :familyId")
     List<Plan> findAllByFamily(@Param("familyId") Long familyId);
+
+    @Query("select p from Plan p where p.planState = 1")
+    Plan findCurrentPlanByPlanState();
 }
 

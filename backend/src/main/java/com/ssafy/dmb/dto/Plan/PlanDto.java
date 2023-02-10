@@ -31,6 +31,7 @@ public class PlanDto {
         private LocalDate startDate;
         private LocalDate endDate;
         private int planPeriod;
+        private int planState;
         private Long familyId;
 
         private List<DayDto> days;
@@ -39,6 +40,7 @@ public class PlanDto {
             this.planId = plan.getId();
             this.planName = plan.getPlanName();
             this.planDestination = plan.getPlanDestination();
+            this.planState = plan.getPlanState();
             this.startDate = plan.getStartDate();
             this.endDate = plan.getEndDate();
             this.planPeriod = plan.getPlanPeriod();
@@ -62,6 +64,35 @@ public class PlanDto {
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
+
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class PlanResponse {
+        private Long familyId;
+        private Long planId;
+        @Schema(description = "이름")
+        @NotEmpty
+        private String planName;
+        @NotEmpty
+        private String planDestination;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private int planState;
+        private int planPeriod;
+
+        public PlanResponse (Plan plan){
+            this.familyId=plan.getFamily().getId();
+            this.planId = plan.getId();
+            this.planName = plan.getPlanName();
+            this.planDestination =plan.getPlanDestination();
+            this.startDate = plan.getStartDate();
+            this.endDate = plan.getEndDate();
+            this.planState = plan.getPlanState();
+            this.planPeriod = plan.getPlanPeriod();
+        }
 
     }
 }

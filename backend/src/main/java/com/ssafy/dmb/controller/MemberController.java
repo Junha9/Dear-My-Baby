@@ -3,8 +3,8 @@ package com.ssafy.dmb.controller;
 import com.ssafy.dmb.dto.login.MemberLoginRequestDto;
 import com.ssafy.dmb.dto.login.TokenInfo;
 import com.ssafy.dmb.dto.user.FamilyDto;
+import com.ssafy.dmb.dto.user.MemberDetailResponseDto;
 import com.ssafy.dmb.dto.user.MemberDto;
-import com.ssafy.dmb.dto.user.MemberResponseDto;
 import com.ssafy.dmb.jwt.JwtTokenProvider;
 import com.ssafy.dmb.service.MemberService;
 import com.ssafy.dmb.service.S3Service;
@@ -61,7 +61,7 @@ public class MemberController {
 
     @GetMapping("/detail")
     @Operation(summary = "회원 정보 조회", description = "<strong> memberID </strong>를 통해 회원 정보를 조회한다.")
-    public ResponseEntity<MemberResponseDto> getMemberDetail(@RequestHeader("Access-Token") String accessToken) {
+    public ResponseEntity<MemberDetailResponseDto> getMemberDetail(@RequestHeader("Access-Token") String accessToken) {
 
         String ATK = accessToken.substring(7);
         System.out.println("ATK: " + ATK);

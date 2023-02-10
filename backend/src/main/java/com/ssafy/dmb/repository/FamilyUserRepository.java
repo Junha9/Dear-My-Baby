@@ -19,4 +19,6 @@ public interface FamilyUserRepository extends JpaRepository<FamilyUser, Long> {
     @Query("select fu from FamilyUser fu where fu.member =:member and fu.family =:family")
     FamilyUser findByMemberAndFamily(@Param("member") Member member, @Param("family") Family family);
 
+    @Query("select fu from FamilyUser fu where fu.member.no = :memberNo")
+    List<FamilyUser> findByMemberNo(@Param("memberNo") Long memberNo);
 }

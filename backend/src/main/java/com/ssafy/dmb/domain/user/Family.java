@@ -1,5 +1,6 @@
 package com.ssafy.dmb.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.dmb.domain.baby.Baby;
 import com.ssafy.dmb.domain.plan.Plan;
 import lombok.*;
@@ -27,6 +28,7 @@ public class Family {
     private List<FamilyUser> FamilyUser = new ArrayList<>();
 
     @OneToMany(mappedBy = "family")
+    @JsonManagedReference
     private List<Plan> plans = new ArrayList<>();
 
     @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
