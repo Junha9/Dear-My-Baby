@@ -36,8 +36,8 @@ public class CommentController {
     }
 
     @Operation(summary = "댓글 리스트 조회", description = "<strong> recordId </strong>를 통해 댓글 리스트를 전체 조회한다.")
-    @GetMapping("/comments")
-    public List<CommentResponseDto> getCommentList(@RequestParam("recordId") Long recordId) throws IOException {
+    @GetMapping("/comments/{recordId}")
+    public List<CommentResponseDto> getCommentList(@PathVariable Long recordId) throws IOException {
 
         return commentService.getCommentList(recordId);
 

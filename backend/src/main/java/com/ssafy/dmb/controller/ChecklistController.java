@@ -43,8 +43,8 @@ public class ChecklistController {
     }
 
     @Operation(summary = "체크리스트 조회", description = "<strong> planId </strong>를 통해 계획별 준비물을 조회한다.")
-    @GetMapping("/items")
-    public List<ChecklistResponseDto> getChecklist(@RequestParam("planId") Long planId) throws IOException {
+    @GetMapping("/items/{planId}")
+    public List<ChecklistResponseDto> getChecklist(@PathVariable Long planId) throws IOException {
         return checklistService.getChecklist(planId);
     }
 
