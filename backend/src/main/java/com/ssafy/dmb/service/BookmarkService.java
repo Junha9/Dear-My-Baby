@@ -2,6 +2,8 @@ package com.ssafy.dmb.service;
 
 import com.ssafy.dmb.domain.plan.Bookmark;
 import com.ssafy.dmb.domain.plan.Plan;
+import com.ssafy.dmb.error.BusinessException;
+import com.ssafy.dmb.error.ErrorCode;
 import com.ssafy.dmb.repository.BookmarkRepository;
 import com.ssafy.dmb.repository.PlanRepository;
 import com.ssafy.dmb.dto.Plan.BookmarkDto;
@@ -33,7 +35,7 @@ public class BookmarkService {
         Long planId = request.getPlanId();
 
         Plan plan = planRepository.findById(planId).
-                orElseThrow(() -> new NoSuchElementException());
+                orElseThrow(() -> new BusinessException(ErrorCode.BAD_REQUEST, "존재하지 않는 plan입니다."));
 
 
         Bookmark bookmark = Bookmark.builder().

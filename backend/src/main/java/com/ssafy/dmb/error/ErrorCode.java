@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum ErrorCode {
 
     INVALID_INPUT_VALUE(400, "COMMON-001", "유효성 검증에 실패한 경우"),
-    INTERNAL_SERVER_ERROR(500, "COMMON-002", "서버에서 처리할 수 없는 경우");
+    INTERNAL_SERVER_ERROR(500, "COMMON-002", "서버에서 처리할 수 없는 경우"),
+    BAD_REQUEST(500,"BAD_REQUEST", "요청이 잘못된 경우");
     private final int status;
     private final String code;
     private final String description;

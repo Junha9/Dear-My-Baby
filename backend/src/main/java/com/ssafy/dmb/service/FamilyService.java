@@ -118,6 +118,9 @@ public class FamilyService {
 
     public FamilyDto.FamilyUserList getFamilyDetail(Long familyId) {
         Family family = familyRepository.findById(familyId).get();
+
+
+
         LOGGER.info("[getFamilyDetail] family: {}", family.getFamilyUser());
 
         List<FamilyUser> familyUserList = family.getFamilyUser();

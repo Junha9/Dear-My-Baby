@@ -5,6 +5,7 @@ import com.ssafy.dmb.dto.day.DayDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,9 @@ public class PlanDto {
 
         private Long planId;
 
+        @NotEmpty
         private String planName;
+        @NotEmpty
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -53,7 +56,9 @@ public class PlanDto {
     public static class PlanRequest {
         private Long familyId;
         @Schema(description = "이름")
+        @NotEmpty
         private String planName;
+        @NotEmpty
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;

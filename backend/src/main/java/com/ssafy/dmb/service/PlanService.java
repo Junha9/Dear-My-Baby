@@ -4,6 +4,8 @@ import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.dto.Plan.PlanDto;
+import com.ssafy.dmb.error.BusinessException;
+import com.ssafy.dmb.error.ErrorCode;
 import com.ssafy.dmb.repository.DayRepository;
 import com.ssafy.dmb.repository.FamilyRepository;
 import com.ssafy.dmb.repository.PlanRepository;
@@ -64,6 +66,11 @@ public class PlanService {
                 .build();
 
         int period = plan.getPlanPeriod();
+
+        if (period <= 0) {
+            throw new BusinessException(ErrorCode.BAD_REQUEST, "여행 종료일은 출발일 이후여야 합니다.");
+        }
+
         // day를 만들어서 저장해야되는데
         // plan랑 daynumber => period로 가 필요
         for(int i = 1;i<=period;i++){

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class PlanController {
 
     @Operation(summary = "여행 계획 생성", description = "여행 계획을 생성한다.")
     @PostMapping("/new")
-    public ResponseEntity<PlanDto.Detail> createPlan(@RequestBody PlanDto.PlanRequest request) {
+    public ResponseEntity<PlanDto.Detail> createPlan(@Validated @RequestBody PlanDto.PlanRequest request) {
 
         return ResponseEntity.status(HttpStatus.OK).body(planService.createPlan(request));
 
