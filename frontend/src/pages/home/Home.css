@@ -1,7 +1,6 @@
 /* 배경 색 : rgba(255, 255, 255, 0.922)
 /* 시그니쳐 색 : rgb(59, 45, 142) */
 
-
 .placeItem {
   display: flex;
   flex-direction: column;
@@ -33,11 +32,12 @@
 
 .user-plan {
   padding: 3vh;
+  padding-top: 3.5vh;
   /* background-color: rgb(249, 255, 202); */
   background-color: rgba(255, 255, 255, 0.922);
-  border-top-left-radius: 6%;
-  border-top-right-radius: 6%;
-  box-shadow: 1px 1px 1px 1px rgb(255, 255, 255);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0px 0px 10px 4px rgba(131, 127, 127, 0.4);
 }
 /*
 .recommandCard {
@@ -50,7 +50,6 @@
   margin-inline: 5%;
 }
 */
-
 
 .main-div {
   padding: 0% 0%;
@@ -70,34 +69,51 @@
   /* background-color: rgb(255, 243, 152); */
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
-  box-shadow: 0px 0.1px 0px rgba(18, 18, 18, 0.314);
+  box-shadow: 10px 10px 10px rgba(203, 203, 203, 0.314);
+  margin-top: 3px;
+  text-align: center;
   /* animation-duration: 3s;
   animation-name: slidein; */
-  
 }
 
 .dday-alarm-text {
   padding: 10px;
   padding-left: 20px;
+  text-align: left;
 }
 
 .dday-alarm-button {
   margin-bottom: 15px;
-  margin-left: 15px;
+  margin-left: 20px;
   color: white;
   border: none;
   border-radius: 10px;
-  background-color: rgb(95, 67, 255);
+  background-color: rgb(89, 56, 255);
+  box-shadow: 3px 3px 3px rgb(232, 236, 248);
   padding: 5px 10px;
-
+  width: 150px;
+  font-size: 13px;
 }
+
+.dday-alarm-button2 {
+  color: white;
+  border: none;
+  width: 100px;
+  height: 40px;
+  background-color: rgb(89, 56, 255);
+  box-shadow: 3px 3px 3px rgb(232, 236, 248);
+  margin-bottom: 10px;
+  padding: 0px;
+}
+
 .plan-append {
   /* background-color: rgb(255, 243, 152); */
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  box-shadow: 0px 0.1px 0px rgba(18, 18, 18, 0.314);
+  box-shadow: 10px 10px 10px rgba(203, 203, 203, 0.314);
   /* animation-duration: 3s; */
   /* animation-name: slidein; */
+  text-align: center;
 }
 
 .plan-append-text {
@@ -111,8 +127,9 @@
 }
 
 .recommend {
-  padding: 20px;
+  padding: 30px;
   background-color: rgba(255, 255, 255, 0.922);
+  font-size: 13px;
 }
 
 .main-animation {
@@ -120,7 +137,6 @@
   -moz-animation: fadein 5s;
   -webkit-animation: fadein 5s;
   -o-animation: fadein 5s;
-  
 }
 @keyframes fadein {
   from {
@@ -129,7 +145,6 @@
   to {
     opacity: 1;
   }
-
 }
 
 @-moz-keyframes fadein {
@@ -142,22 +157,20 @@
 }
 @-webkit-keyframes fadein {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 @-o-keyframes fadein {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
-
-
 
 /* .family-photo-animation {
   animation-duration: 3s;
@@ -171,6 +184,6 @@
   }
   to {
     margin-right: 0%;
-    width: 100%
+    width: 100%;
   }
-} 
+}

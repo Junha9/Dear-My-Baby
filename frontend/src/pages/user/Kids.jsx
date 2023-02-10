@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Outlet } from 'react-router-dom';
 const dummyChildFavor = [
   {
     // 음식, 관광지
@@ -16,16 +16,7 @@ export default function Kids() {
 
   return (
     <div>
-      <h1>About Kids</h1>
-      <button
-        onClick={() => {
-          setFood(food.push('햄버거'));
-          console.log(food);
-        }}
-      >
-        바꿔
-      </button>
-      <div>{food.length}</div>
+      <Outlet></Outlet>
     </div>
   );
 }

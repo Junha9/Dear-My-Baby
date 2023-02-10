@@ -1,14 +1,23 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap'); */
 
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gamja+Flower&family=Nanum+Pen+Script&display=swap');
+@import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+
+/* @font-face {
+  font-family: 'Noto Sans KR';
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');
+  font-style: normal;
+  font-weight: 900;
+} */
 
 body {
-  font-family: 'Do Hyeon', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
-/* Material UI에 도현체 적용 */
+/* Material UI에 나눔고딕 적용 */
 [class^='MuiTypography'] {
-  font-family: 'Do Hyeon', sans-serif !important;
+  font-family: 'Nanum Gothic', sans-serif !important;
 }
 
 /* 화면 크기별 css 설계하기

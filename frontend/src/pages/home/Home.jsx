@@ -5,9 +5,16 @@ import { apiGetRecordList } from '@/commons/api/record';
 import { apiCreateDay } from '@/commons/api/day';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Dropdown from '@/commons/components/Dropdown';
 import './Home.css';
 import Place from './Place';
-import { apiGetMemberFamilys } from '@/commons/api/member';
+import Weather from './Weather.jsx';
+import Baby from './Baby.jsx';
+import Baby2 from './Baby2';
+import Baby3 from './Baby3';
+import Man from './Man';
+import Woman from './Woman';
+import { width } from '@mui/system';
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
@@ -22,8 +29,10 @@ const dummyUser = {
 
 export default function Home() {
   const [user, setUser] = useState(dummyUser);
+  const [selectFamily, setSelectFamily] = useState(null);
   const closestPlan = user.closestPlan;
   const isTraveling = user.currentPlanId != null;
+  const [view, setView] = useState(false);
 
   // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
   const today = new Date();
@@ -67,17 +76,19 @@ export default function Home() {
           justifyContent: 'space-between',
           padding: '6%',
           // backgroundColor: 'rgba(47, 54, 129, 0.597)',
-          height: '280px',
+          height: '220px',
         }}
       >
         <div className="main-animation">
           <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'white' }}>dear my baby</h3>
-          <h2 style={{ fontWeight: '100', color: 'white' }}>당신의 아이에게 따뜻한 추억을 선물하세요</h2>
+          <h3 style={{ fontWeight: '100', color: 'white', fontSize: '16px', marginBottom: '15px' }}>
+            당신의 아이에게 <br></br>따뜻한 추억을 선물하세요
+          </h3>
         </div>
         <div className="family-photo-animation">
           <img
-            src="/assets/family.jpeg"
-            style={{ height: '130px', width: '130px', borderRadius: '50%', boxShadow: '0px 2px 2px' }}
+            src="public\assets\baby.jpg"
+            style={{ height: '110px', width: '110px', borderRadius: '50%', boxShadow: '0px 2px 2px' }}
             alt="img"
           />
         </div>
@@ -86,7 +97,7 @@ export default function Home() {
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
           <div style={{ marginBottom: '3vh' }}>
-            <h2>제주 여행 중</h2>
+            <h4>제주 여행 중</h4>
             <button
               onClick={() => {
                 navigate(`/record`);
@@ -100,7 +111,9 @@ export default function Home() {
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
           <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
-            <h2 className="dday-alarm-text">오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h2>
+            <h4 className="dday-alarm-text">
+              오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
+            </h4>
             <button
               className="dday-alarm-button"
               onClick={() => {
@@ -116,54 +129,128 @@ export default function Home() {
             </button>
           </div>
         ) : null}
+        {selectFamily ? (
+          <div className="plan-append">
+            <h3 className="plan-append-text">babyname과 여행할 지역을 고르셨나요?</h3>
 
-        <div className="plan-append">
-          <h3 className="plan-append-text">...님 여행할 지역을 고르셨나요?</h3>
-
-          <div
-            className="plus-plan"
-            onClick={() => {
-              navigate('/plan');
-            }}
-            style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
-          >
-            <button
-              className="plan-append-text"
+            <div
+              className="plus-plan"
               onClick={() => {
                 navigate('/plan');
               }}
-              style={{
-                backgroundColor: 'rgba(229, 229, 229, 1)',
-                color: 'orange',
-                border: 'none',
-                height: '50px',
-                width: '50px',
-                borderRadius: '50%',
-                fontSize: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginRight: '1%',
-              }}
+              style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
             >
-              +
-            </button>
-            <h4>여행 계획 추가하기</h4>
+              <button
+                className="plan-append-text"
+                onClick={() => {
+                  navigate('/plan');
+                }}
+                style={{
+                  backgroundColor: 'rgba(229, 229, 229, 1)',
+                  color: 'orange',
+                  border: 'none',
+                  height: '30px',
+                  width: '30px',
+                  margin: '10px',
+                  borderRadius: '50%',
+                  background: '#FFFFFF',
+                  border: '0.4px solid #EEEEEE',
+                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
+                  fontSize: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginRight: '10px',
+                  marginLeft: '30px',
+                  marginBottom: '15px',
+                }}
+              >
+                +
+              </button>
+              <h4>여행 계획 추가하기</h4>
+            </div>
           </div>
+        ) : (
+          <div className="plan-append">
+            <h4 className="plan-append-text">username님 가족과 함께 해보세요!</h4>
+
+            <div className="plus-plan">
+              <ul
+                onClick={() => {
+                  setView(!view);
+                }}
+              >
+                가족 선택하기 {view ? ' ⌃' : ' ⌄'}
+                {view && <Dropdown setSelectFamily={setSelectFamily} />}
+              </ul>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}>
+              <button
+                style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
+                className="dday-alarm-button2"
+                onClick={() => {
+                  navigate(`/user/make-group`);
+                }}
+              >
+                가족 그룹 만들기
+              </button>
+
+              <button
+                style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
+                className="dday-alarm-button2"
+                onClick={() => {
+                  //
+                  navigate(`/record`);
+                }}
+              >
+                가족 그룹 들어가기
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      {/* <hr /> */}
+      {selectFamily ? (
+        <div className="recommend">
+          <h3>babyname에게 추천하는 지역별 여행지</h3>
+          <Place />
         </div>
-      </div>
-      <hr />
+      ) : null}
+      {selectFamily ? (
+        <div className="recommend">
+          <h3>babyname에게 추천하는 지역별 축제</h3>
+          <Place />
+        </div>
+      ) : null}
+      {selectFamily ? (
+        <div className="recommend">
+          <h3>babyname에게 추천하는 지역별 식당</h3>
+          <Place />
+        </div>
+      ) : null}
       <div className="recommend">
-        <h3>어린이와 겨울에 가기 좋은 여행지</h3>
-        <Place />
+        <h3>겨울철 아이와 함께 가볼만한 여행지</h3>
+        <Weather />
       </div>
       <div className="recommend">
-        <h3>4~6세 어린이와 함께 가기 좋은 여행지</h3>
-        <Place />
+        <h3>유아기 아이들을 위한 추천 여행지</h3>
+        <Baby />
       </div>
       <div className="recommend">
-        <h3>7~10세 어린이를 위한 추천 여행지</h3>
-        <Place />
+        <h3>유년기 아이들을 위한 추천 여행지</h3>
+        <Baby2 />
+      </div>
+      <div className="recommend">
+        <h3>어린이들을 위한 추천 여행지</h3>
+        <Baby3 />
+      </div>
+      <div className="recommend">
+        <h3>남자 아이들을 위한 추천 여행지</h3>
+        <Man />
+      </div>
+      <div className="recommend">
+        <h3>여자 아이들을 위한 추천 여행지</h3>
+        <Woman />
       </div>
     </div>
   );

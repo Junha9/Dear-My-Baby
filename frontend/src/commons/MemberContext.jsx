@@ -55,6 +55,7 @@ export function MemberProvider({ children }) {
     const response = await apiLoginMember(memberId, password);
     const accessToken = response.data;
     setToken(accessToken);
+    setMember((await apiGetMember(accessToken)).data);
   }, []);
 
   const logout = useCallback(

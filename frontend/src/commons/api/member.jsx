@@ -35,7 +35,7 @@ export async function apiCreateMember(member, imgFile) {
 // 회원을 로그인시키며 refresh-token을 Cookie로, access-token을 body로 받아온다
 export async function apiLoginMember(memberId, password) {
   if (memberId != null && password != null) {
-    const response = await api.post(`/member/login`, { memberId, password }, { withCredentials: true });
+    const response = await api.post(`/member/login`, { memberId, password });
     return response;
   }
   throw new Error('apiLoginMember : memberId, password must be provided');

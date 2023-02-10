@@ -1,4 +1,5 @@
 import { getApiInstance } from './http';
+
 // 날짜별 여행 기록 전체 조회
 const dummyRecords = [
   {

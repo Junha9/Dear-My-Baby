@@ -5,8 +5,11 @@ import AppBar from '@mui/material/AppBar';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -16,7 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { useMember } from '@/commons/MemberContext';
+import { useMember, useMemberMethod } from '@/commons/MemberContext';
 
 const links = [
   { name: 'Home', path: '/' },
@@ -26,17 +29,28 @@ const links = [
 ];
 
 export default function HeadBar() {
-  const member = useMember();
-
-  const [open, setOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [listOpen, setListOpen] = useState(false);
   const navigate = useNavigate();
+  const member = useMember();
+  const { logout } = useMemberMethod();
 
-  function toggleDrawer(event, open) {
+  const toggleDrawer = (event, open) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    setOpen(open);
-  }
+    setDrawerOpen(open);
+  };
+
+  const toggleList = (event) => {
+    event.stopPropagation();
+    setListOpen(!listOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <div>
@@ -54,16 +68,16 @@ export default function HeadBar() {
             // sx={{ mr: 1 }}
             onClick={() => navigate(-1)}
           >
-            <ArrowBackIcon />
+            <ArrowBackIcon style={{ color: 'white' }} />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontSize: '14px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
-              <img
+              {/* <img
                 src="/assets/logo.png"
                 style={{ height: '30px', width: '30px', marginRight: '10px' }}
                 alt="logo"
-              ></img>
-              DearMyBaby
+              ></img> */}
+              Dear my baby
             </Link>
           </Typography>
           <IconButton
@@ -74,9 +88,9 @@ export default function HeadBar() {
             // sx={{ mr: 1 }}
             onClick={(event) => toggleDrawer(event, true)}
           >
-            <MenuIcon />
+            <MenuIcon style={{ color: 'white' }} />
           </IconButton>
-          <Drawer anchor="right" open={open} onClose={(event) => toggleDrawer(event, false)}>
+          <Drawer anchor="right" open={drawerOpen} onClose={(event) => toggleDrawer(event, false)}>
             <Box
               sx={{ width: '50vw' }}
               role="presentation"
@@ -84,14 +98,32 @@ export default function HeadBar() {
               onKeyDown={(event) => toggleDrawer(event, false)}
             >
               <List>
-                <ListItem disablePadding>
-                  <ListItemButton component={Link} to="user">
-                    <Avatar src={member != null && member.memberImg} sx={{ width: 32, height: 32, mr: 2 }}>
-                      M
-                    </Avatar>
-                    <ListItemText primary={member != null ? member.memberName : '회원정보'}></ListItemText>
-                  </ListItemButton>
-                </ListItem>
+                {member != null ? (
+                  <>
+                    <ListItemButton onClick={toggleList}>
+                      <Avatar src={member.memberImg} sx={{ width: 32, height: 32, mr: 2 }}></Avatar>
+                      <ListItemText primary={member.memberName}></ListItemText>
+                      {listOpen ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                    <Collapse in={listOpen} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        <ListItemButton component={Link} to="user" sx={{ pl: 4 }}>
+                          <ListItemText primary="MyPage" />
+                        </ListItemButton>
+                        <ListItemButton onClick={handleLogout} sx={{ pl: 4 }}>
+                          <ListItemText primary="Logout" />
+                        </ListItemButton>
+                      </List>
+                    </Collapse>
+                  </>
+                ) : (
+                  <>
+                    <ListItemButton component={Link} to="user/login">
+                      <Avatar sx={{ width: 32, height: 32, mr: 2 }}>M</Avatar>
+                      <ListItemText primary="로그인 하기"></ListItemText>
+                    </ListItemButton>
+                  </>
+                )}
                 <Divider></Divider>
                 {links.map((link) => (
                   <ListItem key={link.path} disablePadding>

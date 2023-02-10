@@ -1,8 +1,7 @@
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import zIndex from '@mui/material/styles/zIndex';
-import { Bookmark } from '@mui/icons-material';
+import PlaceBasket from './PlaceBasket';
 
 const kakao = window.kakao;
 
@@ -12,7 +11,7 @@ export default function PlanMap() {
   const [map, setMap] = useState();
   const [keyWord, setKeyWord] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  let addedBookMark = [];
+  const [placeBasket, setPlaceBasket] = useState([]);
 
   // 검색어 상태 변화
   const onChange = (e) => {
@@ -61,10 +60,17 @@ export default function PlanMap() {
 
   // 북마크 추가 버튼 눌려을때
   const addToBookMark = () => {
-    // console.log(bookMark)
-    addedBookMark.push(info);
-    console.log(addedBookMark);
+    if (placeBasket && !placeBasket.includes(info)) {
+      // placeBasket.push(info);
+      setPlaceBasket(placeBasket.concat(info));
+    }
   };
+
+  // 북마크 삭제 버튼
+  // const deleteToBookMark = () => {
+  //   setPlaceBasket({ placeBasket: placeBasket.filter((places) => places.adressName != info.addressName) });
+  //   console.log('삭제후', placeBasket);
+  // };
 
   return (
     <div>
@@ -136,7 +142,13 @@ export default function PlanMap() {
                           <a href={info.placeURL} target="_blank" className="link" rel="noreferrer">
                             디테일
                           </a>
-                          <button onClick={addToBookMark}>추가</button>
+                          {placeBasket.includes(info) ? (
+                            <button onClick={{}}>삭제</button>
+                          ) : (
+                            <div>
+                              <button onClick={addToBookMark}>추가</button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -146,6 +158,13 @@ export default function PlanMap() {
             )}
           </>
         ))}
+
+        <div className="place-basket-div">
+          <h4>장소바구니</h4>
+          {placeBasket.map((basketplace) => {
+            return <PlaceBasket key={basketplace.addressName} basketplace={basketplace}></PlaceBasket>;
+          })}
+        </div>
       </Map>
     </div>
   );

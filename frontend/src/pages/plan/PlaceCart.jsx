@@ -212,11 +212,11 @@ const PlaceCart = () => {
     // console.log(dummyDays);
     // alert('경로가 저장되었습니다.');
   }
-  
+
   const createNewPlan = () => {
-    // data에는 
-  apiCreatePlan(data)
-  }
+    // data에는
+    // apiCreatePlan(data)
+  };
   return (
     <div>
       <div
@@ -230,7 +230,6 @@ const PlaceCart = () => {
         {/* 여행 기간 만큼 버튼 자동생성하기 */}
       </div>
       {/*  */}
-
       <KakaoMap
         center={{
           // 지도의 중심좌표 장소바구니 목록들중 중심 좌표로 들어오게 하기

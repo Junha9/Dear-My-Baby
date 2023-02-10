@@ -5,7 +5,7 @@ export default function AlbumRecordItem({ record }) {
     <ul className="record-box">
       <div className="img-padding">
         <li>
-          <img className="img-padding2" src={record.recordFile} alt="random" width="60" height="100"></img>
+          <img className="img-padding2" src={record.recordFile} alt="random" width="75" height="110"></img>
         </li>
       </div>
       <div className="text-padding">

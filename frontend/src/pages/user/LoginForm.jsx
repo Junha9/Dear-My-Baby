@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import { useMemberMethod, useMemberReload } from '@/commons/MemberContext';
+import { useMemberMethod } from '@/commons/MemberContext';
 
 export default function LoginForm() {
   const [memberId, setMemberId] = useState('');
@@ -20,7 +20,6 @@ export default function LoginForm() {
   const [warnings, setWarnings] = useState({});
 
   const { login } = useMemberMethod();
-  const memberReload = useMemberReload();
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(
@@ -37,7 +36,6 @@ export default function LoginForm() {
 
       try {
         await login(memberId, password);
-        await memberReload();
         navigate('/');
       } catch (error) {
         // console.log("failed to login")

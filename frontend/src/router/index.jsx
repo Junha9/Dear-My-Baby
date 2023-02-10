@@ -7,12 +7,19 @@ import User from '@/pages/user';
 import Plan from '@/pages/plan';
 import Record from '@/pages/record';
 import Album from '@/pages/album';
+import Recommend from '@/pages/home/Recommend';
+import CheckList from '@/pages/checklist/CheckList';
 
+import KidsBaseInfo from '@/pages/user/KidsBaseInfo';
 import KidsInformation from '@/pages/user/KidsInformation';
 import FamilyForm from '@/pages/user/FamilyForm';
 import Login from '@/pages/user/Login';
 import Signup from '@/pages/user/SignUp';
+import RecommendItem from '@/pages/home/RecommendItem';
+import Kids from '@/pages/user/Kids';
 
+// recommend lazily loaded components
+const RecommendFoodDetail = lazy(() => import('@/pages/home/RecommendFoodDetail'));
 // User, lazily loaded components
 const UserInfo = lazy(() => import('@/pages/user').then((module) => ({ default: module.UserInfo })));
 
@@ -53,13 +60,46 @@ const router = createBrowserRouter([
           { path: 'sign-up', element: <Signup></Signup> },
         ],
       },
-      { path: 'kids', element: <KidsInformation></KidsInformation> },
+      { path: 'checklist', element: <CheckList></CheckList> },
+      {
+        path: 'kids',
+        element: <Kids></Kids>,
+        children: [
+          {
+            index: true,
+            element: <KidsBaseInfo></KidsBaseInfo>,
+          },
+          {
+            path: 'kids-favor',
+            element: <KidsInformation></KidsInformation>,
+          },
+        ],
+      },
+      {
+        path: 'recommend',
+        element: <Recommend></Recommend>,
+        children: [
+          {
+            index: true,
+            element: <RecommendItem></RecommendItem>,
+          },
+          {
+            path: 'food-detail',
+            element: <RecommendFoodDetail></RecommendFoodDetail>,
+          },
+        ],
+      },
       {
         path: 'plan',
         element: <Plan></Plan>,
         children: [
           {
             index: true,
+            // path: 'select-date',
+            element: <SelectDate></SelectDate>,
+          },
+          {
+            index: 'select-group',
             element: <SelectGroup></SelectGroup>,
           },
           {
@@ -69,10 +109,6 @@ const router = createBrowserRouter([
           {
             path: 'place-cart',
             element: <PlaceCart></PlaceCart>,
-          },
-          {
-            path: 'select-date',
-            element: <SelectDate></SelectDate>,
           },
           {
             path: 'select-place',
