@@ -52,45 +52,73 @@ public class MemberService {
 
         Long memberNo = memberDetail.getNo();
 
-        List<FamilyUser> familyUserList = familyUserRepository.findByMemberNo(memberNo);
+        List<FamilyUser> familyUserList = null;
+        familyUserList = familyUserRepository.findByMemberNo(memberNo);
 
         int dday = -999;
         Long closetPlanId = -1L;
-
-        // user가 가입했던 FamilyId들을 돌면서
-        // Family 마다의 여행 List들을 조회하고
-        // 각각의 Plan List를 돌면서
-        // 아직 시작하지 않은 plan들 중에 startDate와 현재 날짜를 비교하며
-        // 최솟값을 갱신하고 갱신될때마다 closetPlanId를 갱신한다.
-        for(FamilyUser fu: familyUserList) {
-            Long familyId = fu.getFamily().getId();
-            List<Plan> planList = planRepository.findAllByFamily(familyId);
-            for(Plan p : planList) {
-                if(p.getPlanState()==0 && dday < Period.between(p.getStartDate(),LocalDate.now()).getDays()) {
-                    dday = Period.between(p.getStartDate(), LocalDate.now()).getDays();
-                    closetPlanId = p.getId();
+        if(familyUserList!=null) {
+            // user가 가입했던 FamilyId들을 돌면서
+            // Family 마다의 여행 List들을 조회하고
+            // 각각의 Plan List를 돌면서
+            // 아직 시작하지 않은 plan들 중에 startDate와 현재 날짜를 비교하며
+            // 최솟값을 갱신하고 갱신될때마다 closetPlanId를 갱신한다.
+            for (FamilyUser fu : familyUserList) {
+                Long familyId = fu.getFamily().getId();
+                List<Plan> planList = planRepository.findAllByFamily(familyId);
+                for (Plan p : planList) {
+                    if (p.getPlanState() == 0 && dday < Period.between(p.getStartDate(), LocalDate.now()).getDays()) {
+                        dday = Period.between(p.getStartDate(), LocalDate.now()).getDays();
+                        closetPlanId = p.getId();
+                    }
                 }
             }
+
+            Plan closetPlan = null;
+
+            if (dday != -999) {
+                closetPlan = planRepository.findById(closetPlanId).get();
+            }
+
+            PlanDto.ClosetPlanResponse closetPlanResponse = null;
+
+            if (closetPlan != null)
+                closetPlanResponse = new PlanDto.ClosetPlanResponse(closetPlan);
+
+            //--------------------------
+            Plan currentPlan = null;
+            for (FamilyUser fu : familyUserList) {
+                Long familyId = fu.getFamily().getId();
+                List<Plan> planList = planRepository.findAllByFamily(familyId);
+                for (Plan p : planList) {
+                    currentPlan = planRepository.findCurrentPlanByPlanState(p.getId());
+                }
+            }
+
+            PlanDto.CurrentPlanResponse currentPlanResponse = null;
+            if (currentPlan != null)
+                currentPlanResponse = new PlanDto.CurrentPlanResponse(currentPlan);
+
+            List<FamilyDto.familyList> familyIdList = new ArrayList<>();
+            for (FamilyUser fu : familyUserList) {
+                FamilyDto.familyList familyList = new FamilyDto.familyList(fu.getFamily());
+                familyIdList.add(familyList);
+            }
+
+            MemberDetailResponseDto memberDetailResponseDto = null;
+
+            if (currentPlan == null && closetPlan == null)
+                memberDetailResponseDto = new MemberDetailResponseDto(memberDetail, familyIdList);
+            else if (currentPlan == null)
+                memberDetailResponseDto = new MemberDetailResponseDto(memberDetail, closetPlanResponse, familyIdList);
+            else if (closetPlan == null)
+                memberDetailResponseDto = new MemberDetailResponseDto(memberDetail, currentPlanResponse, familyIdList);
+            else
+                memberDetailResponseDto = new MemberDetailResponseDto(memberDetail, closetPlanResponse, currentPlanResponse, familyIdList);
+
+            return memberDetailResponseDto;
         }
-
-        Plan closetPlan = null;
-        if(closetPlanId!=-1) {
-            closetPlan = planRepository.findById(closetPlanId).get();
-        }
-        PlanDto.PlanResponse closetPlanResponse = new PlanDto.PlanResponse(closetPlan);
-        //--------------------------
-
-        Plan currentPlan = planRepository.findCurrentPlanByPlanState();
-        PlanDto.PlanResponse currentPlanResponse = new PlanDto.PlanResponse(currentPlan);
-
-        List<FamilyDto.familyList> familyIdList = new ArrayList<>();
-        for (FamilyUser fu : familyUserList){
-            FamilyDto.familyList familyList = new FamilyDto.familyList(fu.getFamily());
-            familyIdList.add(familyList);
-        }
-        MemberDetailResponseDto memberDetailResponseDto = new MemberDetailResponseDto(memberDetail,closetPlanResponse,currentPlanResponse,familyIdList);
-
-        return memberDetailResponseDto;
+        return new MemberDetailResponseDto(memberDetail);
     }
 
     public List<FamilyDto.familyList> getFamilyList(Long memberNo) {

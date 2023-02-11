@@ -9,10 +9,10 @@ import lombok.Setter;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberDetailResponseDto {
 
     private Long memberNo;
@@ -25,13 +25,13 @@ public class MemberDetailResponseDto {
 
     private String memberImg;
 
-    private PlanDto.PlanResponse closetPlan;
+    private PlanDto.ClosetPlanResponse closetPlan;
 
-    private PlanDto.PlanResponse currentPlan;
+    private PlanDto.CurrentPlanResponse currentPlan;
 
     private List<FamilyDto.familyList> familyIdList;
 
-    public MemberDetailResponseDto(Member member, PlanDto.PlanResponse closetPlan, PlanDto.PlanResponse currentPlan,List<FamilyDto.familyList> familyIdList){
+    public MemberDetailResponseDto(Member member, PlanDto.ClosetPlanResponse closetPlan, PlanDto.CurrentPlanResponse currentPlan, List<FamilyDto.familyList> familyIdList){
         this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
@@ -42,4 +42,60 @@ public class MemberDetailResponseDto {
         this.familyIdList = familyIdList;
     }
 
+    public MemberDetailResponseDto(Member member, PlanDto.ClosetPlanResponse closetPlan, List<FamilyDto.familyList> familyIdList){
+        this.memberNo = member.getNo();
+        this.memberId = member.getMemberId();
+        this.memberName = member.getMemberName();
+        this.memberEmail = member.getMemberEmail();
+        this.memberImg = member.getMemberImg();
+        this.closetPlan = closetPlan;
+        this.currentPlan = null;
+        this.familyIdList = familyIdList;
+    }
+
+    public MemberDetailResponseDto(Member member, PlanDto.CurrentPlanResponse currentPlan, List<FamilyDto.familyList> familyIdList){
+        this.memberNo = member.getNo();
+        this.memberId = member.getMemberId();
+        this.memberName = member.getMemberName();
+        this.memberEmail = member.getMemberEmail();
+        this.memberImg = member.getMemberImg();
+        this.closetPlan = null;
+        this.currentPlan = currentPlan;
+        this.familyIdList = familyIdList;
+    }
+
+    public MemberDetailResponseDto(Member member, List<FamilyDto.familyList> familyIdList){
+        this.memberNo = member.getNo();
+        this.memberId = member.getMemberId();
+        this.memberName = member.getMemberName();
+        this.memberEmail = member.getMemberEmail();
+        this.memberImg = member.getMemberImg();
+        this.closetPlan = null;
+        this.currentPlan = null;
+        this.familyIdList = familyIdList;
+    }
+
+    public MemberDetailResponseDto(Member member){
+        this.memberNo = member.getNo();
+        this.memberId = member.getMemberId();
+        this.memberName = member.getMemberName();
+        this.memberEmail = member.getMemberEmail();
+        this.memberImg = member.getMemberImg();
+        this.closetPlan = null;
+        this.currentPlan = null;
+        this.familyIdList = null;
+    }
+    @Override
+    public String toString() {
+        return "MemberDetailResponseDto{" +
+                "memberNo=" + memberNo +
+                ", memberName='" + memberName + '\'' +
+                ", memberEmail='" + memberEmail + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", memberImg='" + memberImg + '\'' +
+                ", closetPlan=" + closetPlan +
+                ", currentPlan=" + currentPlan +
+                ", familyIdList=" + familyIdList +
+                '}';
+    }
 }

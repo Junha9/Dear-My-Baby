@@ -2,10 +2,8 @@ package com.ssafy.dmb.dto.Plan;
 
 import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.dto.day.DayDto;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,9 +22,8 @@ public class PlanDto {
 
         private Long planId;
 
-        @NotEmpty
         private String planName;
-        @NotEmpty
+
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -57,10 +54,8 @@ public class PlanDto {
     @AllArgsConstructor
     public static class PlanRequest {
         private Long familyId;
-        @Schema(description = "이름")
-        @NotEmpty
         private String planName;
-        @NotEmpty
+
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -70,20 +65,19 @@ public class PlanDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class PlanResponse {
+    public static class ClosetPlanResponse {
         private Long familyId;
         private Long planId;
-        @Schema(description = "이름")
-        @NotEmpty
+
         private String planName;
-        @NotEmpty
+
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
         private int planState;
         private int planPeriod;
 
-        public PlanResponse (Plan plan){
+        public ClosetPlanResponse (Plan plan){
             this.familyId=plan.getFamily().getId();
             this.planId = plan.getId();
             this.planName = plan.getPlanName();
@@ -94,5 +88,60 @@ public class PlanDto {
             this.planPeriod = plan.getPlanPeriod();
         }
 
+        @Override
+        public String toString() {
+            return "ClosetPlanResponse{" +
+                    "familyId=" + familyId +
+                    ", planId=" + planId +
+                    ", planName='" + planName + '\'' +
+                    ", planDestination='" + planDestination + '\'' +
+                    ", startDate=" + startDate +
+                    ", endDate=" + endDate +
+                    ", planState=" + planState +
+                    ", planPeriod=" + planPeriod +
+                    '}';
+        }
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class CurrentPlanResponse {
+        private Long familyId;
+        private Long planId;
+
+        private String planName;
+
+        private String planDestination;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private int planState;
+        private int planPeriod;
+
+        public CurrentPlanResponse (Plan plan){
+            this.familyId=plan.getFamily().getId();
+            this.planId = plan.getId();
+            this.planName = plan.getPlanName();
+            this.planDestination =plan.getPlanDestination();
+            this.startDate = plan.getStartDate();
+            this.endDate = plan.getEndDate();
+            this.planState = plan.getPlanState();
+            this.planPeriod = plan.getPlanPeriod();
+        }
+
+        @Override
+        public String toString() {
+            return "CurrentPlanResponse{" +
+                    "familyId=" + familyId +
+                    ", planId=" + planId +
+                    ", planName='" + planName + '\'' +
+                    ", planDestination='" + planDestination + '\'' +
+                    ", startDate=" + startDate +
+                    ", endDate=" + endDate +
+                    ", planState=" + planState +
+                    ", planPeriod=" + planPeriod +
+                    '}';
+        }
+    }
+
 }
