@@ -87,11 +87,13 @@ public class MemberService {
 
             //--------------------------
             Plan currentPlan = null;
-            for (FamilyUser fu : familyUserList) {
+            G :for (FamilyUser fu : familyUserList) {
                 Long familyId = fu.getFamily().getId();
                 List<Plan> planList = planRepository.findAllByFamily(familyId);
                 for (Plan p : planList) {
                     currentPlan = planRepository.findCurrentPlanByPlanState(p.getId());
+                    if(currentPlan != null)
+                        break G;
                 }
             }
 
