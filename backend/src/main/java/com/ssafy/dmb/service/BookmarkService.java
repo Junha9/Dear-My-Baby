@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 
@@ -30,7 +29,7 @@ public class BookmarkService {
 
 
     @Transactional
-    public BookmarkDto.Detail create(BookmarkDto.BookmarkRequest request){
+    public BookmarkDto.BookmarkDetail create(BookmarkDto.BookmarkRequest request){
         LOGGER.info("[createBookmark] input request : {}", request);
         Long planId = request.getPlanId();
 
@@ -49,7 +48,7 @@ public class BookmarkService {
         validateDuplicateBookmark(bookmark);
         Long id = bookmarkRepository.save(bookmark).getId();
         Bookmark findResult = bookmarkRepository.findById(id).get();
-        BookmarkDto.Detail result = new BookmarkDto.Detail(findResult);
+        BookmarkDto.BookmarkDetail result = new BookmarkDto.BookmarkDetail(findResult);
         return result;
 //        return bookmark.getId();
     }
@@ -70,12 +69,12 @@ public class BookmarkService {
         return bookmarkRepository.findByPlan(planId);
     }
 
-    public List<BookmarkDto.Detail> getBookmarkList(Long planId) {
+    public List<BookmarkDto.BookmarkDetail> getBookmarkList(Long planId) {
         LOGGER.info("[getBookmarkList] input planId : {}", planId);
         List<Bookmark> bookmarkList = bookmarkRepository.findByPlan(planId);
 
-        List<BookmarkDto.Detail> planBookmarkDtoList = bookmarkList.stream()
-                .map(r -> new BookmarkDto.Detail(r))
+        List<BookmarkDto.BookmarkDetail> planBookmarkDtoList = bookmarkList.stream()
+                .map(r -> new BookmarkDto.BookmarkDetail(r))
                 .collect(Collectors.toList());
         return planBookmarkDtoList;
 

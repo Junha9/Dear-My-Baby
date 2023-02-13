@@ -32,6 +32,8 @@ public class Plan {
     @Column(nullable = false)
     private int planPeriod;
 
+    private int currentDay;
+
     private int planState;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,12 +53,13 @@ public class Plan {
 
 
     @Builder
-    public Plan(String planDestination, LocalDate startDate, LocalDate endDate, Family family, String planName, int planState){
+    public Plan(String planDestination, LocalDate startDate, LocalDate endDate, Family family, String planName, int planState, int currentDay){
         this.planName = planName;
         this.planDestination = planDestination;
         this.startDate = startDate;
         this.endDate = endDate;
         this.planPeriod = Period.between(startDate, endDate).getDays() + 1;
+        this.currentDay = currentDay;
         this.family = family;
         this.planState = planState;
     }

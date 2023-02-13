@@ -4,6 +4,7 @@ import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.dto.Plan.PlanDto;
+import com.ssafy.dmb.dto.day.CurrentDayDto;
 import com.ssafy.dmb.error.BusinessException;
 import com.ssafy.dmb.error.ErrorCode;
 import com.ssafy.dmb.repository.DayRepository;
@@ -24,55 +25,78 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class PlanService {
-    private final DayRepository dayRepository;
-    private final FamilyRepository familyRepository;
 
     private final Logger LOGGER = LoggerFactory.getLogger(PlanService.class);
-
+    private final DayRepository dayRepository;
+    private final FamilyRepository familyRepository;
     private final PlanRepository planRepository;
 
-    public PlanDto.Detail getPlanDetail(Long planId) {
+    public PlanDto.PlanDetail getPlanDetail(Long planId) {
         Plan plan = planRepository.findById(planId).get();
 
-        PlanDto.Detail planDetail = new PlanDto.Detail(plan);
-
+        PlanDto.PlanDetail planDetail = new PlanDto.PlanDetail(plan);
 
         return planDetail;
     }
 
-    public PlanDto.Detail startPlan(Long planId) {
+    public CurrentDayDto getCurrentDay(Long planId) {
+        Plan plan = planRepository.findById(planId).get();
+        int currentDay = plan.getCurrentDay();
+        List<Day> days = plan.getDays();
+
+        Long currentDayId = -1L;
+        for(Day d: days){
+            if(currentDay == d.getDayNumber()){
+                currentDayId = d.getId();
+                break;
+            }
+        }
+
+        Day day = null;
+        CurrentDayDto currentDayDto = null;
+        if(currentDayId != -1L) {
+            day = dayRepository.findById(currentDayId).get();
+            currentDayDto = new CurrentDayDto(day, currentDay);
+        }else{
+            currentDayDto = new CurrentDayDto(-1);
+        }
+
+        return currentDayDto;
+    }
+
+    public PlanDto.PlanDetail startPlan(Long planId) {
         Plan changeplan = planRepository.findById(planId).get();
         changeplan.setPlanState(1);
         planRepository.save(changeplan);
         Plan plan = planRepository.findById(planId).get();
-        PlanDto.Detail planDetail = new PlanDto.Detail(plan);
+        PlanDto.PlanDetail planDetail = new PlanDto.PlanDetail(plan);
 
         return planDetail;
     }
 
-    public PlanDto.Detail endPlan(Long planId) {
+    public PlanDto.PlanDetail endPlan(Long planId) {
         Plan changeplan = planRepository.findById(planId).get();
         changeplan.setPlanState(2);
         planRepository.save(changeplan);
         Plan plan = planRepository.findById(planId).get();
-        PlanDto.Detail planDetail = new PlanDto.Detail(plan);
+        PlanDto.PlanDetail planDetail = new PlanDto.PlanDetail(plan);
 
         return planDetail;
     }
 
-    public List<PlanDto.Detail> getPlanDetailList(Long familyId) {
+    public List<PlanDto.PlanDetail> getPlanDetailList(Long familyId) {
         LOGGER.info("[getPlanDetailList] input familyId: {}", familyId);
         List<Plan> planList = planRepository.findAllByFamily(familyId);
 
-        List<PlanDto.Detail> planDetailList = planList.stream()
-                .map(p -> new PlanDto.Detail(p))
+        List<PlanDto.PlanDetail> planDetailList = planList.stream()
+                .map(p -> new PlanDto.PlanDetail(p))
                 .collect(Collectors.toList());
 
         return planDetailList;
 
     }
 
-    public PlanDto.Detail createPlan(PlanDto.PlanRequest request) {
+    public PlanDto.PlanDetail createPlan(PlanDto.PlanRequest request) {
         LOGGER.info("[createPlan] input request: {}", request);
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
@@ -84,6 +108,7 @@ public class PlanService {
                 .endDate(request.getEndDate())
                 .family(family)
                 .planState(0)
+                .currentDay(1)
                 .build();
 
         int period = plan.getPlanPeriod();
@@ -106,7 +131,7 @@ public class PlanService {
 
     }
 
-    public PlanDto.Detail updatePlan(PlanDto.PlanRequest request, Long planId) {
+    public PlanDto.PlanDetail updatePlan(PlanDto.PlanRequest request, Long planId) {
         LOGGER.info("[updatePlan] input request: {}, {}", request, planId );
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
@@ -122,6 +147,15 @@ public class PlanService {
         plan.setId(planId);
         planRepository.save(plan);
         return getPlanDetail(planId);
+    }
+
+    public CurrentDayDto moveNextDay(Long planId, int currentDay) {
+        Plan plan = planRepository.findById(planId).get();
+
+        plan.setCurrentDay(currentDay);
+        planRepository.save(plan);
+
+        return getCurrentDay(planId);
     }
 
     public void deletePlan(Long planId) {

@@ -12,8 +12,6 @@ public class RecordDto {
 
     private Long dayId;
 
-    private Long planId;
-
     private String recordName;
 
     private String recordText;

@@ -13,7 +13,7 @@ public class BabyDto {
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Response{
+    public static class BabyResponse {
 
         private Long babyId;
 
@@ -28,7 +28,7 @@ public class BabyDto {
         private Set<String> favoriteFood = new HashSet<String>();
 
 
-        public Response(Baby baby) {
+        public BabyResponse(Baby baby) {
             this.babyId = baby.getId();
             this.familyId = baby.getFamily().getId();
             this.babyName = baby.getBabyName();

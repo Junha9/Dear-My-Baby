@@ -18,24 +18,32 @@ public class PlanDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Detail {
+    public static class PlanDetail {
 
         private Long planId;
 
         private String planName;
 
         private String planDestination;
+
         private LocalDate startDate;
+
         private LocalDate endDate;
+
         private int planPeriod;
+
         private int planState;
+
         private Long familyId;
+
+        private int currentDay;
 
         private List<DayDto> days;
 
-        public Detail(Plan plan) {
+        public PlanDetail(Plan plan) {
             this.planId = plan.getId();
             this.planName = plan.getPlanName();
+            this.currentDay = plan.getCurrentDay();
             this.planDestination = plan.getPlanDestination();
             this.planState = plan.getPlanState();
             this.startDate = plan.getStartDate();

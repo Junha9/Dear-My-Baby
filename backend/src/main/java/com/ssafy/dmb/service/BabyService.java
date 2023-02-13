@@ -25,14 +25,14 @@ public class BabyService {
     private final FamilyRepository familyRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(BabyService.class);
 
-    public BabyDto.Response getBabyInfo(Long babyId) {
+    public BabyDto.BabyResponse getBabyInfo(Long babyId) {
         LOGGER.info("[getBabyInfo] input babyId: {}", babyId);
         Baby baby = babyRepository.findById(babyId).get();
-        BabyDto.Response babyInfo = new BabyDto.Response(baby);
+        BabyDto.BabyResponse babyInfo = new BabyDto.BabyResponse(baby);
         return babyInfo;
     }
 
-    public BabyDto.Response createBabyInfo(BabyDto.BabyRequest request) {
+    public BabyDto.BabyResponse createBabyInfo(BabyDto.BabyRequest request) {
         LOGGER.info("[createBabyInfo] input request : {}", request);
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
@@ -46,11 +46,11 @@ public class BabyService {
                 .build();
 
         babyRepository.save(baby);
-        BabyDto.Response babyInfo = new BabyDto.Response(baby);
+        BabyDto.BabyResponse babyInfo = new BabyDto.BabyResponse(baby);
         return babyInfo;
     }
 
-    public BabyDto.Response updateBabyInfo(BabyDto.BabyRequest request, Long babyId) {
+    public BabyDto.BabyResponse updateBabyInfo(BabyDto.BabyRequest request, Long babyId) {
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
 
@@ -64,14 +64,14 @@ public class BabyService {
 
         baby.setId(babyId);
         babyRepository.save(baby);
-        BabyDto.Response babyInfo = new BabyDto.Response(baby);
+        BabyDto.BabyResponse babyInfo = new BabyDto.BabyResponse(baby);
         return babyInfo;
     }
-    public List<BabyDto.Response> getBabyList(Long familyId) {
+    public List<BabyDto.BabyResponse> getBabyList(Long familyId) {
         List<Baby> babies = babyRepository.findByFamily(familyId);
 
-        List<BabyDto.Response> babyDtoList = babies.stream()
-                .map(b -> new BabyDto.Response(b))
+        List<BabyDto.BabyResponse> babyDtoList = babies.stream()
+                .map(b -> new BabyDto.BabyResponse(b))
                 .collect(Collectors.toList());
         return babyDtoList;
     }

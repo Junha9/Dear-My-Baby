@@ -26,7 +26,7 @@ public class BookmarkController {
 
     @Operation(summary = "북마크 리스트 조회", description = "<strong> planId </strong>를 통해 북마크 리스트를 조회 한다.")
     @GetMapping("/{planId}")
-    public ResponseEntity<List<BookmarkDto.Detail>> getBookmarkList(@PathVariable("planId") Long planId) {
+    public ResponseEntity<List<BookmarkDto.BookmarkDetail>> getBookmarkList(@PathVariable("planId") Long planId) {
 
         return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.getBookmarkList(planId));
 
@@ -34,7 +34,7 @@ public class BookmarkController {
 
     @Operation(summary = "북마크 저장", description = "북마크 정보 저장 한다.")
     @PostMapping("/new")
-    public ResponseEntity<List<BookmarkDto.Detail>> saveBookmark(@RequestBody BookmarkDto.BookmarkRequest request) {
+    public ResponseEntity<List<BookmarkDto.BookmarkDetail>> saveBookmark(@RequestBody BookmarkDto.BookmarkRequest request) {
 
         bookmarkService.create(request);
 
@@ -44,7 +44,7 @@ public class BookmarkController {
 
     @Operation(summary = "북마크 리스트 삭제", description = "<strong> bookmarkId </strong>를 통해 북마크를 삭제 한다.")
     @DeleteMapping("/{bookmarkId}")
-    public ResponseEntity<List<BookmarkDto.Detail>> deleteBookmark(@PathVariable("bookmarkId") Long bookmarkId) {
+    public ResponseEntity<List<BookmarkDto.BookmarkDetail>> deleteBookmark(@PathVariable("bookmarkId") Long bookmarkId) {
         Bookmark bookmark = bookmarkRepository.findById(bookmarkId).get();
         Plan plan = bookmark.getPlan();
         bookmarkService.delete(bookmarkId);
