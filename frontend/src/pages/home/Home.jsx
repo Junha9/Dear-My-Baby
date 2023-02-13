@@ -43,14 +43,16 @@ export default function Home() {
   const [familyName, setFamilyName] = useState(null);
   const [babyName, setBabyName] = useState('');
   // 최초에 한번 회원정보를 최신화한다
-  useEffect(() => memberReload, []);
+  useEffect(() => {
+    memberReload();
+  }, []);
   useEffect(() => {
     if (window.localStorage.getItem('familyId')) {
       setFamilyId(window.localStorage.getItem('familyId'));
       setFamilyName(window.localStorage.getItem('familyName'));
       apiGetBabyList(familyId).then((res) => {
         setBabyName(res.data[0].babyName);
-      })
+      });
     }
   }, [familyName]);
   const [view, setView] = useState(false);
@@ -106,17 +108,21 @@ export default function Home() {
             </div>
           ) : null}
           <>
-          <h4 className="plan-append-text"><h2 style={{display
-          : 'inline'}}>{member.memberName}</h2>님
-            <ul style={{display: 'inline', padding: '0', marginLeft: '2%'}}
+            <h4 className="plan-append-text">
+              <h2 style={{ display: 'inline' }}>{member.memberName}</h2>님
+              <ul
+                style={{ display: 'inline', padding: '0', marginLeft: '2%' }}
                 onClick={() => {
                   setView(!view);
                 }}
               >
-                {familyName}{view ? '▲' : '▼'}
-                {view && <Dropdown setFamilyId={setFamilyId} setBabyName={setBabyName} setFamilyName={setFamilyName}/>}
-              </ul>과(와) 함께 해보세요!</h4>
-            </>
+                {familyName}
+                {view ? '▲' : '▼'}
+                {view && <Dropdown setFamilyId={setFamilyId} setBabyName={setBabyName} setFamilyName={setFamilyName} />}
+              </ul>
+              과(와) 함께 해보세요!
+            </h4>
+          </>
 
           {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
           {member.closestPlan != null &&

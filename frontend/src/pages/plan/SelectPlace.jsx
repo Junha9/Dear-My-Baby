@@ -7,6 +7,7 @@ import { useMemberReload } from '@/commons/MemberContext';
 
 const SelectPlace = (props) => {
   const navigate = useNavigate();
+  const memberReload = useMemberReload();
 
   // 첫 검색어 중심 좌표 데이터
   const tripDate = props.planDate;
@@ -36,7 +37,7 @@ const SelectPlace = (props) => {
       endDate: tripDate[0].endDate,
     };
     apiCreatePlan(data).then(() => {
-      useMemberReload();
+      memberReload();
     });
   };
 

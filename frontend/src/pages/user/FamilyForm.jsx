@@ -20,17 +20,19 @@ const FamilyForm = () => {
   const auth = useMemberAuth();
 
   // 최초에 한번 회원정보를 최신화
-  useEffect(() => memberReload, []);
+  useEffect(() => {
+    memberReload();
+  }, []);
 
   // 회원이 가진 그룹 조회
   // useEffect(async () => {
   //   await auth((token) => {apiGetMemberFamilyList(member.memberId, token).then((data) => setUserFamilyList(data))})})
 
   // const memberId = 'hoguangel';
-  const makeGroup = () => {
+  const makeGroup = async () => {
     if (member != null) {
-      apiCreateFamily(member.memberId, familyName);
-      memberReload();
+      await apiCreateFamily(member.memberId, familyName);
+      await memberReload();
     }
   };
 
