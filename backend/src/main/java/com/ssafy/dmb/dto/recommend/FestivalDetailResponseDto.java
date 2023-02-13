@@ -37,8 +37,6 @@ public class FestivalDetailResponseDto {
     // 축제 종료일
     private String festivalClosedDay;
 
-    // 축제시간
-    private String festivalHours;
 
     // 축제 장소
     private String festivalPlace;
@@ -71,10 +69,8 @@ public class FestivalDetailResponseDto {
         this.festivalLongitude = festival.getFestivalLongitude();
         this.festivalStartDay = festival.getFestivalStartDay();
         this.festivalClosedDay = festival.getFestivalClosedDay();
-        this.festivalHours = festival.getFestivalHours();
         this.festivalPlace = festival.getFestivalPlace();
         this.festivalFee = festival.getFestivalFee();
-        this.festivalHours = festival.getFestivalHours();
         this.festivalAvlAge = festival.getFestivalAvlAge();
         this.festivalAvlParking = festival.getFestivalAvlParking();
         this.festivalImgUrl = festival.getFestivalImgUrl();

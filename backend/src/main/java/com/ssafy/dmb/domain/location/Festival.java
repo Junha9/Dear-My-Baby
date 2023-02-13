@@ -48,8 +48,6 @@ public class Festival {
     // 축제 종료일
     private String festivalClosedDay;
 
-    // 축제시간
-    private String festivalHours;
 
     // 축제 장소
     private String festivalPlace;
