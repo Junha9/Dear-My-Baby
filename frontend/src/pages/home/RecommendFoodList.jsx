@@ -16,18 +16,18 @@ const RecommendFoodList = ({ foodData }) => {
           navigate(`./food-detail?food-id=${foodData.id}`)
         }
       >
-        <div className="food-item">
-          <div className="food-info">
+        <div className="reco-item">
+          <div className="reco-info">
             <h4>{foodData.name}</h4>
-            <div className="food-info-outline">
+            <div className="reco-info-outline">
               <p className="outline-ptag">설명:{foodData.outline}</p>
             </div>
-            <div className="food-catagory">
+            <div className="reco-catagory">
               <p>{foodData.catagory}</p>
             </div>
           </div>
-          <div className="food-img">
-            <img src={foodData.imgUrl} alt="restaurant" className="food-src" />
+          <div className="reco-img">
+            <img src={foodData.imgUrl} alt="restaurant" className="reco-src" />
           </div>
           {/* 소개 부분에 보여 줄 데이터 */}
           {/* 상세보기 페이지 만들어서 데이터 props 해주기 라우터 어렵다.*/}

@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceItem from './PlaceItem';
 import Slider from 'react-slick';
@@ -27,8 +26,8 @@ const PlaceList = ({ places }) => {
       ))} */}
       <Slider {...settings}>
         {/* <div className="placeFrame"> */}
-        {places.map((place) => (
-          <PlaceItem key={place.placeId} place={place}></PlaceItem>
+        {places.map((place, index) => (
+          <PlaceItem key={index} place={place}></PlaceItem>
         ))}
         {/* </div> */}
       </Slider>

@@ -49,6 +49,7 @@ export default function HeadBar() {
 
   const handleLogout = () => {
     logout();
+    window.localStorage.clear();
     navigate('/');
   };
 

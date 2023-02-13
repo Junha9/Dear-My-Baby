@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { apiCreateFamily } from '@/commons/api/family';
 import { useNavigate } from 'react-router-dom';
+import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberContext';
+import { apiGetMember, apiUpdateMemberCurrentPlanId, apiGetMemberFamilyList } from '@/commons/api/member';
 
 const FamilyForm = () => {
   const [familyName, setFamilyName] = useState('');
+  const [userFamilyList, setUserFamilyList] = useState('');
+
   const navigate = useNavigate();
 
   const setGroupName = (e) => {
@@ -11,20 +15,37 @@ const FamilyForm = () => {
   };
 
   // memberId 는 member api 요청 보내서 받아와야 함
-  const memberId = 'hoguangel';
-  const makeGroup = (e) => {
-    e.preventDefault();
-    // console.log(apiCreateFamily(memberId, familyName));
-    navigate('../../plan/select-date');
+  const member = useMember();
+  const memberReload = useMemberReload();
+  const auth = useMemberAuth();
+
+  // 최초에 한번 회원정보를 최신화
+  useEffect(() => memberReload, []);
+
+  // 회원이 가진 그룹 조회
+  // useEffect(async () => {
+  //   await auth((token) => {apiGetMemberFamilyList(member.memberId, token).then((data) => setUserFamilyList(data))})})
+
+  // const memberId = 'hoguangel';
+  const makeGroup = () => {
+    if (member != null) {
+      apiCreateFamily(member.memberId, familyName);
+      memberReload();
+    }
   };
 
   return (
-    <div className="family-form" style={{ height: '100vh', width: '100vw' }}>
+    <div className="family-form" style={{ padding: '2vh' }}>
       <h2>그룹 만들기</h2>
-      <form action="#">
+      <div action="#">
         <input type="text" placeholder="그룹 이름" onChange={setGroupName} />
-        <input type="submit" onClick={makeGroup} value="그룹 생성" />
-      </form>
+        <button onClick={makeGroup}>그룹 생성</button>
+      </div>
+
+      {/* <h2>member.memberName 님의 그룹</h2>
+      { async () => {
+        await auth((token) => {apiGetMemberFamilyList(member.memberId, token).then((data) => setUserFamilyList(data))})}}   
+      { userFamilyList.familyName } */}
     </div>
   );
 };

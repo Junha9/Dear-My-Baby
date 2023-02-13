@@ -20,6 +20,7 @@ import Kids from '@/pages/user/Kids';
 
 // recommend lazily loaded components
 const RecommendFoodDetail = lazy(() => import('@/pages/home/RecommendFoodDetail'));
+const RecommendPlaceDetail = lazy(() => import('@/pages/home/RecommendPlaceDetail'));
 // User, lazily loaded components
 const UserInfo = lazy(() => import('@/pages/user').then((module) => ({ default: module.UserInfo })));
 
@@ -87,6 +88,11 @@ const router = createBrowserRouter([
             path: 'food-detail',
             element: <RecommendFoodDetail></RecommendFoodDetail>,
           },
+          {
+            path: 'place-detail',
+            element: <RecommendPlaceDetail></RecommendPlaceDetail>,
+          },
+
         ],
       },
       {

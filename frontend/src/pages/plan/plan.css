@@ -34,3 +34,48 @@
   height: 20%;
   overflow: scroll;
 }
+
+.plan-cityframe {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* box-shadow: 2px 2px 15px rgba(217, 217, 217, 1); */
+  border-radius: 5px;
+}
+
+.city__table {
+  width: 90%;
+  margin: 4%;
+  padding: 2%;
+}
+
+
+.modalInfo {
+  width: 100px;
+  height: 75px;
+}
+
+.modal__body {}
+
+.modal__button {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.select-place-button {
+  border: 1px solid rgb(67, 223, 158);
+  background-color: white;
+  box-shadow: 1px 1px 2px rgba(150, 142, 195, 0.566);
+  margin: 3%;
+  font-size: 0.8rem;
+  color: rgb(93, 93, 93);
+  font-weight: 600;
+}
+
+.select-place-button:focus {
+  background-color: rgb(67, 223, 158);
+  border: none;
+  color: white;
+}

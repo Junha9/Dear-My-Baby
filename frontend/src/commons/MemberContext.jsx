@@ -44,9 +44,13 @@ export function MemberProvider({ children }) {
 
   const reload = useCallback(
     async function () {
-      const response = await auth((accessToken) => apiGetMember(accessToken));
-      const newMember = response.data;
-      setMember(newMember);
+      try {
+        const response = await auth((accessToken) => apiGetMember(accessToken));
+        const newMember = response.data;
+        setMember(newMember);
+      } catch (error) {
+        setMember(null);
+      }
     },
     [auth],
   );

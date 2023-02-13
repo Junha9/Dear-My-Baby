@@ -4,14 +4,7 @@ const api = getApiInstance();
 
 // 여행 계획 생성
 export async function apiCreatePlan(data) {
-  data = {
-    familyId: 2,
-    planName: '호우',
-    planDestination: '한강',
-    startDate: '2023-02-08',
-    endDate: '2023-02-15',
-  };
-
+  
   if (data.familyId != null) {
     const response = await api.post(`/plan/new`, data);
     return response;

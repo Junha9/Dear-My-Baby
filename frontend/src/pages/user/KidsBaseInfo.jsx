@@ -1,21 +1,16 @@
-// - 자녀 유(로 가정) 무
-// - 자녀 몇명인지
-//     - 자녀들 전체 고려해서 선택 하게 하기
-// - 연령대
-//     - 0~3
-//     - 4~ 7
-//     - 8~10
-//     - 11세 이상
-// - 성별 (남, 녀, 둘다)
+
 import { FormLabel, RadioGroup, FormControlLabel, Radio, FormGroup, Checkbox } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const KidsBaseInfo = () => {
   const [kidsBaseInfo, setKidsBaseInfo] = useState([]);
   const [kidsHowMany, setKidsHowMany] = useState();
   const [kidsHowOld, setKidsHowOld] = useState();
   const [kidsGender, setKidsGender] = useState();
+
+  const navigate = useNavigate();
 
   const changeHowMany = (e) => {
     // document.getEventListener();
@@ -38,6 +33,7 @@ const KidsBaseInfo = () => {
     console.log(kidsHowMany, kidsHowOld, kidsGender);
     setKidsBaseInfo([kidsHowMany, kidsHowOld, kidsGender]);
     console.log(kidsBaseInfo);
+    navigate(`./kids-favor`)
   };
 
   return (

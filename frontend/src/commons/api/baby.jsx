@@ -3,13 +3,13 @@ const api = getApiInstance();
 
 // 아이 정보 등록
 export async function apiCreateBaby(babyData) {
-  //    const babyData = {
-  //     familyId: 210,
-  //     favoriteSpot: ['바다'],
-  //     favoriteFood: ['밥', '한식'],
-  //     babyName: '연두',
-  //     babyAge: 5,
-  //   };
+     babyData = {
+      familyId: 98,
+      favoriteSpot: ['바다'],
+      favoriteFood: ['밥', '한식'],
+      babyName: '승태',
+      babyAge: 5,
+    };
 
   if (babyData.familyId != null) {
     const response = await api.post(`/baby/new`, babyData);

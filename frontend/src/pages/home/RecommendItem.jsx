@@ -8,23 +8,54 @@ import RecommendFoodDetail from './RecommendFoodDetail';
 import RecommendFoodList from './RecommendFoodList';
 import RecommendPlaceList from './RecommendPlaceList';
 import { useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+
+
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 const RecommendItem = () => {
+
+  const [alignment, setAlignment] = useState('left');
+
+  const handleAlignment = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
+
   const [food, place] = useOutletContext();
   // console.log(food, place);
   // 음식 누르면 음식 show 넎고, 장소 클릭 하면 장소에 show, 음식에 noshow
   const [onOff, setOnOff] = useState(false);
   // console.log(onOff);
 
-  const location = useLocation();
-  console.log('????', location);
-  const searchParams = new URLSearchParams(location.search);
-  console.log('????????????', searchParams);
+  // const location = useLocation();
+  // console.log('????', location);
+  // const searchParams = new URLSearchParams(location.search);
+  // console.log('????????????', searchParams);
 
   return (
     <div>
-      <button onClick={() => setOnOff(!onOff)}>음식</button>
-      <button onClick={() => setOnOff(!onOff)}>장소</button>
+      <div className='recommend__bar'>
+
+        <ToggleButtonGroup
+          value={alignment}
+          exclusive
+          onChange={handleAlignment}
+          aria-label="text alignment"
+        >
+          <a onClick={() => setOnOff(true)}>
+            <ToggleButton value="left" aria-label="left aligned" style={{ width: '200px', borderBottom: 'none' }}>
+              음식
+            </ToggleButton>
+          </a>
+          <a onClick={() => setOnOff(false)}>
+            <ToggleButton value="center" aria-label="centered" style={{ width: '200px', borderBottom: 'none' }}>
+              장소
+            </ToggleButton>
+          </a>
+        </ToggleButtonGroup>
+      </div>
 
       <div className="show-food-list" style={onOff ? { display: 'block' } : { display: 'none' }}>
         {food.map((item) => (
@@ -37,7 +68,7 @@ const RecommendItem = () => {
           <RecommendPlaceList key={item.address} data={item}></RecommendPlaceList>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -4,6 +4,7 @@ const path = {
   home: '/',
   plan: '/plan',
   planFindCity: '/plan/find-city',
+  recommend: '/recommend',
   record: '/record',
   album: '/album',
   sidebar: '/sidebar',

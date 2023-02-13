@@ -111,7 +111,7 @@ const RecordMap = () => {
         center={state.center}
         style={{
           width: '100%',
-          height: '100vh',
+          height: '92.5vh',
         }}
         level={5}
         draggable={true}

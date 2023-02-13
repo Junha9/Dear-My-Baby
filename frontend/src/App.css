@@ -1,7 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap'); */
 
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gamja+Flower&family=Nanum+Pen+Script&display=swap');
-@import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+@import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');
 
 /* @font-face {
   font-family: 'Noto Sans KR';
@@ -47,7 +47,7 @@ button {
   color: white;
   border: none;
   border-radius: 10px;
-  background-color: rgb(89, 56, 255);
+  background-color: rgb(67, 223, 158);
   padding: 5px 10px;
 }
 

@@ -41,78 +41,6 @@ export default function KidsInformation() {
     setIndex(index + 1);
   };
 
-  // const [food, setFood] = useState([]);
-  // const [place, setPlace] = useState([]);
-  // let quizAnswer = [
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  // ];
-  // const [pointer, setPointer] = useState(0);
-  // const [answer, setAnswer] = useState([
-  //   true,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  //   false,
-  // ]);
-
-  // // 다음 문제로 가기
-  // function toNext() {
-  //   quizAnswer[pointer] = false;
-  //   quizAnswer[pointer + 1] = true;
-  //   // console.log(quizAnswer);
-  //   setAnswer(quizAnswer);
-  //   setPointer(pointer + 1);
-  //   // console.log('pointer', pointer, 'quizANswer', quizAnswer);
-  // }
-  // // 뒤로가기
-  // const goBack = () => {
-  //   quizAnswer[pointer] = false;
-  //   quizAnswer[pointer - 1] = true;
-  //   setAnswer(quizAnswer);
-  //   setPointer(pointer - 1);
-  //   console.log(pointer);
-  // };
-  // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBEIwupfrAKsMRJP3yTVIdF-fq2e3N0D5YZA&usqp=CAU
   return (
     <>
       <div className="question">
@@ -149,7 +77,8 @@ export default function KidsInformation() {
             <img src={question.imgUrl} style={{ height: '100%', width: '100%' }} alt="questionError"></img>
           </div>
         ) : (
-          <div>질문이 다 끝났다</div>
+          // <div>질문이 다 끝났다</div>
+          navigate('/')
         )}
 
         {/* className={answer[0] ? 'show' : 'noshow'} */}

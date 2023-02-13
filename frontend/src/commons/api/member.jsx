@@ -100,11 +100,18 @@ export async function apiDeleteMember(memberId, accessToken) {
 }
 
 // 회원이 가진 가족 list 구하기
-export async function apiGetMemberFamilys(memberNo) {
-  if (memberNo != null) {
+export async function apiGetMemberFamilyList(memberNo, accessToken) {
+  if (memberNo != null && accessToken != null) {
     const response = await api.get(`/member/familylist?memberNo=${memberNo}`);
     // console.log(response);
     return response;
   }
-  throw Error('apiGetFamily : familyId and familyName must be provided');
+  throw Error('apiGetMemberFamilyList : memberNo, accessToken must be provided');
+}
+
+export async function apiUpdateMemberCurrentPlanId(planId, accessToken) {
+  if (accessToken != null) {
+    // TODO
+  }
+  throw Error('apiUpdateMemberCurrentPlanId : accessToken must be provided');
 }

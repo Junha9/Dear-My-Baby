@@ -18,15 +18,23 @@ const ToDoItem = ({ todoItem, todoList, setTodoList }) => {
       <input
         type="checkbox"
         className="todoapp__item-checkbox"
-        checked={todoItem.checked} // (1)
-        onChange={onChangeCheckbox} // (2)
+        checked={todoItem.checked}
+        onChange={onChangeCheckbox}
       />
       {/* 아이템 내용 */}
-      <span className="todoapp__item-ctx">{todoItem.text}</span>
-      {/* 수정 버튼 */}
-      <button type="button" className="todoapp__item-edit-btn">
-        ✏
-      </button>
+      <span className={`todoapp__item-ctx ${todoItem.checked ? 'todoapp__item-ctx-checked' : ''}`}>
+        {todoItem.text}
+      </span>
+      {
+        // 수정 버튼
+        // 완료한 일인 경우에는 null을 반환하여 보이지 않도록 함
+        !todoItem.checked ? (
+          <button type="button" className="todoapp__item-edit-btn">
+            ✏
+          </button>
+        ) : null
+      }
+
       {/* 삭제 버튼 */}
       <button type="button" className="todoapp__item-delete-btn">
         🗑
