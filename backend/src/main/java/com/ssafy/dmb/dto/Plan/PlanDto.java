@@ -30,6 +30,10 @@ public class PlanDto {
 
         private LocalDate endDate;
 
+        private String planLatitude;
+
+        private String planLongitude;
+
         private int planPeriod;
 
         private int planState;
@@ -50,6 +54,8 @@ public class PlanDto {
             this.endDate = plan.getEndDate();
             this.planPeriod = plan.getPlanPeriod();
             this.familyId = plan.getFamily().getId();
+            this.planLatitude = plan.getPlanLatitude();
+            this.planLongitude = plan.getPlanLongitude();
             this.days = plan.getDays().stream()
                     .map(d -> new DayDto(d))
                     .collect(Collectors.toList());
@@ -63,7 +69,8 @@ public class PlanDto {
     public static class PlanRequest {
         private Long familyId;
         private String planName;
-
+        private String planLatitude;
+        private String planLongitude;
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -76,9 +83,9 @@ public class PlanDto {
     public static class ClosetPlanResponse {
         private Long familyId;
         private Long planId;
-
         private String planName;
-
+        private String planLatitude;
+        private String planLongitude;
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -90,6 +97,8 @@ public class PlanDto {
             this.planId = plan.getId();
             this.planName = plan.getPlanName();
             this.planDestination =plan.getPlanDestination();
+            this.planLatitude = plan.getPlanLatitude();
+            this.planLongitude = plan.getPlanLongitude();
             this.startDate = plan.getStartDate();
             this.endDate = plan.getEndDate();
             this.planState = plan.getPlanState();
@@ -117,9 +126,9 @@ public class PlanDto {
     public static class CurrentPlanResponse {
         private Long familyId;
         private Long planId;
-
         private String planName;
-
+        private String planLatitude;
+        private String planLongitude;
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -130,6 +139,8 @@ public class PlanDto {
             this.familyId=plan.getFamily().getId();
             this.planId = plan.getId();
             this.planName = plan.getPlanName();
+            this.planLatitude = plan.getPlanLatitude();
+            this.planLongitude = plan.getPlanLongitude();
             this.planDestination =plan.getPlanDestination();
             this.startDate = plan.getStartDate();
             this.endDate = plan.getEndDate();

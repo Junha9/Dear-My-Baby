@@ -41,6 +41,9 @@ public class Plan {
     @JsonBackReference
     private Family family;
 
+    private String planLatitude;
+
+    private String planLongitude;
 
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
     private List<Bookmark> bookmarks = new ArrayList<>();
@@ -53,9 +56,11 @@ public class Plan {
 
 
     @Builder
-    public Plan(String planDestination, LocalDate startDate, LocalDate endDate, Family family, String planName, int planState, int currentDay){
+    public Plan(String planLatitude, String planLongitude, String planDestination, LocalDate startDate, LocalDate endDate, Family family, String planName, int planState, int currentDay){
         this.planName = planName;
         this.planDestination = planDestination;
+        this.planLatitude = planLatitude;
+        this.planLongitude = planLongitude;
         this.startDate = startDate;
         this.endDate = endDate;
         this.planPeriod = Period.between(startDate, endDate).getDays() + 1;
