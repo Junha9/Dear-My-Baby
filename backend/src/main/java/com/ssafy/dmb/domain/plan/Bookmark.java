@@ -28,15 +28,20 @@ public class Bookmark {
 
     private String bookmarkLongitude;
 
+    private String bookmarkUrl;
+
+    private String bookmarkCategory;
 
     @Builder
-    public Bookmark (Plan plan, String bookmarkName, String bookmarkAddress,
-                     String bookmarkLatitude, String bookmarkLongitude) {
+    public Bookmark (Plan plan, String bookmarkName, String bookmarkAddress, String bookmarkLatitude
+            , String bookmarkLongitude, String bookmarkCategory, String bookmarkUrl) {
         this.plan = plan;
         this.bookmarkName = bookmarkName;
         this.bookmarkAddress = bookmarkAddress;
         this.bookmarkLatitude = bookmarkLatitude;
         this.bookmarkLongitude = bookmarkLongitude;
+        this.bookmarkCategory = bookmarkCategory;
+        this.bookmarkUrl = bookmarkUrl;
     }
 
 }
