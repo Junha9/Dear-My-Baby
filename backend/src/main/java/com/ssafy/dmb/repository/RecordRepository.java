@@ -16,6 +16,4 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
 
     @Query("select r from Record r join fetch r.day d where r.day.plan.id = :planId")
     List<Record> findAllByPlanId(@Param("planId") Long planId);
-
-
 }

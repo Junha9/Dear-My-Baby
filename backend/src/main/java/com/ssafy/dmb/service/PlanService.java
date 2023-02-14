@@ -1,8 +1,9 @@
 package com.ssafy.dmb.service;
 
-import com.ssafy.dmb.domain.user.Family;
+import com.ssafy.dmb.domain.location.Region;
 import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.plan.Plan;
+import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.dto.Plan.PlanDto;
 import com.ssafy.dmb.dto.day.CurrentDayDto;
 import com.ssafy.dmb.dto.day.DayDto;
@@ -11,6 +12,7 @@ import com.ssafy.dmb.error.ErrorCode;
 import com.ssafy.dmb.repository.DayRepository;
 import com.ssafy.dmb.repository.FamilyRepository;
 import com.ssafy.dmb.repository.PlanRepository;
+import com.ssafy.dmb.repository.RegionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +34,7 @@ public class PlanService {
     private final DayRepository dayRepository;
     private final FamilyRepository familyRepository;
     private final PlanRepository planRepository;
+    private final RegionRepository regionRepository;
 
     public PlanDto.PlanDetail getPlanDetail(Long planId) {
         Plan plan = planRepository.findById(planId).get();
@@ -173,5 +177,19 @@ public class PlanService {
     public void deletePlan(Long planId) {
         LOGGER.info("[deletePlan] input planId : {}", planId);
         planRepository.deleteById(planId);
+    }
+
+    public List<PlanDto.PlanRecordResponse> findPlanRecord(Long familyId){
+        List<Plan> planList = planRepository.findPlanRecordByFamilyId(familyId);
+        List<PlanDto.PlanRecordResponse> planRecords = new ArrayList< PlanDto.PlanRecordResponse>();
+        for(Plan p : planList) {
+            Region region = regionRepository.findByPlanName(p.getPlanName());
+            String regionImgUrl = region.getRegionImgUrl();
+
+            PlanDto.PlanRecordResponse planRecordResponse = new PlanDto.PlanRecordResponse(p,regionImgUrl);
+            planRecords.add(planRecordResponse);
+        }
+
+        return planRecords;
     }
 }

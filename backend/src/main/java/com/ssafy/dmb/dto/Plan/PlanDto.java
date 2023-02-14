@@ -163,4 +163,22 @@ public class PlanDto {
         }
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class PlanRecordResponse {
+        private Long planId;
+        private String planName;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private String regionImgUrl;
+        public PlanRecordResponse (Plan plan, String regionImgUrl){
+            this.planId = plan.getId();
+            this.planName = plan.getPlanName();
+            this.startDate = plan.getStartDate();
+            this.endDate = plan.getEndDate();
+            this.regionImgUrl = regionImgUrl;
+        }
+
+    }
 }
