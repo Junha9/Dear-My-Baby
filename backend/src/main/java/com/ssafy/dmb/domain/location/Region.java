@@ -20,13 +20,13 @@ public class Region {
 
     private String regionImgUrl;
 
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<Restaurant> restaurants = new ArrayList<>();
 
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<Tour> tours = new ArrayList<>();
 
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<Festival> festivals = new ArrayList<>();
 
 }
