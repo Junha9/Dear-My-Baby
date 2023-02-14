@@ -21,7 +21,7 @@ public class RegionService {
     private final Logger LOGGER = LoggerFactory.getLogger(RegionService.class);
 
     public List<RegionResponseDto> getRegionList() {
-        List<Region> regionList = regionRepository.findNameAndImg();
+        List<Region> regionList = regionRepository.findAll();
 
         List<RegionResponseDto> regions = regionList.stream()
                 .map(l -> new RegionResponseDto(l))

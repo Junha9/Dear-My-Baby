@@ -5,6 +5,7 @@ import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.dto.Plan.PlanDto;
 import com.ssafy.dmb.dto.day.CurrentDayDto;
+import com.ssafy.dmb.dto.day.DayDto;
 import com.ssafy.dmb.error.BusinessException;
 import com.ssafy.dmb.error.ErrorCode;
 import com.ssafy.dmb.repository.DayRepository;
@@ -64,14 +65,21 @@ public class PlanService {
         return currentDayDto;
     }
 
-    public PlanDto.PlanDetail startPlan(Long planId) {
+    public Long startPlan(Long planId) {
         Plan changeplan = planRepository.findById(planId).get();
         changeplan.setPlanState(1);
         planRepository.save(changeplan);
         Plan plan = planRepository.findById(planId).get();
         PlanDto.PlanDetail planDetail = new PlanDto.PlanDetail(plan);
+        List<DayDto> dayList = planDetail.getDays();
+        Long currentDayId = -1L;
+        for(DayDto d: dayList){
+            if(d.getDayNumber() == 1){
+                currentDayId = d.getDayId();
+            }
+        }
 
-        return planDetail;
+        return currentDayId;
     }
 
     public PlanDto.PlanDetail endPlan(Long planId) {

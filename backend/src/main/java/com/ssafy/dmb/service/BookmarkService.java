@@ -43,6 +43,8 @@ public class BookmarkService {
                 bookmarkAddress(request.getBookmarkAddress()).
                 bookmarkLongitude(request.getBookmarkLongitude()).
                 bookmarkLatitude(request.getBookmarkLatitude()).
+                bookmarkCategory(request.getBookmarkCategory()).
+                bookmarkUrl(request.getBookmarkUrl()).
                 build();
 
         validateDuplicateBookmark(bookmark);

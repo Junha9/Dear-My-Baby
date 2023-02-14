@@ -25,30 +25,30 @@ public class MemberDetailResponseDto {
 
     private String memberImg;
 
-    private PlanDto.ClosetPlanResponse closetPlan;
+    private PlanDto.ClosetPlanResponse closestPlan;
 
     private PlanDto.CurrentPlanResponse currentPlan;
 
     private List<FamilyDto.familyList> familyIdList;
 
-    public MemberDetailResponseDto(Member member, PlanDto.ClosetPlanResponse closetPlan, PlanDto.CurrentPlanResponse currentPlan, List<FamilyDto.familyList> familyIdList){
+    public MemberDetailResponseDto(Member member, PlanDto.ClosetPlanResponse closestPlan, PlanDto.CurrentPlanResponse currentPlan, List<FamilyDto.familyList> familyIdList){
         this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
         this.memberEmail = member.getMemberEmail();
         this.memberImg = member.getMemberImg();
         this.currentPlan = currentPlan;
-        this.closetPlan = closetPlan;
+        this.closestPlan = closestPlan;
         this.familyIdList = familyIdList;
     }
 
-    public MemberDetailResponseDto(Member member, PlanDto.ClosetPlanResponse closetPlan, List<FamilyDto.familyList> familyIdList){
+    public MemberDetailResponseDto(Member member, PlanDto.ClosetPlanResponse closestPlan, List<FamilyDto.familyList> familyIdList){
         this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
         this.memberEmail = member.getMemberEmail();
         this.memberImg = member.getMemberImg();
-        this.closetPlan = closetPlan;
+        this.closestPlan = closestPlan;
         this.currentPlan = null;
         this.familyIdList = familyIdList;
     }
@@ -59,7 +59,7 @@ public class MemberDetailResponseDto {
         this.memberName = member.getMemberName();
         this.memberEmail = member.getMemberEmail();
         this.memberImg = member.getMemberImg();
-        this.closetPlan = null;
+        this.closestPlan = null;
         this.currentPlan = currentPlan;
         this.familyIdList = familyIdList;
     }
@@ -70,7 +70,7 @@ public class MemberDetailResponseDto {
         this.memberName = member.getMemberName();
         this.memberEmail = member.getMemberEmail();
         this.memberImg = member.getMemberImg();
-        this.closetPlan = null;
+        this.closestPlan = null;
         this.currentPlan = null;
         this.familyIdList = familyIdList;
     }
@@ -81,7 +81,7 @@ public class MemberDetailResponseDto {
         this.memberName = member.getMemberName();
         this.memberEmail = member.getMemberEmail();
         this.memberImg = member.getMemberImg();
-        this.closetPlan = null;
+        this.closestPlan = null;
         this.currentPlan = null;
         this.familyIdList = null;
     }
@@ -93,7 +93,7 @@ public class MemberDetailResponseDto {
                 ", memberEmail='" + memberEmail + '\'' +
                 ", memberId='" + memberId + '\'' +
                 ", memberImg='" + memberImg + '\'' +
-                ", closetPlan=" + closetPlan +
+                ", closestPlan=" + closestPlan +
                 ", currentPlan=" + currentPlan +
                 ", familyIdList=" + familyIdList +
                 '}';
