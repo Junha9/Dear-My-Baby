@@ -1,97 +1,42 @@
-import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
-import PlaceBasket from './PlaceBasket';
-import { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+
+import { useState, useEffect, useRef, Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
+import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
+
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import PlaceBasket from './PlaceBasket';
+
+import { apiGetBookmarkList, apiCreateBookmark, apiDeleteBookmark } from '@/commons/api/bookmark';
+
 const kakao = window.kakao;
 
-export default function PlanMap() {
-  // 첫 검색어 중심 좌표 데이터
+export default function PlanMap({ plan }) {
+  const [bookmarkList, setBookmarkList] = useState();
+  useEffect(() => {
+    if (plan != null) {
+      apiGetBookmarkList(plan.planId).then(({ data }) => setBookmarkList(data));
+      setKeyword(plan.planDestination);
+    }
+  }, [plan]);
 
-
-  const location = useLocation();
-  const propWord = location.state?.keyword;
-  const propLat = location.state?.lat;
-  const propLng = location.state?.lng;
-  // console.log('proped from SelectPlace:', propWord)
-  const initKeyword = propWord;
-
-  const keyWordRef = useRef();
-
-  const [info, setInfo] = useState();
+  const [keyword, setKeyword] = useState('');
+  const [kakaoMap, setKakaoMap] = useState(null);
+  const [kakaoMapcenter, setKakaoMapCenter] = useState();
   const [markers, setMarkers] = useState([]);
-  const [map, setMap] = useState();
-
-  // 지역선택 안했을 경우 ..?
-  const [keyWord, setKeyWord] = useState(initKeyword);
-  const [initLat, setInitLat] = useState(propLat)   // 최초 위도
-  const [initLng, setInitLng] = useState(propLng)   // 최초 경도
-
-
-
+  const [info, setInfo] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [placeBasket, setPlaceBasket] = useState([]);
-  const [center, setCenter] = useState();
 
-  // 검색어 상태 변화
-  const onChange = (e) => {
-    setKeyWord(e.target.value);
-  };
-
-  // 검색 키워드
-  const onClick = () => {
-    console.log(keyWordRef.current.value);
-    setKeyWord(keyWordRef.current.value);
-    // console.log({ info });
-    // console.log(searchWord);
-  };
-
-  // 랜더링 되고 최초로 한번만 실행하는 useEffect 함수
-  useEffect(() => {
-    console.log('just checking');
+  function kakaoSearch() {
+    if (!kakaoMap || !keyword) return;
     const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(keyWord, (data, status, _pagination) => {
+    ps.keywordSearch(keyword, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         // console.log('data', data);
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-        // LatLngBounds 객체에 좌표를 추가합니다
-        const bounds = new kakao.maps.LatLngBounds();
-        let markers = [];
-
-        for (var i = 0; i < data.length; i++) {
-          markers.push({
-            position: {
-              lat: data[i].y,
-              lng: data[i].x,
-            },
-            content: data[i].place_name,
-            adressName: data[i].address_name,
-            placeURL: data[i].place_url,
-            categoryCode: data[i].category_group_code,
-            roadAddressName: data[i].road_address_name,
-          });
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }
-        setMarkers(markers);
-        // 지도 중심 좌표 찾기
-        // setCenter(map.getCenter())
-
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        // map.setBounds(bounds);
-      }
-    });
-
-  }, [])
-
-  // 검색할 때 마다 실행
-  useEffect(() => {
-    if (!map) return;
-    const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(keyWord, (data, status, _pagination) => {
-      if (status === kakao.maps.services.Status.OK) {
-        console.log('data', data);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
@@ -114,19 +59,45 @@ export default function PlanMap() {
         }
         setMarkers(markers);
         // 지도 중심 좌표 찾기
-        setCenter(map.getCenter());
+        setKakaoMapCenter(kakaoMap.getCenter());
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
+        kakaoMap.setBounds(bounds);
       }
     });
-  }, [keyWord]);
+  }
+
+  // keyword가 바뀔 때마다 실행
+  useEffect(kakaoSearch, [keyword]);
 
   // 북마크 추가 버튼 눌려을때
   const addToBookMark = () => {
-    if (placeBasket && !placeBasket.includes(info)) {
+    if (bookmarkList && !bookmarkList.find((e) => e.bookmarkName == info.content)) {
       // placeBasket.push(info);
-      setPlaceBasket(placeBasket.concat(info));
+      // console.log(bookmarkList.concat(info));
+      console.log(bookmarkList);
+      console.log('info', info);
+      const justAddedBookmark = {
+        planId: plan.planId,
+        bookmarkName: info.content,
+        bookmarkAddress: info.addressName,
+        bookmarkLatitude: info.position.lat,
+        bookmarkLongitude: info.position.lng,
+        bookmarkUrl: info.placeURL,
+        bookmarkCategory: info.categoryGroupName,
+        //url, categorycode
+      };
+
+      // setBookmarkList(bookmarkList.concat(info.content));
+      apiCreateBookmark(justAddedBookmark).then((res) => setBookmarkList(res.data));
+    }
+  };
+
+  const deleteBookmark = () => {
+    if (bookmarkList && bookmarkList.find((e) => e.bookmarkName == info.content)) {
+      console.log(bookmarkList.find((e) => e.bookmarkName == info.content).bookmarkId);
+      const toDeleteBookmark = bookmarkList.find((e) => e.bookmarkName == info.content).bookmarkId;
+      apiDeleteBookmark(toDeleteBookmark).then((res) => setBookmarkList(res.data));
     }
   };
 
@@ -140,44 +111,43 @@ export default function PlanMap() {
     <div>
       <div style={{ position: 'absolute', left: '0vw', top: '9vh', backgroundColor: 'transparent', zIndex: '2' }}>
         <input
-          ref={keyWordRef}
-          value={keyWord}
-          onChange={onChange}
-          onKeyPress={onClick}
+          value={keyword}
+          onChange={(event) => setKeyword(event.target.value)}
+          // onKeyPress={onClick}
           type="text"
           placeholder="장소 검색 하세요"
         />
-        <button onClick={onClick}>검색</button>
+        <button onClick={kakaoSearch}>검색</button>
+        {/* 장소 바구니 보러갈 때 쿼리로 planid를 넘겨 주기  */}
         <button>
-          <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }}>
+          <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }} state={plan}>
             장소바구니 보러가기
           </Link>
-          <button
-            onClick={() => {
-              alert(center);
-            }}
-          >
-            console log
-          </button>
+        </button>
+        <button
+          onClick={() => {
+            console.log(plan);
+          }}
+        >
+          console log
         </button>
       </div>
 
       <Map // 로드뷰를 표시할 Container
         center={{
-          lat: initLat,
-          lng: initLng,
+          lat: plan != null ? plan.planLatitude : 37.79,
+          lng: plan != null ? plan.planLongitude : 127.43003,
         }}
         style={{
           width: '100%',
           height: '100vh',
         }}
         level={10}
-        onCreate={setMap}
+        onCreate={setKakaoMap}
       >
-        {markers.map((marker) => (
-          <>
+        {markers.map((marker, index) => (
+          <Fragment key={index}>
             <MapMarker
-              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
               position={marker.position}
               onClick={() => {
                 setInfo(marker);
@@ -187,7 +157,6 @@ export default function PlanMap() {
 
             {isOpen && (
               <CustomOverlayMap
-                key={`${marker.position.lng}`}
                 position={{
                   lat: info.position.lat,
                   lng: info.position.lng,
@@ -225,14 +194,6 @@ export default function PlanMap() {
                     </div>
                     <div style={{ fontSize: '0.8rem', color: 'rgba(0, 0, 0, 0.7)' }}>{info.categoryGroupName}</div>
                     <div className="body">
-                      <div className="img">
-                        {/* <img
-                          src="//t1.daumcdn.net/thumb/C84x76/?fname=http://t1.daumcdn.net/cfile/2170353A51B82DE005"
-                          width="73"
-                          height="70"
-                          alt="카카오 스페이스닷원"
-                        /> */}
-                      </div>
                       <div className="desc">
                         <div className="ellipsis" style={{ fontSize: '0.9rem' }}>
                           {info.roadAddressName}
@@ -248,10 +209,12 @@ export default function PlanMap() {
                           >
                             상세정보
                           </a>
-                          {placeBasket.includes(info) ? (
+                          {bookmarkList.find((e) => e.bookmarkName == info.content) != null ? (
+                            // 여기다 하트 색깔 빼는거 + 북마크 리스트에서 빼는거 해야함.
                             <FavoriteIcon
                               style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
-                              onClick={addToBookMark}
+                              onClick={deleteBookmark}
+                              // console.log('heart', bookmarkList.find((e) => e.bookmarkName == info.content))
                             ></FavoriteIcon>
                           ) : (
                             <FavoriteBorderIcon
@@ -266,14 +229,19 @@ export default function PlanMap() {
                 </div>
               </CustomOverlayMap>
             )}
-          </>
+          </Fragment>
         ))}
 
-        <div className="place-basket-div">
+        {/* <div className="place-basket-div">
           <h4>장소바구니</h4>
-          {placeBasket.map((basketplace) => {
+          {bookmarkList.map((basketplace) => {
             return <PlaceBasket key={basketplace.addressName} basketplace={basketplace}></PlaceBasket>;
           })}
+        </div> */}
+        <div className="place-basket-div" style={{ left: '0', width: '50%' }}>
+          <h4>진짜 장소바구니</h4>
+          {bookmarkList != null &&
+            bookmarkList.map((bookmark) => <div key={bookmark.bookmarkId}>{bookmark.bookmarkName}</div>)}
         </div>
       </Map>
     </div>
@@ -281,5 +249,5 @@ export default function PlanMap() {
 }
 
 PlanMap.propTypes = {
-  //   records,
+  plan: PropTypes.any,
 };

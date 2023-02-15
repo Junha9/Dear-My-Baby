@@ -16,5 +16,8 @@ public interface PlanRepository extends JpaRepository<Plan,Long> {
 
     @Query("select p from Plan p where p.planState = 1 and p.id = :planId")
     Plan findCurrentPlanByPlanState(@Param("planId") Long planId);
+
+    @Query("select p from Plan p where p.planState != 0 and p.family.id = :familyId")
+    List<Plan> findPlanRecordByFamilyId(@Param("familyId") Long familyId);
 }
 

@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import PropTypes from 'prop-types';
 
 import { useState } from 'react';
@@ -15,7 +18,6 @@ const RecommendPlaceList = ({ data }) => {
           navigate(`./place-detail?place-id=${data.id}`)
         }
       >
-
         <div className="reco-data">
           <div className="reco-info">
             <h4>{data.name}</h4>

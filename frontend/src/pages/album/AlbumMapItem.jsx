@@ -6,8 +6,8 @@ export default function AlbumMapItem({ record, handleRecordId }) {
   return (
     <MapMarker
       position={{
-        lat: record.lat,
-        lng: record.lng,
+        lat: record.latitude,
+        lng: record.longitude,
       }}
       image={{
         src: 'https://cdn-icons-png.flaticon.com/512/1943/1943015.png',

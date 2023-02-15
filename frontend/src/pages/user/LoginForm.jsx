@@ -21,7 +21,7 @@ export default function LoginForm() {
 
   const { login } = useMemberMethod();
   const navigate = useNavigate();
-
+  // use callback..?
   const handleSubmit = useCallback(
     async function (event) {
       event.preventDefault();
@@ -35,6 +35,7 @@ export default function LoginForm() {
       }
 
       try {
+        console.log(memberId, password);
         await login(memberId, password);
         navigate('/');
       } catch (error) {

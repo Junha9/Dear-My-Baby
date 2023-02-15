@@ -1,7 +1,7 @@
-import PlaceList from './PlaceList';
+import DummyPlaceList from './DummyPlaceList';
 
 const Baby = () => {
-  const places = [
+  const placeList = [
     {
       placeName: '포레스트리솜',
       imgUrl: 'https://ldb-phinf.pstatic.net/20200221_111/1582268200689KuL3U_JPEG/na5MRQEa-8fH7s7tXeLYpFyf.jpg',
@@ -37,7 +37,7 @@ const Baby = () => {
 
   return (
     <div className="placeList">
-      <PlaceList places={places}></PlaceList>
+      <DummyPlaceList placeList={placeList}></DummyPlaceList>
     </div>
   );
 };

@@ -84,13 +84,13 @@ public class PlanDto {
         private Long familyId;
         private Long planId;
         private String planName;
+        private int planPeriod;
         private String planLatitude;
         private String planLongitude;
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
         private int planState;
-        private int planPeriod;
 
         public ClosetPlanResponse (Plan plan){
             this.familyId=plan.getFamily().getId();
@@ -163,4 +163,22 @@ public class PlanDto {
         }
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class PlanRecordResponse {
+        private Long planId;
+        private String planName;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private String regionImgUrl;
+        public PlanRecordResponse (Plan plan, String regionImgUrl){
+            this.planId = plan.getId();
+            this.planName = plan.getPlanName();
+            this.startDate = plan.getStartDate();
+            this.endDate = plan.getEndDate();
+            this.regionImgUrl = regionImgUrl;
+        }
+
+    }
 }

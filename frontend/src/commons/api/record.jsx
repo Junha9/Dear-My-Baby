@@ -18,7 +18,6 @@ const api = getApiInstance();
 
 // day별 기록 저장
 export async function apiCreateRecord(record, recordFile) {
-  console.log(record, recordFile);
   if (record != null && recordFile != null) {
     const formData = new FormData();
     formData.append(
@@ -35,17 +34,16 @@ export async function apiCreateRecord(record, recordFile) {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(response);
     return response;
   }
   throw new Error('apiCreateRecord : record, recordFile must be provided');
 }
 
 // 날짜별 여행 기록 전체 조회
-export async function apiGetRecordList(dayId, planId) {
-  if (dayId != null && planId != null) {
-    const response = await api.get(`/record/day?dayId=${dayId}&planId=${planId}`);
+export async function apiGetDayRecord(dayId) {
+  if (dayId != null) {
+    const response = await api.get(`/record/day/${dayId}`);
     return response;
   }
-  throw new Error('apiGetRecordList : dayId and planId must be provided');
+  throw new Error('apiGetDayRecord : dayId must be provided');
 }

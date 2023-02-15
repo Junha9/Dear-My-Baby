@@ -53,7 +53,7 @@ const SelectDate = () => {
           alignItems: 'center',
         }}
       >
-        <h3 style={{ margin: '5%' }}>여행 일정 등록</h3>
+        <h2 style={{ marginTop: '10%', marginBottom: '5%' }}>여행 일정 등록</h2>
         <DateRange
           editableDateInputs={true}
           onChange={(item) => setDate([item.selection])}

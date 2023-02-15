@@ -1,23 +1,24 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/media-has-caption */
 import { apiCreateRecord } from '@/commons/api/record';
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 
 // import styled from 'styled-components';
 
-const RecordUpload = (props) => {
-  const [source, setSource] = useState();
+const RecordUpload = ({ currentDayId, currentLat, currentLng, setNowRecords, setModalOpen }) => {
+  const navigate = useNavigate();
+  const [source, setSource] = useState('');
   const [recordText, setRecordText] = useState('');
   const [recordTitle, setRecordTitle] = useState('');
-
   const recordFile = source ? source.url : 'string';
   const record = {
-    dayId: 6,
+    dayId: currentDayId,
     recordText: recordText,
     recordName: recordTitle,
-    latitude: props.recordLocation.center.lat + 0.4,
-    longitude: props.recordLocation.center.lng + 0.6,
-    recordDate: new Date(),
-    recordType: 0,
+    latitude: currentLat.toString(),
+    longitude: currentLng.toString(),
+    recordType: source.video ? 1 : 0,
   };
 
   console.log({ record: record, recordFile: recordFile });
@@ -52,11 +53,20 @@ const RecordUpload = (props) => {
     // formData.recordDto.latitude = 1;
     // formData.recordDto.longitude = recordLocation.formData.recordDto.recordType = 0;
     // console.log(formData);
-    console.log(record, recordFile);
-    console.log(source ? source.image : 'no');
-    apiCreateRecord(record, recordFile);
-    alert('발자국이 찍혔습니다!');
-    props.handleRecordReload();
+    // console.log(record, recordFile);
+    // console.log(source ? source.image : 'no');
+    if (recordFile != null) {
+      const createRecord = async () => {
+        const response = await apiCreateRecord(record, recordFile);
+        setNowRecords(response.data);
+        alert('발자국이 찍혔습니다!');
+        setModalOpen(false);
+      };
+      createRecord();
+      // window.location.reload();
+    } else {
+      alert('영상 혹은 사진 기록을 남겨주세요!');
+    }
   };
 
   const onChange = (e) => {

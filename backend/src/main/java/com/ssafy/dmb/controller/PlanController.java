@@ -101,4 +101,10 @@ public class PlanController {
         return ResponseEntity.status(HttpStatus.OK).body(planService.getPlanDetailList(family.getId()));
     }
 
+    @Operation(summary = "여행의 레코드 리스트 조회", description = "<strong> familyId </strong>를 통해 여행의 레코드 리스트 조회한다.")
+    @GetMapping("/planrecord/{familyId}")
+    public ResponseEntity<List<PlanDto.PlanRecordResponse>> getPlanRecordList(@PathVariable("familyId") Long familyId){
+        return ResponseEntity.status(HttpStatus.OK).body(planService.findPlanRecord(familyId));
+    }
+
 }

@@ -1,12 +1,15 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
 import { CustomOverlayMap } from 'react-kakao-maps-sdk';
 
-function RecordMapItem(record) {
+function RecordMapItem({ record, handleClick }) {
   return (
     <div>
       <CustomOverlayMap
         position={{
-          lat: record.record.latitude,
-          lng: record.record.longitude,
+          lat: record.latitude,
+          lng: record.longitude,
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -18,6 +21,7 @@ function RecordMapItem(record) {
               marginBottom: '5px',
             }}
             alt="record foot"
+            onClick={handleClick}
           />
         </div>
       </CustomOverlayMap>

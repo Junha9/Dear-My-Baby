@@ -50,7 +50,7 @@ export default function HeadBar() {
   const handleLogout = () => {
     logout();
     window.localStorage.clear();
-    navigate('/');
+    // navigate('/'); // 로그아웃이 마무리되기 전에 navigate 하여 home의 memberReload가 먼저 호출되는 오류가 존재
   };
 
   return (

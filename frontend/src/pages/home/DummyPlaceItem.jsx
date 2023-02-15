@@ -5,7 +5,7 @@ import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 
-export default function PlaceItem({ place }) {
+export default function DummyPlaceItem({ place }) {
   // console.log(region.placeName, 'ththibal');
   return (
     <div className="placeItem">
@@ -13,7 +13,7 @@ export default function PlaceItem({ place }) {
         <Card component="li" sx={{ minWidth: 40, flexGrow: 1, height: '20vh' }}>
           <CardCover>
             <img
-              src={place.regionImgUrl}
+              src={place.imgUrl}
               // srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
               loading="lazy"
               alt=""
@@ -21,7 +21,7 @@ export default function PlaceItem({ place }) {
           </CardCover>
           <CardContent>
             <Typography textColor="#fff" mt={{ xs: 11, sm: 10 }} sx={{ fontSize: '0.7rem' }}>
-              {place.regionName}
+              {place.placeName}
             </Typography>
           </CardContent>
         </Card>
@@ -29,14 +29,3 @@ export default function PlaceItem({ place }) {
     </div>
   );
 }
-
-PlaceItem.propTypes = {
-  place: PropTypes.shape({
-    placeId: PropTypes.number,
-    placeName: PropTypes.string,
-    placeType: PropTypes.string,
-    placeImg: PropTypes.string,
-    lat: PropTypes.string,
-    lng: PropTypes.string,
-  }),
-};
