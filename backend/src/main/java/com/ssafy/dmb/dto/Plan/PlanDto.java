@@ -84,13 +84,13 @@ public class PlanDto {
         private Long familyId;
         private Long planId;
         private String planName;
+        private int planPeriod;
         private String planLatitude;
         private String planLongitude;
         private String planDestination;
         private LocalDate startDate;
         private LocalDate endDate;
         private int planState;
-        private int planPeriod;
 
         public ClosetPlanResponse (Plan plan){
             this.familyId=plan.getFamily().getId();

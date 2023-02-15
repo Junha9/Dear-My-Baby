@@ -18,6 +18,8 @@ public class CurrentDayDto {
 
     private int currentDay;
 
+    private int planPeriod;
+
     private Long planId;
 
     private List<PlaceResponseDto> places;
@@ -27,6 +29,7 @@ public class CurrentDayDto {
         this.dayId = day.getId();
         this.currentDay = currentDay;
         this.planId = day.getPlan().getId();
+        this.planPeriod = day.getPlan().getPlanPeriod();
         this.places = day.getPlaces().stream()
                 .map(d->new PlaceResponseDto(d))
                 .collect(Collectors.toList());
