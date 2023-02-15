@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { record, records } from './props';
+import { records } from './props';
 import { MarkerClusterer, Polyline } from 'react-kakao-maps-sdk';
 import AlbumMapItem from './AlbumMapItem';
 
-export default function AlbumMapCluster({ records, handleRecordId }) {
+export default function AlbumMapCluster({ records, handleRecordIndex }) {
   const points = records.map((record) => ({ lat: record.lat, lng: record.lng }));
   console.log(points);
 
@@ -16,8 +16,12 @@ export default function AlbumMapCluster({ records, handleRecordId }) {
         // onClusterclick={(recordIds) => recordIds.map((record) => handleRecordId(record))}
       >
         {/* 발자국 모여있는곳 */}
-        {records.map((record) => (
-          <AlbumMapItem key={record.recordId} record={record} handleRecordId={handleRecordId}></AlbumMapItem>
+        {records.map((record, index) => (
+          <AlbumMapItem
+            key={record.recordId}
+            record={record}
+            handleRecordId={() => handleRecordIndex(index)}
+          ></AlbumMapItem>
         ))}
       </MarkerClusterer>
 
@@ -34,5 +38,5 @@ export default function AlbumMapCluster({ records, handleRecordId }) {
 
 AlbumMapCluster.propTypes = {
   records,
-  handleRecordId: PropTypes.func,
+  handleRecordIndex: PropTypes.func,
 };

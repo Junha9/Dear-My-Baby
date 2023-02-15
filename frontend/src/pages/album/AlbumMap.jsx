@@ -1,5 +1,10 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { apiGetPlan } from '@/commons/api/plan';
+import { apiGetDayRecord } from '@/commons/api/record';
+
 import { Map } from 'react-kakao-maps-sdk';
-import { useState } from 'react';
 import { Modal, Box } from '@mui/material';
 import AlbumMapCluster from './AlbumMapCluster';
 import Button from '@mui/material/Button';
@@ -7,118 +12,134 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-
-const dummyRecords = [
-  {
-    recordId: 1,
-    dayCount: 1,
-    recordType: 0,
-    recordFile: 'https://picsum.photos/id/237/200/300',
-    lat: 37.4967288,
-    lng: 127.0448612,
-  },
-  {
-    recordId: 2,
-    dayCount: 1,
-    recordType: 0,
-    recordFile: 'https://picsum.photos/id/236/300/300',
-    lat: 37.4977288,
-    lng: 127.0458612,
-  },
-  {
-    recordId: 3,
-    dayCount: 2,
-    recordType: 0,
-    recordFile: 'https://picsum.photos/id/235/300/200',
-    lat: 37.4987288,
-    lng: 127.0458612,
-  },
-  {
-    recordId: 4,
-    dayCount: 2,
-    recordType: 1,
-    recordFile: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    lat: 37.4997288,
-    lng: 127.0468612,
-  },
-];
+import NativeSelect from '@mui/material/NativeSelect';
 
 export default function AlbumMap() {
-  const [records] = useState(dummyRecords);
+  const { planId } = useParams();
+  const [plan, setPlan] = useState(null);
+  const [dayRecordList, setDayRecordList] = useState([]);
+  const [dayIndex, setDayIndex] = useState(0);
+
+  useEffect(() => {
+    apiGetPlan(planId).then(({ data }) => setPlan(data));
+  }, [planId]);
+
+  useEffect(() => {
+    const loadDayRecordList = async () => {
+      const newDayRecordList = [];
+      for (const day of plan.days) {
+        const response = await apiGetDayRecord(day.dayId);
+        const recordList = response.data;
+        newDayRecordList.push(recordList);
+      }
+      setDayRecordList(newDayRecordList);
+    };
+    loadDayRecordList();
+  }, [plan]);
+
   const [activeStep, setActiveStep] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-  const maxSteps = records.length;
 
-  function handleRecordId(recordId) {
-    for (let index = 0; index < records.length; index++) {
-      if (records[index].recordId == recordId) {
-        setActiveStep(index);
-        break;
-      }
-    }
+  function handleRecordIndex(index) {
+    setActiveStep(index);
     setModalOpen(true);
   }
 
   return (
     <>
-      <Map center={{ lat: 37.4977288, lng: 127.0448612 }} style={{ width: '100%', height: '90vh' }} draggable={true}>
-        <AlbumMapCluster records={records} handleRecordId={handleRecordId}></AlbumMapCluster>
-      </Map>
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        >
-          {activeStep < maxSteps ? (
-            <Card sx={{ width: 400 }}>
-              <CardHeader title={`${records[activeStep].dayCount}일차 기록`}></CardHeader>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Button disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>
-                  <KeyboardArrowLeft></KeyboardArrowLeft>
-                </Button>
-                {records[activeStep].recordType == 0 ? (
-                  <CardMedia
-                    component="img"
-                    src={records[activeStep].recordFile}
-                    sx={{ width: '70%', height: '200px', objectFit: 'contain' }}
-                  ></CardMedia>
-                ) : (
-                  <CardMedia
-                    component="video"
-                    controls
-                    src={records[activeStep].recordFile}
-                    sx={{ width: '70%', height: '200px', objectFit: 'contain' }}
-                  ></CardMedia>
-                )}
+      {plan != null && dayRecordList.length > 0 ? (
+        <>
+          <Box sx={{ background: 'white', p: 3 }}>
+            <FormControl fullWidth>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                날짜 선택
+              </InputLabel>
+              <NativeSelect value={dayIndex} onChange={(event) => setDayIndex(event.target.value)}>
+                {plan.days.map((day, index) => (
+                  <option key={index} value={index} selected={false}>
+                    {index + 1}일차
+                  </option>
+                ))}
+              </NativeSelect>
+            </FormControl>
+          </Box>
 
-                <Button disabled={activeStep === maxSteps - 1} onClick={() => setActiveStep(activeStep + 1)}>
-                  <KeyboardArrowRight></KeyboardArrowRight>
-                </Button>
-              </Box>
-              <CardContent>
-                <ul>
-                  <li>레코드 제목</li>
-                  <li>레코드 text</li>
-                  <li>recordId : {records[activeStep].recordId}</li>
-                  <li>recordType : {records[activeStep].recordType}</li>
-                  <li>latitude : {records[activeStep].lat}</li>
-                  <li>longitude : {records[activeStep].lng}</li>
-                  <textarea></textarea>
-                  <button>댓글 작성</button>
-                </ul>
-              </CardContent>
-            </Card>
-          ) : (
-            <div>No Content</div>
-          )}
-        </Box>
-      </Modal>
+          <Map
+            center={{ lat: plan.planLatitude, lng: plan.planLongitude }}
+            style={{ width: '100%', height: '90vh' }}
+            draggable={true}
+          >
+            {dayRecordList.length > 0 && (
+              <AlbumMapCluster
+                records={dayRecordList[dayIndex]}
+                handleRecordIndex={handleRecordIndex}
+              ></AlbumMapCluster>
+            )}
+          </Map>
+          <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              {activeStep < dayRecordList[dayIndex].length ? (
+                <Card sx={{ width: 400 }}>
+                  <CardHeader title={`${dayIndex + 1}일차 기록`}></CardHeader>
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>
+                      <KeyboardArrowLeft></KeyboardArrowLeft>
+                    </Button>
+                    {dayRecordList[dayIndex][activeStep].recordType == 0 ? (
+                      <CardMedia
+                        component="img"
+                        src={dayRecordList[dayIndex][activeStep].fileUrl}
+                        sx={{ width: '70%', height: '200px', objectFit: 'contain' }}
+                      ></CardMedia>
+                    ) : (
+                      <CardMedia
+                        component="video"
+                        controls
+                        src={dayRecordList[dayIndex][activeStep].fileUrl}
+                        sx={{ width: '70%', height: '200px', objectFit: 'contain' }}
+                      ></CardMedia>
+                    )}
+
+                    <Button
+                      disabled={activeStep === dayRecordList[dayIndex].length - 1}
+                      onClick={() => setActiveStep(activeStep + 1)}
+                    >
+                      <KeyboardArrowRight></KeyboardArrowRight>
+                    </Button>
+                  </Box>
+                  <CardContent>
+                    <ul>
+                      <li>레코드 제목</li>
+                      <li>레코드 text</li>
+                      <li>recordId : {dayRecordList[dayIndex][activeStep].recordId}</li>
+                      <li>recordType : {dayRecordList[dayIndex][activeStep].recordType}</li>
+                      <li>latitude : {dayRecordList[dayIndex][activeStep].lat}</li>
+                      <li>longitude : {dayRecordList[dayIndex][activeStep].lng}</li>
+                      <textarea></textarea>
+                      <button>댓글 작성</button>
+                    </ul>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div>No Content</div>
+              )}
+            </Box>
+          </Modal>
+        </>
+      ) : (
+        <div>No Plan</div>
+      )}
     </>
   );
 }

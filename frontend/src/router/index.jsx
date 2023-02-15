@@ -26,7 +26,9 @@ const UserInfo = lazy(() => import('@/pages/user').then((module) => ({ default: 
 
 // Plan, lazily loaded components
 const FindCity = lazy(() => import('@/pages/plan').then((module) => ({ default: module.FindCity })));
-const PlaceCart = lazy(() => import('@/pages/plan').then((module) => ({ default: module.PlaceCart })));
+const PlanList = lazy(() => import('@/pages/plan').then((module) => ({ default: module.PlanList })));
+// const PlaceCart = lazy(() => import('@/pages/plan').then((module) => ({ default: module.PlaceCart })));
+const PlaceCartParent = lazy(() => import('@/pages/plan').then((module) => ({ default: module.PlaceCartParent })));
 const SelectDate = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectDate })));
 const SelectGroup = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectGroup })));
 const SelectPlace = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectPlace })));
@@ -35,6 +37,7 @@ const SelectPlace = lazy(() => import('@/pages/plan').then((module) => ({ defaul
 const RecordMap = lazy(() => import('@/pages/record').then((module) => ({ default: module.RecordMap })));
 
 // Album, lazily loaded components
+const AlbumFamily = lazy(() => import('@/pages/album').then((module) => ({ default: module.AlbumFamily })));
 const AlbumList = lazy(() => import('@/pages/album').then((module) => ({ default: module.AlbumList })));
 const AlbumMap = lazy(() => import('@/pages/album').then((module) => ({ default: module.AlbumMap })));
 const AlbumRecordList = lazy(() => import('@/pages/album').then((module) => ({ default: module.AlbumRecordList })));
@@ -92,7 +95,6 @@ const router = createBrowserRouter([
             path: 'place-detail',
             element: <RecommendPlaceDetail></RecommendPlaceDetail>,
           },
-
         ],
       },
       {
@@ -101,29 +103,42 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            // path: 'select-date',
-            element: <SelectDate></SelectDate>,
+            element: <PlanList></PlanList>,
           },
           {
-            index: 'select-group',
-            element: <SelectGroup></SelectGroup>,
+            path: ':planId',
+            children: [
+              {
+                path: 'find-city',
+                element: <FindCity></FindCity>,
+              },
+              {
+                path: 'place-cart',
+                element: <PlaceCartParent></PlaceCartParent>,
+              },
+            ],
           },
           {
-            path: 'find-city',
-            element: <FindCity></FindCity>,
-          },
-          {
-            path: 'place-cart',
-            element: <PlaceCart></PlaceCart>,
-          },
-          {
-            path: 'select-place',
-            element: <SelectPlace></SelectPlace>,
+            path: 'create',
+            children: [
+              {
+                index: true,
+                element: <SelectDate></SelectDate>,
+              },
+              {
+                path: 'select-place',
+                element: <SelectPlace></SelectPlace>,
+              },
+              {
+                index: 'select-group',
+                element: <SelectGroup></SelectGroup>,
+              },
+            ],
           },
         ],
       },
       {
-        path: 'record',
+        path: 'record/:currentDayId',
         element: <Record></Record>,
         children: [
           {
@@ -138,15 +153,29 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AlbumList></AlbumList>,
+            element: <AlbumFamily></AlbumFamily>,
           },
           {
-            path: 'map',
-            element: <AlbumMap></AlbumMap>,
-          },
-          {
-            path: 'view',
-            element: <AlbumRecordList></AlbumRecordList>,
+            path: ':familyId',
+            children: [
+              {
+                index: true,
+                element: <AlbumList></AlbumList>,
+              },
+              {
+                path: ':planId',
+                children: [
+                  {
+                    path: 'map',
+                    element: <AlbumMap></AlbumMap>,
+                  },
+                  {
+                    path: 'view',
+                    element: <AlbumRecordList></AlbumRecordList>,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

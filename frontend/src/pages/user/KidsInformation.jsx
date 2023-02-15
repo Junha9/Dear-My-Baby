@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './KidsInformation.css';
 import { useNavigate } from 'react-router-dom';
-import { height } from '@mui/system';
 import questionList from './KidData.json';
+import { apiCreateBaby, apiGetBabyList, apiUpdateBaby } from '@/commons/api/baby';
 
 const dummyChildFavor = [
   {
@@ -15,6 +15,7 @@ const dummyChildFavor = [
     festival: [],
   },
 ];
+
 const qNum = [...new Array(2)].map((_, i) => i + 1);
 export default function KidsInformation() {
   const [index, setIndex] = useState(0);
@@ -22,6 +23,19 @@ export default function KidsInformation() {
   const [foodList, setFoodList] = useState([]);
   const navigate = useNavigate();
   const question = questionList[index];
+  const familyId = window.localStorage.getItem('familyId');
+  const [babyId, setBabyId] = useState(0);
+  // const [babyInfo, setBabyInfo] = useState();
+  // baby 정보 API get
+  let babyInfo = {};
+  useEffect(() => {
+    console.log(familyId);
+    apiGetBabyList(familyId).then((res) => {
+      babyInfo = res.data[0];
+      console.log('apiget', babyInfo);
+      // setBabyId(res.data[0].babyId);
+    });
+  }, []);
 
   const handleYes = () => {
     const categoryId = question.categoryId;
@@ -41,10 +55,23 @@ export default function KidsInformation() {
     setIndex(index + 1);
   };
 
+  // 아이 선호정보 입력하는 함수 + 홈으로 돌아가기
+  const postKidFavorInfo = () => {
+    console.log('?', babyInfo);
+    console.log('babyid', babyInfo.babyId);
+    babyInfo.favoriteFood = foodList;
+    babyInfo.favoriteSpot = placeList;
+    //
+
+    apiUpdateBaby(babyInfo, babyInfo.babyId);
+
+    navigate('/');
+  };
+
   return (
     <>
       <div className="question">
-        <button style={{ position: 'absolute' }} onClick={() => console.log(placeList, foodList)}>
+        <button style={{ position: 'absolute' }} onClick={() => console.log(babyId)}>
           Panic Button
         </button>
         {index < questionList.length ? (
@@ -78,7 +105,17 @@ export default function KidsInformation() {
           </div>
         ) : (
           // <div>질문이 다 끝났다</div>
-          navigate('/')
+          <div>
+            <h1>응답 해주셔서 감사합니다.</h1>
+            <button
+              onClick={() => {
+                console.log(babyInfo);
+                postKidFavorInfo();
+              }}
+            >
+              홈으로 가기
+            </button>
+          </div>
         )}
 
         {/* className={answer[0] ? 'show' : 'noshow'} */}

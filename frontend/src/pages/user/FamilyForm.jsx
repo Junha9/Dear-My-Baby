@@ -33,6 +33,8 @@ const FamilyForm = () => {
     if (member != null) {
       await apiCreateFamily(member.memberId, familyName);
       await memberReload();
+      alert(`${familyName} 그룹이 생성 되었습니다.`);
+      navigate(`/`);
     }
   };
 

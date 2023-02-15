@@ -1,3 +1,8 @@
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+import { apiGetPlanRecord } from '@/commons/api/plan';
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -8,58 +13,47 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItemButton';
 import Typography from '@mui/material/Typography';
 import MapIcon from '@mui/icons-material/Map';
-import { Link } from 'react-router-dom';
-
-const plans = [
-  {
-    planId: 1,
-    planImg: 'https://picsum.photos/id/234/200/300',
-    planDate: '2022-01-01',
-    planCount: 3,
-  },
-  {
-    planId: 2,
-    planImg: 'https://picsum.photos/id/233/200/300',
-    planDate: '2022-02-01',
-    planCount: 3,
-  },
-  {
-    planId: 3,
-    planImg: 'https://picsum.photos/id/232/200/300',
-    planDate: '2022-03-01',
-    planCount: 3,
-  },
-];
 
 export default function AlbumList() {
+  const { familyId } = useParams();
+  const [planList, setPlanList] = useState([]);
+
+  useEffect(() => {
+    apiGetPlanRecord(familyId).then(({ data }) => setPlanList(data));
+  }, [familyId]);
+
   return (
-    <body className="album-list-div">
+    <div className="album-list-div">
       <Box p={2}>
         <Typography className="travel-record" variant="h4">
           기록 앨범
         </Typography>
       </Box>
       <List className="record-list">
-        {plans.map((plan) => (
-          <ListItem
-            className="record-detail"
-            key={plan.planId}
-            secondaryAction={
-              <IconButton component={Link} to="map" edge="end" aria-label="to-map">
-                <MapIcon />
-              </IconButton>
-            }
-            disablePadding
-          >
-            <ListItemButton component={Link} to="view">
-              <ListItemAvatar>
-                <Avatar src={plan.planImg}></Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="제주도 여행" secondary="Jan 9, 2014" />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {planList.length > 0 ? (
+          planList.map((plan) => (
+            <ListItem
+              className="record-detail"
+              key={plan.planId}
+              secondaryAction={
+                <IconButton component={Link} to={`${plan.planId}/map`} edge="end" aria-label="to-map">
+                  <MapIcon />
+                </IconButton>
+              }
+              disablePadding
+            >
+              <ListItemButton component={Link} to={`${plan.planId}/view`}>
+                <ListItemAvatar>
+                  <Avatar src={plan.regionImgUrl}>{plan.planName}</Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={plan.planName} secondary={plan.startDate} />
+              </ListItemButton>
+            </ListItem>
+          ))
+        ) : (
+          <Box sx={{ p: 2 }}>등록된 계획이 없습니다.</Box>
+        )}
       </List>
-    </body>
+    </div>
   );
 }
