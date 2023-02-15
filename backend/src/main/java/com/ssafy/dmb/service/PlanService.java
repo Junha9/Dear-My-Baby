@@ -183,7 +183,7 @@ public class PlanService {
         List<Plan> planList = planRepository.findPlanRecordByFamilyId(familyId);
         List<PlanDto.PlanRecordResponse> planRecords = new ArrayList< PlanDto.PlanRecordResponse>();
         for(Plan p : planList) {
-            Region region = regionRepository.findByPlanName(p.getPlanName());
+            Region region = regionRepository.findByPlanName(p.getPlanDestination().replace(" ","/"));
             String regionImgUrl = region.getRegionImgUrl();
 
             PlanDto.PlanRecordResponse planRecordResponse = new PlanDto.PlanRecordResponse(p,regionImgUrl);
