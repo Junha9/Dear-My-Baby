@@ -51,16 +51,10 @@ public class BabyService {
     }
 
     public void updateBabyInfo(BabyDto.BabyUpdateRequest request, Long babyId) {
-        Long familyId = request.getFamilyId();
-        Family family = familyRepository.findById(familyId).get();
+        Baby baby = babyRepository.findById(babyId).get();
 
-        Baby baby = Baby.builder()
-                .family(family)
-                .favoriteSpot(request.getFavoriteSpot())
-                .favoriteFood(request.getFavoriteFood())
-                .build();
-
-        baby.setId(babyId);
+        baby.setFavoriteFood(request.getFavoriteFood());
+        baby.setFavoriteSpot(request.getFavoriteSpot());
         babyRepository.save(baby);
     }
     public List<BabyDto.BabyResponse> getBabyList(Long familyId) {
