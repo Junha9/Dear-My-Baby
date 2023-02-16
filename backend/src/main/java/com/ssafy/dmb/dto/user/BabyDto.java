@@ -55,4 +55,16 @@ public class BabyDto {
 
     }
 
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class BabyUpdateRequest{
+        private Long familyId;
+
+        private Set<String> favoriteSpot = new HashSet<String>();
+
+        private Set<String> favoriteFood = new HashSet<String>();
+
+    }
+
 }
