@@ -69,7 +69,7 @@ public class PlanService {
         return currentDayDto;
     }
 
-    public Long startPlan(Long planId) {
+    public CurrentDayDto startPlan(Long planId) {
         Plan changeplan = planRepository.findById(planId).get();
         changeplan.setPlanState(1);
         planRepository.save(changeplan);
@@ -82,8 +82,11 @@ public class PlanService {
                 currentDayId = d.getDayId();
             }
         }
-
-        return currentDayId;
+        if(currentDayId != -1L) {
+            return getCurrentDay(currentDayId);
+        }else{
+            return null;
+        }
     }
 
     public PlanDto.PlanDetail endPlan(Long planId) {

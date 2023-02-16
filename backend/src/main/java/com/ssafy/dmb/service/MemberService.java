@@ -92,6 +92,7 @@ public class MemberService {
                 List<Plan> planList = planRepository.findAllByFamily(familyId);
                 for (Plan p : planList) {
                     currentPlan = planRepository.findCurrentPlanByPlanState(p.getId());
+
                     if(currentPlan != null)
                         break G;
                 }
