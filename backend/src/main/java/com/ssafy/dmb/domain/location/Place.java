@@ -16,7 +16,7 @@ public class Place {
     @Column(name = "place_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "day_id")
     private Day day;
 
