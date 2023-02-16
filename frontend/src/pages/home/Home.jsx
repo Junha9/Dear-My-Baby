@@ -21,35 +21,15 @@ import { apiGetBabyList } from '@/commons/api/baby';
 import { apiStartPlan } from '@/commons/api/plan';
 import { apiGetRegion } from '@/commons/api/recommend';
 
-// 접속한 유저 그룹의 plans 다 가져와야함
-const dummyUser = {
-  userId: 'ssafy',
-  userName: '김싸피',
-  closestPlan: {
-    planId: 1,
-    planDate: new Date(),
-    planCount: 3,
-  },
-  currentPlan: {
-    planId: 1,
-    planDate: new Date(),
-    planCount: 3,
-  },
-};
-
 export default function Home() {
+  const [view, setView] = useState(false);
+  const navigate = useNavigate();
+
   const member = useMember();
   const memberReload = useMemberReload();
   const auth = useMemberAuth();
-  const [familyId, setFamilyId] = useState(null);
-  const [familyName, setFamilyName] = useState('가족');
-  const [babyName, setBabyName] = useState('');
-  const [currentDayId, setCurrentDayId] = useState('');
   const [regionList, setRegionList] = useState([]);
-  // let region = '';
-  // apiGetRegion().then((res) => setRegion(JSON.stringfy(res.data)));
-  let temp = '';
-  // 최초에 한번 회원정보를 최신화한다
+  // 최초에 한번 회원정보를 최신화하고 지역 정보를 가져온다
   useEffect(() => {
     memberReload();
     apiGetRegion().then(({ data }) => {
@@ -58,36 +38,40 @@ export default function Home() {
     });
   }, []);
 
+  const [familyId, setFamilyId] = useState(null);
+  const [familyName, setFamilyName] = useState('가족');
+  const [babyName, setBabyName] = useState(null);
+  const [currentDayId, setCurrentDayId] = useState('');
+  // 유저 로그인시 로컬 스토리지에서 가족 선택 정보 가져오기
   useEffect(() => {
-    if (window.localStorage.getItem('familyId')) {
-      // console.log(familyId);
-      setFamilyId(window.localStorage.getItem('familyId'));
-      setFamilyName(window.localStorage.getItem('familyName'));
-      apiGetBabyList(familyId).then((res) => {
-        console.log('babyList', res);
-        if (res.data[0]) {
-          setBabyName(res.data[0].babyName);
-        }
-      });
-    }
-  }, [familyName]);
-  const [view, setView] = useState(false);
-  const navigate = useNavigate();
+    if (member != null) {
+      const localFamilyId = window.localStorage.getItem('familyId');
+      // const localFamilyName = window.localStorage.getItem('familyName');
 
-  const getCurrentDayId = () => {
-    apiStartPlan(member.currentPlan.planId).then(({ data }) => {
-      // setCurrentDayId(data);
-      const dayId = data;
+      const familyList = member.familyIdList;
+      for (const family of familyList) {
+        if (family.familyId == localFamilyId) {
+          setFamilyId(family.familyId);
+          setFamilyName(family.familyName);
+          break;
+        }
+      }
+    }
+  }, [member]);
+
+  // familyId가 바뀔 때마다 아이 목록 가져오기
+  // 레거시 코드를 유지하기 위해 familyName이 바뀔 때도 실행
+  useEffect(() => {
+    apiGetBabyList(familyId).then((res) => {
+      console.log('babyList', res);
+      if (res.data[0]) {
+        setBabyName(res.data[0].babyName);
+      }
     });
-  };
-  console.log(member);
-  // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
+  }, [familyId, familyName]);
+
+  // 오늘 날짜가 계획 시작 날짜와 같은지 체크하는 용도
   const today = new Date();
-  // const isToday =
-  // member.closestPlan != null &&
-  // today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
-  // today.getMonth() === member.closestPlan.planDate.getMonth() &&
-  // today.getDate() === member.closestPlan.planDate.getDate();
 
   return (
     <div className="main-div">
@@ -106,7 +90,7 @@ export default function Home() {
           <h3 style={{ fontWeight: '100', color: 'white', fontSize: '16px', marginBottom: '15px' }}>
             당신의 아이에게 <br></br>따뜻한 추억을 선물하세요
           </h3>
-          {babyName === '' ? (
+          {babyName == null ? (
             <button
               onClick={() => {
                 navigate('./kids');
@@ -143,7 +127,7 @@ export default function Home() {
             </div>
           ) : null}
           <>
-            <div className="plan-append-text" style={{ display: 'flex' }}>
+            <div className="main-username" style={{ display: 'flex' }}>
               <div style={{ fontWeight: '700', color: 'purple', fontSize: '1.2rem' }}>{member.memberName}님</div>
               <div
                 style={{
@@ -194,9 +178,9 @@ export default function Home() {
           ) : null}
 
           <div className="plan-append">
-            <h3 className="plan-append-text">{babyName}과 여행할 지역을 고르셨나요?</h3>
+            <h3>{babyName}과 여행할 지역을 고르셨나요?</h3>
             <div
-              className="plus-plan"
+              className="plus-plan plus-plan-container"
               onClick={() => {
                 navigate('/plan/create');
               }}
@@ -212,11 +196,11 @@ export default function Home() {
                   background: '#FFFFFF',
                   border: '0.4px solid #EEEEEE',
                   boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
-                  fontSize: '2rem',
+                  fontSize: '1.5rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginRight: '3%',
+                  marginRight: '2%',
                 }}
               >
                 +
@@ -260,7 +244,7 @@ export default function Home() {
         </div>
       )}
 
-      {babyName != '' && (
+      {babyName != null && (
         <>
           <div className="recommend">
             <h3>{babyName}에게 추천하는 지역별 여행지</h3>

@@ -90,8 +90,11 @@ export default function AlbumMap() {
               }}
             >
               {activeStep < dayRecordList[dayIndex].length ? (
-                <Card sx={{ width: 400 }}>
-                  <CardHeader title={`${dayIndex + 1}일차 기록`}></CardHeader>
+                <Card sx={{ width: 350 }} style={{ borderRadius: '10%' }}>
+                  <CardHeader title={`${dayIndex + 1}일차 기록`} style={{ fontFamily: 'sans-serif' }}></CardHeader>
+                  <h2 style={{ marginTop: '3%', paddingLeft: '5%' }}>
+                    {dayRecordList[dayIndex][activeStep].recordName}
+                  </h2>
                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Button disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>
                       <KeyboardArrowLeft></KeyboardArrowLeft>
@@ -118,17 +121,14 @@ export default function AlbumMap() {
                       <KeyboardArrowRight></KeyboardArrowRight>
                     </Button>
                   </Box>
-                  <CardContent>
-                    <ul>
-                      <li>레코드 제목</li>
-                      <li>레코드 text</li>
-                      <li>recordId : {dayRecordList[dayIndex][activeStep].recordId}</li>
-                      <li>recordType : {dayRecordList[dayIndex][activeStep].recordType}</li>
-                      <li>latitude : {dayRecordList[dayIndex][activeStep].lat}</li>
-                      <li>longitude : {dayRecordList[dayIndex][activeStep].lng}</li>
-                      <textarea></textarea>
-                      <button>댓글 작성</button>
-                    </ul>
+                  <CardContent
+                    style={{
+                      margin: '4%',
+                      boxShadow: '1px 1px 1px gray',
+                      borderRadius: '10px',
+                    }}
+                  >
+                    {dayRecordList[dayIndex][activeStep].recordText}
                   </CardContent>
                 </Card>
               ) : (

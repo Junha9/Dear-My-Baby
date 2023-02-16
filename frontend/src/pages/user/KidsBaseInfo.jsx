@@ -61,7 +61,7 @@ const KidsBaseInfo = () => {
           <FormControl>
             {/* <FormLabel id="demo-row-radio-buttons-group-label"></FormLabel> */}
             <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-              <FormControlLabel value="0" control={<Radio />} label="없음" onClick={(e) => changeHowMany(e)} />
+              {/* <FormControlLabel value="0" control={<Radio />} label="없음" onClick={(e) => changeHowMany(e)} /> */}
               <FormControlLabel value="1" control={<Radio />} label=" 1명" onClick={(e) => changeHowMany(e)} />
               <FormControlLabel value="2" control={<Radio />} label=" 2명" onClick={(e) => changeHowMany(e)} />
               <FormControlLabel value="3" control={<Radio />} label=" 3명 이상" onClick={(e) => changeHowMany(e)} />

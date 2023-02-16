@@ -73,12 +73,12 @@ export default function HeadBar() {
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1, fontSize: '14px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
-              {/* <img
-                src="/assets/logo.png"
-                style={{ height: '30px', width: '30px', marginRight: '10px' }}
-                alt="logo"
-              ></img> */}
-              Dear my baby
+              <img
+                src="/assets/logo2.png"
+                style={{ height: '30px', width: '30px', marginRight: '10px', marginTop: '5px', marginBottom: '5px' }}
+                alt="logo2"
+              ></img>
+              <span style={{ marginTop: '10px' }}>Dear my baby</span>
             </Link>
           </Typography>
           <IconButton

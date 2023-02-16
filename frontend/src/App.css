@@ -12,12 +12,14 @@
 } */
 
 body {
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'sngfont', sans-serif;
+  font-size: 20px;
 }
 
 /* Material UI에 나눔고딕 적용 */
 [class^='MuiTypography'] {
-  font-family: 'Nanum Gothic', sans-serif !important;
+  font-family: 'sngfont', sans-serif !important;
+  font-size: 20px;
 }
 
 /* 화면 크기별 css 설계하기
@@ -41,6 +43,11 @@ body {
     text-align: left;
     overflow-x: hidden;
   }
+}
+
+@font-face {
+  font-family: 'sngfont';
+  src: url('./kor.ttf');
 }
 
 button {
