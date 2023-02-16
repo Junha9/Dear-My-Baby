@@ -47,7 +47,7 @@ body {
 
 @font-face {
   font-family: 'sngfont';
-  src: url('./kor.ttf');
+  src: url('/assets/ridibatang.ttf');
 }
 
 button {
