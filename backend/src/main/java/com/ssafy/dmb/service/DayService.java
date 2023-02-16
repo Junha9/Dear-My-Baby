@@ -24,6 +24,7 @@ public class DayService {
     private final DayRepository dayRepository;
     private final PlaceRepository placeRepository;
 
+    @Transactional
     public void saveDay(DayDto dayDto) {
         LOGGER.info("[dayDto] input dto: {}", dayDto);
 
