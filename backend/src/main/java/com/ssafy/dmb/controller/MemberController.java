@@ -112,7 +112,7 @@ public class MemberController {
         cookie.setMaxAge(7 * 86400000);
 
         // optional properties
-        if(environment != "local")
+        if(!environment.equals("local"))
             cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
