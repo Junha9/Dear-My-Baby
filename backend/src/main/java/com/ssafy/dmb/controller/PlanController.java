@@ -75,8 +75,8 @@ public class PlanController {
     }
 
     @Operation(summary = "여행 시작", description = "<strong> planId </strong>를 통해 planState를 시작으로 수정")
-    @PutMapping("/start")
-    public ResponseEntity<CurrentDayDto> startPlan(@RequestParam("planId") Long planId,@RequestParam("currentDay") Long currentDay) {
+    @PutMapping("/start/{planId}")
+    public ResponseEntity<CurrentDayDto> startPlan(@RequestParam("planId") Long planId) {
 
         return ResponseEntity.status(HttpStatus.OK).body(planService.startPlan(planId));
 
