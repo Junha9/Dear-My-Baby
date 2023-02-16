@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/media-has-caption */
 import { apiCreateRecord } from '@/commons/api/record';
+import { margin } from '@mui/system';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -82,7 +83,7 @@ const RecordUpload = ({ currentDayId, currentLat, currentLng, setNowRecords, set
       {source != null && source.image && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <input className="upload-input upload-title" type="text" placeholder="제목" onChange={onChangeTitle}></input>
-          <img style={{ height: '260px', width: '200px' }} src={URL.createObjectURL(source.url)} alt="uploaded img" />
+          <img style={{ height: '100%', width: '100%' }} src={URL.createObjectURL(source.url)} alt="uploaded img" />
         </div>
       )}
 
@@ -90,7 +91,7 @@ const RecordUpload = ({ currentDayId, currentLat, currentLng, setNowRecords, set
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <input className="upload-input upload-title" type="text" placeholder="제목" onChange={onChangeTitle}></input>
           <video
-            style={{ height: '260px', width: '200px' }}
+            style={{ height: '100%', width: '100%', marginBottom: '10%' }}
             src={URL.createObjectURL(source.url)}
             controls
             alt="uploaded video"
