@@ -38,13 +38,16 @@ export async function apiGetBaby(babyId) {
 
 // 아이 정보 수정
 export async function apiUpdateBaby(babyData, babyId) {
-  //   const babyData = {
-  //     familyId: 210,
-  //     favoriteSpot: ['바다', '산'],
-  //     favoriteFood: ['밥', '한식'],
-  //     babyName: '도현',
-  //     babyAge: 5,
-  //   };
+  // {
+  //   "familyId": 0,
+  //   "favoriteSpot": [
+  //     "string"
+  //   ],
+  //   "favoriteFood": [
+  //     "string"
+  //   ]
+  // }
+  console.log('babyData', babyData);
   if (babyId != null) {
     const response = await api.put(`/baby/${babyId}`, babyData);
     return response;

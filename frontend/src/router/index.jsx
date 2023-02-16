@@ -138,7 +138,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'record/:currentDayId',
+        path: 'record/:currentDayId/:currentPlanId',
         element: <Record></Record>,
         children: [
           {

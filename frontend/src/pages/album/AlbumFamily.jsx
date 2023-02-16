@@ -42,7 +42,7 @@ export default function AlbumFamily() {
             </FormControl>
             <Box sx={{ p: 3, display: 'flex', justifyContent: 'center' }}>
               <Button variant="outlined" onClick={handleClick}>
-                계획 목록으로 이동
+                앨범 목록으로 이동
               </Button>
             </Box>
           </>

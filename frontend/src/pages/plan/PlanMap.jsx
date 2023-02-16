@@ -5,9 +5,8 @@ import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
-import PlaceBasket from './PlaceBasket';
 import PropTypes from 'prop-types';
+import PlaceBasket from './PlaceBasket';
 import { apiGetBookmarkList, apiCreateBookmark, apiDeleteBookmark } from '@/commons/api/bookmark';
 
 const kakao = window.kakao;
@@ -122,13 +121,13 @@ export default function PlanMap({ plan }) {
             장소바구니 보러가기
           </Link>
         </button>
-        <button
+        {/* <button
           onClick={() => {
             console.log(plan);
           }}
         >
           console log
-        </button>
+        </button> */}
       </div>
 
       <Map // 로드뷰를 표시할 Container
@@ -237,7 +236,7 @@ export default function PlanMap({ plan }) {
           })}
         </div> */}
         <div className="place-basket-div" style={{ left: '0', width: '50%' }}>
-          <h4>진짜 장소바구니</h4>
+          <h4>장소바구니</h4>
           {bookmarkList != null &&
             bookmarkList.map((bookmark) => <div key={bookmark.bookmarkId}>{bookmark.bookmarkName}</div>)}
         </div>

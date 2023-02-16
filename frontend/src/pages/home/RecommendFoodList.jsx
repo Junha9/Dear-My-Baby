@@ -4,30 +4,28 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // const
-const RecommendFoodList = ({ foodData }) => {
+const RecommendFoodList = ({ restaurant }) => {
   const navigate = useNavigate();
-  // console.log('??', item.foodData);
+  // console.log('?? object', restaurant.restaurantImgUrl);
 
   return (
     <div className="recommandList">
       <a
         onClick={() =>
           // console.log(fooditem)
-          navigate(`./food-detail?food-id=${foodData.id}`)
+          navigate(`./food-detail?food-id=${restaurant.restaurantId}`)
         }
       >
         <div className="reco-item">
           <div className="reco-info">
-            <h4>{foodData.name}</h4>
+            <h4>{restaurant.restaurantName}</h4>
             <div className="reco-info-outline">
-              <p className="outline-ptag">설명:{foodData.outline}</p>
+              <p className="outline-ptag">설명:{restaurant.restaurantMeinMenu}</p>
             </div>
-            <div className="reco-catagory">
-              <p>{foodData.catagory}</p>
-            </div>
+            <div className="reco-catagory">{/* <p>{restaurant.catagory}</p> */}</div>
           </div>
           <div className="reco-img">
-            <img src={foodData.imgUrl} alt="restaurant" className="reco-src" />
+            <img src={restaurant.restaurantImgUrl} alt="restaurant" className="reco-src" />
           </div>
           {/* 소개 부분에 보여 줄 데이터 */}
           {/* 상세보기 페이지 만들어서 데이터 props 해주기 라우터 어렵다.*/}
@@ -45,5 +43,5 @@ const RecommendFoodList = ({ foodData }) => {
 export default RecommendFoodList;
 
 RecommendFoodList.propTypes = {
-  foodData: PropTypes.any,
+  restaurant: PropTypes.any,
 };

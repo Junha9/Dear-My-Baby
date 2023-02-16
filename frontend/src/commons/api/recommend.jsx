@@ -3,7 +3,7 @@ const api = getApiInstance();
 
 // 음식점 리스트 가져오기
 export async function apiGetRecommendRestaurantList(familyId) {
-  console.log(familyId);
+  console.log('from api jsx', familyId);
   // [
   //     {
   //       "restaurantId": 0,
@@ -13,14 +13,14 @@ export async function apiGetRecommendRestaurantList(familyId) {
   //     }
   //   ]
   if (familyId != null) {
-    const response = await api.get(`/restaurant`, familyId);
+    const response = await api.get(`/retaurant?familyId=${familyId}`);
     return response;
   }
   throw new Error('apiGetRecommendRestaurantList : restaurant data must be provided');
 }
 
 // 개별 음식점 디테일 정보 가져오기
-export async function apiGetRecommendRestaurantDetail(recommendDetail) {
+export async function apiGetRecommendRestaurantDetail(foodId) {
   // {
   //     "restaurantName": "string",
   //     "restaurantCategory": "string",
@@ -37,8 +37,8 @@ export async function apiGetRecommendRestaurantDetail(recommendDetail) {
   //     "regionId": 0
   //   }
 
-  if (recommendDetail.familyId != null) {
-    const response = await api.get(`/restaurant/detail`, recommendDetail);
+  if (foodId != null) {
+    const response = await api.get(`/retaurant/detail?restaurantId=${foodId}`);
     return response;
   }
   throw new Error('apiGetRecommendRestaurantDetail : restaurant data must be provided');
@@ -53,15 +53,15 @@ export async function apiGetRecommendTourList(familyId) {
   //       "tourImgUrl": "string"
   //     }
   //   ]
-  if (tourList.familyId != null) {
-    const response = await api.get(`/tour/${familyId}`, tourList);
+  if (familyId != null) {
+    const response = await api.get(`/tour?familyId=${familyId}`);
     return response;
   }
-  throw new Error('apiGetRecommendRestaurantList : restaurant data must be provided');
+  throw new Error('apiGetRecommendRestaurantList : tour data must be provided');
 }
 
 // 개별 장소 디테일 정보 가져오기
-export async function apiGetRecommendTourListDetail(tourDetail) {
+export async function apiGetRecommendTourListDetail(placeId) {
   // {
   //     "tourName": "string",
   //     "tourCategory": "string",
@@ -78,15 +78,15 @@ export async function apiGetRecommendTourListDetail(tourDetail) {
   //     "regionId": 0
   //   }
 
-  if (tourDetail.familyId != null) {
-    const response = await api.get(`/tour/detail`, tourDetail);
+  if (placeId != null) {
+    const response = await api.get(`/tour/detail?tourId=${placeId}`);
     return response;
   }
   throw new Error('apiGetRecommendRestaurantDetail : restaurant data must be provided');
 }
 
 // 추천 축제 리스트 가져오기
-export async function apiGetRecommendFestivalList(festivalList) {
+export async function apiGetRecommendFestivalList(familyId) {
   // [
   //     {
   //       "tourId": 0,
@@ -94,15 +94,15 @@ export async function apiGetRecommendFestivalList(festivalList) {
   //       "tourImgUrl": "string"
   //     }
   //   ]
-  if (festivalList.familyId != null) {
-    const response = await api.get(`/festival`, festivalList);
+  if (familyId != null) {
+    const response = await api.get(`/festival?familyId=${familyId}`, festivalList);
     return response;
   }
   throw new Error('apiGetRecommendFestivalList : restaurant data must be provided');
 }
 
 // 개별 축제 디테일 정보 가져오기
-export async function apiGetRecommendFestivalDetail(festivalDetail) {
+export async function apiGetRecommendFestivalDetail(familyId) {
   // {
   //     "tourName": "string",
   //     "tourCategory": "string",
@@ -119,8 +119,8 @@ export async function apiGetRecommendFestivalDetail(festivalDetail) {
   //     "regionId": 0
   //   }
 
-  if (festivalDetail.familyId != null) {
-    const response = await api.get(`/festival/detail`, festivalDetail);
+  if (familyId != null) {
+    const response = await api.get(`/festival/detail?familyId=${familyId}`);
     return response;
   }
   throw new Error('apiGetRecommendRestaurantDetail : restaurant data must be provided');

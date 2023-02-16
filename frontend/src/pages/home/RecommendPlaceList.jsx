@@ -6,30 +6,30 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const RecommendPlaceList = ({ data }) => {
+const RecommendPlaceList = ({ tour }) => {
   const navigate = useNavigate();
-  console.log(data.id);
+  // console.log(tour);
 
   return (
     <div className="recommendList">
       <a
         onClick={() =>
           // console.log(fooditem)
-          navigate(`./place-detail?place-id=${data.id}`)
+          navigate(`./place-detail?place-id=${tour.tourId}`)
         }
       >
-        <div className="reco-data">
+        <div className="reco-tour">
           <div className="reco-info">
-            <h4>{data.name}</h4>
+            <h4>{tour.tourName}</h4>
             <div className="reco-info-outline">
-              <p className="outline-ptag">설명:{data.outline}</p>
+              <p className="outline-ptag">설명:{tour.outline}</p>
             </div>
             <div className="reco-catagory">
-              <p>{data.catagory}</p>
+              <p>{tour.catagory}</p>
             </div>
           </div>
           <div className="reco-img">
-            <img src={data.imgUrl} alt="restaurant" className="reco-src" />
+            <img src={tour.tourImgUrl} alt="restaurant" className="reco-src" />
           </div>
         </div>
       </a>
@@ -39,5 +39,5 @@ const RecommendPlaceList = ({ data }) => {
 
 export default RecommendPlaceList;
 RecommendPlaceList.propTypes = {
-  data: PropTypes.any,
+  tour: PropTypes.any,
 };

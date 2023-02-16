@@ -8,25 +8,30 @@ import RecordUpload from './RecordUpload';
 import RecordMapItem from './RecordMapItem';
 import { apiGetDayRecord } from '@/commons/api/record';
 import { useMember } from '@/commons/MemberContext';
-import { apiGetRecordingDayId, apiPlanToNextDay } from '@/commons/api/plan';
-import { useOutlet, useOutletContext, useParams } from 'react-router-dom';
+import { apiGetRecordingDayId, apiPlanToNextDay, apiGetPlan, apiEndPlan } from '@/commons/api/plan';
+import { useNavigate, useOutlet, useOutletContext, useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import { current } from '@reduxjs/toolkit';
 
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
   // const currentDayId = useOutletContext()?.dayId;
   const params = useParams();
-  const currentDayId = params.currentDayId;
+  const [currentDayId, setCurrentDayId] = useState(params.currentDayId);
+  const currentPlanId = params.currentPlanId;
   console.log('지금여행날', currentDayId);
+  const navigate = useNavigate();
 
   const [currentLat, setCurrentLat] = useState(37.5128064);
   const [currentLng, setCurrentLng] = useState(127.0284288);
   const [recordList, setRecordList] = useState([]);
-  const [albumModalOpen, setAlbumModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false); // record 업로드 모달
+  const [albumModalOpen, setAlbumModalOpen] = useState(false); // record 조회 모달
   const [modalRecord, setModalRecord] = useState(null);
+  const [buttonCurrentDay, setbuttonCurrentDay] = useState('');
 
   const setNowRecords = (responseData) => {
     setRecordList(responseData);
@@ -50,9 +55,14 @@ const RecordMap = () => {
     }
   }, [currentDayId]);
 
-  const [modalOpen, setModalOpen] = useState(false);
+  useEffect(() => {
+    apiGetPlan(currentPlanId).then(({ data }) => {
+      if (data.currentDay < data.planPeriod) {
+        setbuttonCurrentDayId(Number(data.currentDay) + 1);
+      }
+    });
+  }, [currentPlanId]);
 
-  // console.log('records 찍혀라', records);
   const [state, setState] = useState({
     center: {
       lat: 37.5128064,
@@ -121,6 +131,23 @@ const RecordMap = () => {
     };
   }
 
+  function goToNextDay() {
+    apiGetPlan(currentPlanId).then(({ data }) => {
+      console.log('기간', data.planPeriod);
+      console.log('기간', data.currentDay);
+      if (data.currentDay < data.planPeriod) {
+        apiPlanToNextDay(currentPlanId, data.currentDay + 1);
+        setbuttonCurrentDay(data.currentDay + 1);
+        if (data.currentDay !== data.planPeriod) {
+          setCurrentDayId(Number(currentDayId) + 1);
+        }
+      } else {
+        apiEndPlan(currentPlanId);
+        navigate(`/`);
+      }
+    });
+  }
+
   return (
     <div>
       <Map
@@ -128,6 +155,7 @@ const RecordMap = () => {
         style={{
           width: '100%',
           height: '92.5vh',
+          position: 'relative',
         }}
         level={5}
         draggable={true}
@@ -180,6 +208,14 @@ const RecordMap = () => {
           );
         })}
 
+        <button
+          onClick={() => {
+            goToNextDay();
+          }}
+          style={{ position: 'absolute', left: '45%', bottom: '5%', zIndex: '2' }}
+        >
+          {buttonCurrentDay !== '' ? buttonCurrentDay : 1}일차 기록 종료
+        </button>
         <Polyline
           path={[points]}
           strokeWeight={5} // 선의 두께 입니다
@@ -187,7 +223,6 @@ const RecordMap = () => {
           strokeOpacity={0.9} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
           strokeStyle={'solid'} // 선의 스타일입니다
         />
-        {/* <button onClick={apiPlanToNextDay(currentPlanId, currentDayId)}>다음 날로 이동</button> */}
       </Map>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
@@ -214,7 +249,6 @@ const RecordMap = () => {
                 setNowRecords={setNowRecords}
                 currentLat={currentLat}
                 currentLng={currentLng}
-                // recordLocation={state}
                 setModalOpen={setModalOpen}
               ></RecordUpload>
             </div>
@@ -263,6 +297,8 @@ const RecordMap = () => {
               >
                 {modalRecord.recordText}
               </CardContent>
+              {/* <button>수정</button>
+              <button>삭제</button> */}
             </Card>
           </Box>
         </Modal>

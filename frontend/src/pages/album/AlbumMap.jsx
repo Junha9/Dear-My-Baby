@@ -91,7 +91,10 @@ export default function AlbumMap() {
             >
               {activeStep < dayRecordList[dayIndex].length ? (
                 <Card sx={{ width: 350 }} style={{ borderRadius: '10%' }}>
-                  <CardHeader title={`${dayIndex + 1}일차 기록`} style={{ fontFamily: 'sans-serif' }}></CardHeader>
+                  <CardHeader
+                    title={`${Number(dayIndex) + 1}일차 기록`}
+                    style={{ fontFamily: 'sans-serif' }}
+                  ></CardHeader>
                   <h2 style={{ marginTop: '3%', paddingLeft: '5%' }}>
                     {dayRecordList[dayIndex][activeStep].recordName}
                   </h2>

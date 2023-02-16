@@ -3,21 +3,21 @@ const api = getApiInstance();
 
 // 여행 계획 생성
 export async function apiCreateDay(data) {
-  data = {
-    dayId: 6,
-    dayNumber: 2,
-    planId: 13,
-    places: [
-      {
-        placeOrder: 2,
-        placeName: 'jgghh',
-        placeLatitude: '22.112',
-        placeLongitude: '1',
-        placeAddress: 'dddd',
-        dayId: 0,
-      },
-    ],
-  };
+  // data = {
+  //   dayId: 6,
+  //   dayNumber: 2,
+  //   planId: 13,
+  //   places: [
+  //     {
+  //       placeOrder: 2,
+  //       placeName: 'jgghh',
+  //       placeLatitude: '22.112',
+  //       placeLongitude: '1',
+  //       placeAddress: 'dddd',
+  //       dayId: 0,
+  //     },
+  //   ],
+  // };
 
   if (data != null) {
     const response = await api.post(`/day`, data);

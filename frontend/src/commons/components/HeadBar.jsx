@@ -24,7 +24,6 @@ import { useMember, useMemberMethod } from '@/commons/MemberContext';
 const links = [
   { name: 'Home', path: '/' },
   { name: 'Plan', path: 'plan' },
-  { name: 'Record', path: 'record' },
   { name: 'Album', path: 'album' },
 ];
 

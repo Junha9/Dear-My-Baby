@@ -29,12 +29,16 @@ const RecommendItem = () => {
 
   // api 로  정보 받아오기
   useEffect(() => {
-    if (window.localStorage.getItem('familyId')) {
-      // console.log(familyId);
-      setFamilyId(window.localStorage.getItem('familyId'));
+    setFamilyId(window.localStorage.getItem('familyId'));
+    console.log('glgl', familyId);
+    if (familyId != null) {
       setFamilyName(window.localStorage.getItem('familyName'));
       console.log('familyID', familyId);
-      apiGetRecommendRestaurantList(familyId).then(({ data }) => console.log(data));
+      apiGetRecommendRestaurantList(familyId).then(({ data }) => setRestaurantList(data));
+      apiGetRecommendTourList(familyId).then(({ data }) => setTourList(data));
+      // console.log('restaurantList', restaurantList);
+      // console.log('tourList', tourList);
+      // apiGetRecommendFestivalList(familyId).then(({ dat }) => setfestivalList(dat));
     }
   }, [familyId]);
 
@@ -73,14 +77,14 @@ const RecommendItem = () => {
       </div>
 
       <div className="show-food-list" style={onOff ? { display: 'block' } : { display: 'none' }}>
-        {food.map((item) => (
-          <RecommendFoodList key={item.address} foodData={item}></RecommendFoodList>
+        {restaurantList.map((restaurant) => (
+          <RecommendFoodList key={restaurant.address} restaurant={restaurant}></RecommendFoodList>
         ))}
       </div>
 
       <div className="show-place-list" style={onOff ? { display: 'none' } : { display: 'block' }}>
-        {place.map((item) => (
-          <RecommendPlaceList key={item.address} data={item}></RecommendPlaceList>
+        {tourList.map((tour) => (
+          <RecommendPlaceList key={tour.address} tour={tour}></RecommendPlaceList>
         ))}
       </div>
     </div>

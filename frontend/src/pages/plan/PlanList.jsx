@@ -46,8 +46,8 @@ export default function PlanList() {
                       <li>{plan.planDestination}</li>
                       <li>{plan.startDate}</li>
                       <li>{plan.endDate}</li>
-                      <li>{plan.planLatitude}</li>
-                      <li>{plan.planLongitude}</li>
+                      {/* <li>{plan.planLatitude}</li> */}
+                      {/* <li>{plan.planLongitude}</li> */}
                       {/* <li>{JSON.stringify(plan.days)}</li> */}
                     </ul>
                   </div>

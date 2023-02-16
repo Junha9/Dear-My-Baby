@@ -25,27 +25,32 @@ export default function KidsInformation() {
   const question = questionList[index];
   const familyId = window.localStorage.getItem('familyId');
   const [babyId, setBabyId] = useState(0);
-  // const [babyInfo, setBabyInfo] = useState();
+  // const [babyData, setBabyData] = useState({});
+
   // baby 정보 API get
-  let babyInfo = {};
-  useEffect(() => {
-    console.log(familyId);
-    apiGetBabyList(familyId).then((res) => {
-      babyInfo = res.data[0];
-      console.log('apiget', babyInfo);
-      // setBabyId(res.data[0].babyId);
-    });
-  }, []);
+  let babyData = {
+    familyId: 0,
+    favoriteSpot: [],
+    favoriteFood: [],
+  };
+
+  // useEffect(() => {
+  //   // console.log(familyId);
+  //   async () => {
+  //     const response = await apiGetBabyList(familyId);
+  //     setBabyId(response.data[0].babyId);
+  //   };
+  // });
 
   const handleYes = () => {
     const categoryId = question.categoryId;
     if (question.type == 'place') {
       if (!placeList.includes(categoryId)) {
-        setPlaceList([...placeList, categoryId]);
+        setPlaceList([...placeList, categoryId.toString()]);
       }
     } else if (question.type == 'food') {
       if (!foodList.includes(categoryId)) {
-        setFoodList([...foodList, categoryId]);
+        setFoodList([...foodList, categoryId.toString()]);
       }
     }
     setIndex(index + 1);
@@ -56,32 +61,45 @@ export default function KidsInformation() {
   };
 
   // 아이 선호정보 입력하는 함수 + 홈으로 돌아가기
-  const postKidFavorInfo = () => {
-    console.log('?', babyInfo);
-    console.log('babyid', babyInfo.babyId);
-    babyInfo.favoriteFood = foodList;
-    babyInfo.favoriteSpot = placeList;
-    //
-
-    apiUpdateBaby(babyInfo, babyInfo.babyId);
+  const postKidFavorInfo = async () => {
+    const res = await apiGetBabyList(familyId);
+    const newBabyId = res.data[0].babyId;
+    setBabyId(newBabyId);
+    babyData.familyId = familyId;
+    babyData.favoriteFood = foodList;
+    babyData.favoriteSpot = placeList;
+    console.log('보내기전 최종', babyData);
+    apiUpdateBaby(babyData, newBabyId);
 
     navigate('/');
   };
 
   return (
     <>
-      <div className="question">
-        <button style={{ position: 'absolute' }} onClick={() => console.log(babyId)}>
+      <div className="question" style={{ backgroundColor: 'rgb(175, 140, 231)' }}>
+        {/* <button style={{ position: 'absolute' }} onClick={() => console.log(babyId)}>
           Panic Button
-        </button>
+        </button> */}
         {index < questionList.length ? (
-          <div>
-            <div style={{ position: 'absolute' }}>
+          <div style={{ width: '450px', height: '900px' }}>
+            <div
+              style={{
+                position: 'absolute',
+                width: '100vw',
+                // height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignContent: 'center',
+              }}
+            >
               <div style={{ marginBlock: '27%', padding: '15%' }}>
                 <h2 style={{ fontSize: '2.4rem' }}>{question.categoryName}</h2>
               </div>
 
-              <div className="answer-div" style={{ display: 'flex', width: '70%', justifyContent: 'space-between' }}>
+              <div
+                className="answer-div"
+                style={{ display: 'flex', width: '70%', justifyContent: 'space-between', alignSelf: 'center' }}
+              >
                 <button className="kidinfo-button" onClick={handleYes}>
                   좋아한다
                 </button>
@@ -105,11 +123,11 @@ export default function KidsInformation() {
           </div>
         ) : (
           // <div>질문이 다 끝났다</div>
-          <div>
+          <div style={{ paddingBlock: '30%', width: '100%' }}>
             <h1>응답 해주셔서 감사합니다.</h1>
             <button
               onClick={() => {
-                console.log(babyInfo);
+                console.log(babyData);
                 postKidFavorInfo();
               }}
             >
