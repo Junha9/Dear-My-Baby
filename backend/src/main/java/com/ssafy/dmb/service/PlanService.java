@@ -76,17 +76,14 @@ public class PlanService {
         Plan plan = planRepository.findById(planId).get();
         PlanDto.PlanDetail planDetail = new PlanDto.PlanDetail(plan);
         List<DayDto> dayList = planDetail.getDays();
-        Long currentDayId = -1L;
-        for(DayDto d: dayList){
-            if(d.getDayNumber() == 1){
-                currentDayId = d.getDayId();
-            }
-        }
-        if(currentDayId != -1L) {
-            return getCurrentDay(currentDayId);
-        }else{
-            return null;
-        }
+//        Long currentDayId = -1L;
+//        for(DayDto d: dayList){
+//            if(d.getDayNumber() == 1){
+//                currentDayId = d.getDayId();
+//            }
+//        }
+
+        return getCurrentDay(planId);
     }
 
     public PlanDto.PlanDetail endPlan(Long planId) {
