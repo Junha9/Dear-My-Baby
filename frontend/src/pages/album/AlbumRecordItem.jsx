@@ -4,23 +4,24 @@ import { record } from './props';
 export default function AlbumRecordItem({ record }) {
   return (
     <ul className="record-box">
+      <h1 style={{ marginTop: '3%', paddingLeft: '5%' }}>{record.recordName}</h1>
       <div className="img-padding">
         <li>
           {record.recordType == 0 ? (
-            <img className="img-padding2" src={record.fileUrl} alt="random" width="75" height="110"></img>
+            <img src={record.fileUrl} alt="random" width="300" height="200"></img>
           ) : (
             <video src={record.fileUrl} controls width="300" height="200"></video>
           )}
         </li>
       </div>
-      <div className="text-padding">
-        <li>recordId : {record.recordId}</li>
-        <li>recordName : {record.recordName}</li>
-        <li>recordText : {record.recordText}</li>
-        <li>latitude : {record.latitude}</li>
-        <li>longitude : {record.longitude}</li>
-        <li>recordType : {record.recordType}</li>
-        <li>recordDate : {record.recordDate}</li>
+      <div
+        className="record-box"
+        style={{
+          margin: '4%',
+          borderRadius: '10px',
+        }}
+      >
+        {record.recordText}
       </div>
     </ul>
   );

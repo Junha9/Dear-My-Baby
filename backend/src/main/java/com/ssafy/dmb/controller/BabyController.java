@@ -52,10 +52,10 @@ public class BabyController {
     @PutMapping("/{babyId}")
     @Operation(summary = "아이 정보 수정"
             , description = "<strong>babyId</strong>를 통해 아이 정보를 수정한다.")
-    public ResponseEntity<BabyDto.BabyResponse> updateBabyInfo(@RequestBody BabyDto.BabyRequest request
+    public void updateBabyInfo(@RequestBody BabyDto.BabyUpdateRequest request
             , @PathVariable("babyId") Long babyId) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(babyService.updateBabyInfo(request, babyId));
+        babyService.updateBabyInfo(request, babyId);
 
     }
     @Operation(summary = "아이 정보 삭제"

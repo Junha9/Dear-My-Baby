@@ -50,22 +50,18 @@ public class BabyService {
         return babyInfo;
     }
 
-    public BabyDto.BabyResponse updateBabyInfo(BabyDto.BabyRequest request, Long babyId) {
+    public void updateBabyInfo(BabyDto.BabyUpdateRequest request, Long babyId) {
         Long familyId = request.getFamilyId();
         Family family = familyRepository.findById(familyId).get();
 
         Baby baby = Baby.builder()
                 .family(family)
-                .babyName(request.getBabyName())
-                .babyAge(request.getBabyAge())
                 .favoriteSpot(request.getFavoriteSpot())
                 .favoriteFood(request.getFavoriteFood())
                 .build();
 
         baby.setId(babyId);
         babyRepository.save(baby);
-        BabyDto.BabyResponse babyInfo = new BabyDto.BabyResponse(baby);
-        return babyInfo;
     }
     public List<BabyDto.BabyResponse> getBabyList(Long familyId) {
         List<Baby> babies = babyRepository.findByFamily(familyId);

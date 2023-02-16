@@ -20,7 +20,7 @@ export default function DummyPlaceItem({ place }) {
             />
           </CardCover>
           <CardContent>
-            <Typography textColor="#fff" mt={{ xs: 11, sm: 10 }} sx={{ fontSize: '0.7rem' }}>
+            <Typography textColor="#fff" mt={{ xs: 16, sm: 10 }} sx={{ fontSize: '0.7rem', fontWeight: '700' }}>
               {place.placeName}
             </Typography>
           </CardContent>

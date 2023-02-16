@@ -97,9 +97,46 @@ export default function PlaceCart() {
     bookmark2dayIndex.set(modalPlace.bookmarkId, index);
   }
 
-  // days.length 만큼 반복해서 apiPOST 요청.
-  // data에는
-  // apiCreatePlan(data)
+  const createNewPlan = () => {
+    console.log(days.length);
+    console.log(plan);
+    // for (let i = 0; i< days.length ; i ++){
+    //   const postData =
+    //   {
+    //     "planId": planId,
+    //     "planName": "string",
+    //     "planDestination": "string",
+    //     "startDate": "2023-02-13",
+    //     "endDate": "2023-02-13",
+    //     "planLatitude": "string",
+    //     "planLongitude": "string",
+    //     "planPeriod": 0,
+    //     "planState": 0,
+    //     "familyId": 0,
+    //     "currentDay": 0,
+    //     "days": [
+    //       {
+    //         "dayId": 0,
+    //         "dayNumber": 0,
+    //         "planId": 0,
+    //         "bookmarks": [
+    //           {
+    //             "placeOrder": 0,
+    //             "placeName": "string",
+    //             "placeLatitude": "string",
+    //             "placeLongitude": "string",
+    //             "placeAddress": "string",
+    //             "dayId": 0
+    //           }
+    //         ]
+    //       }
+    //     ]
+    //   }
+    // }
+    // days.length 만큼 반복해서 apiPOST 요청.
+    // data에는
+    // apiCreatePlan(data)
+  };
 
   return (
     <div>
@@ -232,7 +269,7 @@ export default function PlaceCart() {
       <div style={{ position: 'absolute', right: '0vw', bottom: '2vh', backgroundColor: 'transparent', zIndex: '2' }}>
         {/* 이어진 경로가 있는 상태에서 경로 추가 누르면 선 안 없어지고 냅두기, 경로가 추가되지 않은 상태에서 다른날 누르면 이어진선 사라지게하기 */}
         {/* <Link to={'/'}> */}
-        {/* <button onClick={createNewPlan}>계획 완료하기</button> */}
+        <button onClick={createNewPlan}>계획 완료하기</button>
         {/* </Link> */}
       </div>
     </div>
