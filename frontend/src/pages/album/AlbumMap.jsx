@@ -121,15 +121,7 @@ export default function AlbumMap() {
                       <KeyboardArrowRight></KeyboardArrowRight>
                     </Button>
                   </Box>
-                  <CardContent
-                    style={{
-                      margin: '4%',
-                      boxShadow: '1px 1px 1px gray',
-                      borderRadius: '10px',
-                    }}
-                  >
-                    {dayRecordList[dayIndex][activeStep].recordText}
-                  </CardContent>
+                  <CardContent className="record-box">{dayRecordList[dayIndex][activeStep].recordText}</CardContent>
                 </Card>
               ) : (
                 <div>No Content</div>

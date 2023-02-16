@@ -86,8 +86,8 @@ export default function Home() {
         }}
       >
         <div className="main-animation">
-          <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'white' }}>dear my baby</h3>
-          <h3 style={{ fontWeight: '100', color: 'white', fontSize: '16px', marginBottom: '15px' }}>
+          <h3 style={{ fontWeight: '20', fontSize: '0.7rem', color: 'white' }}>dear my baby</h3>
+          <h3 style={{ fontWeight: '100', color: 'white', fontSize: '13px', marginBottom: '15px' }}>
             당신의 아이에게 <br></br>따뜻한 추억을 선물하세요
           </h3>
           {babyName == null ? (

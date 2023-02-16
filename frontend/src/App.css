@@ -13,13 +13,11 @@
 
 body {
   font-family: 'sngfont', sans-serif;
-  font-size: 20px;
 }
 
 /* Material UI에 나눔고딕 적용 */
 [class^='MuiTypography'] {
   font-family: 'sngfont', sans-serif !important;
-  font-size: 20px;
 }
 
 /* 화면 크기별 css 설계하기
