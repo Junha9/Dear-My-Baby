@@ -52,7 +52,7 @@ export default function PlaceCart() {
 
   // 마커를 클릭 했을 때 실행 되는 함수
   function handleMarkerClick(content) {
-    // console.log(content);
+    console.log(modalInfo);
     setModalInfo(content);
     isOpen(true);
   }
@@ -96,6 +96,7 @@ export default function PlaceCart() {
         dayId: plan.days[index].dayId,
       });
     }
+
     // console.log('days[i]i[j]', days[i][j]);
     // perDay.push(days[i][j]);
 
@@ -115,6 +116,8 @@ export default function PlaceCart() {
     // // async () => {
     // //   setDays(response.data);
     // // };
+
+    alert('경로가 저장되었습니다.');
   };
 
   let dnum;
@@ -179,14 +182,14 @@ export default function PlaceCart() {
         ))}
         {open && (
           <CustomOverlayMap position={{ lat: modalInfo.bookmarkLatitude, lng: modalInfo.bookmarkLongitude }}>
-            <h1>{modalInfo.placeLatitude}</h1>
+            {/* <h1>{modalInfo.placeLatitude}</h1> */}
             <div
               className="wrap"
               style={{
                 backgroundColor: 'white',
                 padding: '5%',
                 borderRadius: '5%',
-                boxShadow: '1px 1px 5px rgba(0, 0, 0, 0.05)',
+                boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.15)',
                 whiteSpace: 'pre-wrap',
                 width: '180px',
               }}
@@ -206,15 +209,16 @@ export default function PlaceCart() {
               >
                 X
               </button>
-              <div className="modalInfo">
-                <div className="title" style={{ fontWeight: '700', margin: '4% 1%' }}>
-                  {modalInfo.content}
+              <div className="info">
+                <div className="title" style={{ fontWeight: '700', margin: '4% 1%', width: '275px', height: '50px' }}>
+                  <p style={{ fontSize: '20px' }}>{modalInfo.bookmarkName}</p>
+                  <a style={{ textDecoration: 'none', fontSize: '14px' }} href={modalInfo.bookmarkUrl}>
+                    상세정보
+                  </a>
                 </div>
                 <div style={{ fontSize: '0.8rem', color: 'rgba(0, 0, 0, 0.7)' }}>{modalInfo.categoryGroupName}</div>
-                <div className="modal__body">
-                  <div className="ellipsis" style={{ fontSize: '0.9rem' }}>
-                    <a href={modalInfo.bookmarkUrl}>{modalInfo.bookmarkName}</a>
-                  </div>
+                <div className="body">
+                  <div className="ellipsis" style={{ fontSize: '0.9rem' }}></div>
                   <div></div>
                   <div className="modal__button">
                     {/* 날짜 수 만큼 버튼 만들기  onClick={addToPath(modalInfo)} */}
@@ -231,7 +235,7 @@ export default function PlaceCart() {
                           addToPath(modalInfo, index);
                           isOpen(false);
                         }}
-                        style={{ display: 'flex', width: '50px', height: '25px' }}
+                        style={{ display: 'flex', width: '64px', height: '32px' }}
                       >
                         day{index + 1}
                       </button>
@@ -248,14 +252,23 @@ export default function PlaceCart() {
         )}
       </KakaoMap>
 
-      <div style={{ position: 'absolute', right: '0vw', bottom: '2vh', backgroundColor: 'transparent', zIndex: '2' }}>
+      <div
+        style={{
+          display: 'flex',
+          position: 'absolute',
+          left: '4vw',
+          top: '8vh',
+          backgroundColor: 'transparent',
+          zIndex: '2',
+        }}
+      >
         {days.map((day, index) => (
           <button
             key={index}
             onClick={() => createNewPlan(index)}
-            style={{ display: 'flex', width: '50px', height: '25px' }}
+            style={{ display: 'flex', height: '32px', justifyContent: 'center' }}
           >
-            day{index + 1}
+            <p>day{index + 1}</p>
           </button>
         ))}
 

@@ -62,7 +62,7 @@ const RecommendPlaceDetail = () => {
         />
       </div>
       <hr />
-      <div className="detail-outline">
+      <div className="detail-outline" style={{ fontSize: '20px' }}>
         <p>{restaurant.restaurantOutline}</p>
       </div>
 

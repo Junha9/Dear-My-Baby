@@ -209,6 +209,13 @@
   display: flex;
   justify-content: center;
 }
+.recommendList {
+  display: flex;
+  width: 45%;
+}
+.reco-tour {
+  padding-inline: 5%;
+}
 
 .reco-item {
   display: flex;
@@ -221,10 +228,11 @@
 }
 
 .reco-info {
-  width: 70%;
+  height: 30%;
+  /* width: 70%;
   margin-right: 5vw;
   margin-bottom: 0.5vh;
-  padding-left: 0.3vw;
+  padding-left: 0.3vw; */
   /* overflow: hidden; */
   /* text-overflow: ellipsis; */
 }
@@ -250,7 +258,7 @@
 } */
 
 .reco-img {
-  width: 30%;
+  width: 90%;
   height: 100%;
 }
 
@@ -264,7 +272,7 @@
 }
 
 .detail-frame {
-  background-color: rgb(224, 247, 243);
+  background-color: rgb(255, 255, 255);
   box-shadow: 0px 1px 1px rgb(14, 13, 13);
   border-radius: 5%;
   display: flex;

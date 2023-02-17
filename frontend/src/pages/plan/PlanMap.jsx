@@ -114,7 +114,7 @@ export default function PlanMap({ plan }) {
           type="text"
           placeholder="장소 검색 하세요"
         />
-        <button onClick={kakaoSearch}>검색</button>
+        {/* <button onClick={kakaoSearch}>검색</button> */}
         {/* 장소 바구니 보러갈 때 쿼리로 planid를 넘겨 주기  */}
         <button>
           <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }} state={plan}>
@@ -137,7 +137,8 @@ export default function PlanMap({ plan }) {
         }}
         style={{
           width: '100%',
-          height: '100vh',
+          height: '98vh',
+          // paddingTop: '9vh',
         }}
         level={10}
         onCreate={setKakaoMap}

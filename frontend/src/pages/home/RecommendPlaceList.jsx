@@ -11,7 +11,7 @@ const RecommendPlaceList = ({ tour }) => {
   // console.log(tour);
 
   return (
-    <div className="recommendList">
+    <div className="recommendList" style={{ width: '45%' }}>
       <a
         onClick={() =>
           // console.log(fooditem)
@@ -21,9 +21,7 @@ const RecommendPlaceList = ({ tour }) => {
         <div className="reco-tour">
           <div className="reco-info">
             <h4>{tour.tourName}</h4>
-            <div className="reco-info-outline">
-              <p className="outline-ptag">설명:{tour.outline}</p>
-            </div>
+            <div className="reco-info-outline">{/* <p className="outline-ptag">설명:{tour.outline}</p> */}</div>
             <div className="reco-catagory">
               <p>{tour.catagory}</p>
             </div>

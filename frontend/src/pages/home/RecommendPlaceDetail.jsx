@@ -40,9 +40,9 @@ const RecommendPlaceDetail = () => {
   // console.log(placeId);
 
   const goToPlan = (e) => {
-    alert(
-      '이 장소를 장소바구니에 추가해주면서 계획을짜는 페이지로 넘어가게 하고 싶은데 어케 데이터를 주고 받을지 모르겠음',
-    );
+    // alert(
+    //   '이 장소를 장소바구니에 추가해주면서 계획을짜는 페이지로 넘어가게 하고 싶은데 어케 데이터를 주고 받을지 모르겠음',
+    // );
     navigate(`../../plan`);
   };
 

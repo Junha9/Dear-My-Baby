@@ -9,14 +9,14 @@ const RecommendFoodList = ({ restaurant }) => {
   // console.log('?? object', restaurant.restaurantImgUrl);
 
   return (
-    <div className="recommandList">
+    <div className="recommandList" style={{ width: '45%' }}>
       <a
         onClick={() =>
           // console.log(fooditem)
           navigate(`./food-detail?food-id=${restaurant.restaurantId}`)
         }
       >
-        <div className="reco-item">
+        <div className="reco-tour">
           <div className="reco-info">
             <h4>{restaurant.restaurantName}</h4>
             <div className="reco-info-outline">

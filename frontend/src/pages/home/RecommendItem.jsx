@@ -76,13 +76,39 @@ const RecommendItem = () => {
         </ToggleButtonGroup>
       </div>
 
-      <div className="show-food-list" style={onOff ? { display: 'block' } : { display: 'none' }}>
+      <div
+        className="show-food-list"
+        style={
+          onOff
+            ? {
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifySelf: 'center',
+                paddingInline: '5%',
+                justifyContent: 'space-evenly',
+              }
+            : { display: 'none' }
+        }
+      >
         {restaurantList.map((restaurant) => (
           <RecommendFoodList key={restaurant.address} restaurant={restaurant}></RecommendFoodList>
         ))}
       </div>
 
-      <div className="show-place-list" style={onOff ? { display: 'none' } : { display: 'block' }}>
+      <div
+        className="show-place-list"
+        style={
+          onOff
+            ? { display: 'none' }
+            : {
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifySelf: 'center',
+                paddingInline: '5%',
+                justifyContent: 'space-evenly',
+              }
+        }
+      >
         {tourList.map((tour) => (
           <RecommendPlaceList key={tour.address} tour={tour}></RecommendPlaceList>
         ))}
