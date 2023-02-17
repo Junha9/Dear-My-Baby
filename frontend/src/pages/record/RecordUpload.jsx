@@ -14,6 +14,25 @@ const RecordUpload = ({ currentDayId, currentLat, currentLng, setNowRecords, set
   const [recordTitle, setRecordTitle] = useState('');
   const recordFile = source ? source.url : 'string';
 
+  const [videoThumbnail, setVideoThumbnail] = useState(null);
+  const videoRef = useState();
+
+  function handleVideoUpload(event) {
+    const videoFile = event.target.files[0];
+    const videoUrl = URL.createObjectURL(videoFile);
+    videoRef.current.src = videoUrl;
+  }
+
+  function handleVideoLoaded() {
+    const video = videoRef.current;
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    const thumbnailUrl = canvas.toDataURL();
+    setVideoThumbnail(thumbnailUrl);
+  }
+
   const record = {
     dayId: currentDayId,
     recordText: recordText,
@@ -93,6 +112,8 @@ const RecordUpload = ({ currentDayId, currentLat, currentLng, setNowRecords, set
           <input className="upload-input upload-title" type="text" placeholder="제목" onChange={onChangeTitle}></input>
           <video
             style={{ height: '100%', width: '100%', marginBottom: '10%' }}
+            ref={videoRef}
+            onLoadedData={handleVideoUpload}
             src={URL.createObjectURL(source.url)}
             controls
             alt="uploaded video"
