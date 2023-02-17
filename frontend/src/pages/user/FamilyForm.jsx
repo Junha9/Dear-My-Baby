@@ -3,6 +3,7 @@ import { apiCreateFamily } from '@/commons/api/family';
 import { useNavigate } from 'react-router-dom';
 import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberContext';
 import { apiGetMember, apiUpdateMemberCurrentPlanId, apiGetMemberFamilyList } from '@/commons/api/member';
+import './Userinfo.css';
 
 const FamilyForm = () => {
   const [familyName, setFamilyName] = useState('');
@@ -39,7 +40,7 @@ const FamilyForm = () => {
   };
 
   return (
-    <div className="family-form" style={{ padding: '2vh' }}>
+    <div className="group__create" style={{ padding: '10%' }}>
       <h2>그룹 만들기</h2>
       <div action="#">
         <input type="text" placeholder="그룹 이름" onChange={setGroupName} />
