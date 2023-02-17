@@ -1,0 +1,84 @@
+@media (min-width: 320px) and (max-width: 768px) {
+  .record {
+    width: 100%;
+  }
+}
+
+div {
+  border: none;
+}
+
+.recording-foot {
+  animation: tilt-shaking 0.5s linear infinite;
+}
+
+@keyframes tilt-shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0eg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.recording-msg {
+  border-radius: 30px;
+  background-color: rgb(248, 172, 185);
+  /* background-color: var(--main-orange); */
+  padding: 1% 2%;
+  box-shadow: 3px 3px 3px gray;
+}
+
+.recording-btn {
+  background-color: white;
+  color: black;
+  border: 1px solid var(--main-orange);
+  font-size: 0.8rem;
+  border-radius: 5px;
+  width: 60%;
+}
+
+.record-input {
+  display: none;
+}
+
+.upload-input {
+  box-shadow: 1px 1px 2px rgb(189, 189, 189);
+  border: none;
+  background-color: rgb(211, 208, 208, 0.3);
+}
+
+.upload-input:focus {
+  outline: none;
+  border: 2px solid rgb(230, 154, 56, 0.5);
+  background-color: white;
+}
+
+.recording-btn:focus {
+  outline: none;
+}
+
+.upload-title {
+  margin-bottom: 10%;
+  padding: 3px;
+}
+
+.upload-btn {
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(252, 163, 17, 1);
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  width: 30%;
+}

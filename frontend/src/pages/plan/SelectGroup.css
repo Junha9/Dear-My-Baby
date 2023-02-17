@@ -1,0 +1,40 @@
+.select-group-button {
+  /* display: inline-block; */
+  margin: 8px;
+  padding: 3px;
+  width: 100px;
+  height: 100px;
+  flex-wrap: wrap;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(89, 56, 255);
+  padding: 5px 10px;
+}
+
+.append-group-button {
+  /* display: inline-block; */
+  margin: 8px;
+  padding: 3px;
+  width: 100px;
+  height: 100px;
+  flex-wrap: wrap;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(202, 194, 248);
+  padding: 5px 10px;
+}
+
+.main-div2 {
+  /* display: inline-block; */
+  flex-direction: column;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.922);
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation: fadein 5s;
+  -moz-animation: fadein 5s;
+  -webkit-animation: fadein 5s;
+  -o-animation: fadein 5s;
+}

@@ -1,0 +1,118 @@
+/* 배경 색 : rgba(255, 255, 255, 0.922) */
+/* 시그니쳐 색 : rgb(59, 45, 142) */
+
+/* 앨범 이름 */
+.travel-record {
+  /* border: solid; */
+  border-radius: 10px;
+  /* background-color: rgb(229, 234, 255); */
+  /* padding: 3%; */
+  /* padding-left: 20px; */
+  padding-right: 20px;
+  color: white;
+}
+
+/* 기록 이름 */
+.record-name {
+  /* border: solid; */
+  box-sizing: content-box;
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+  /* background-color: rgb(229, 234, 255); */
+  /* padding: 3%; */
+  /* padding-left: 20px; */
+  padding-right: 20px;
+  color: rgb(236, 232, 240);
+  text-align: center;
+}
+
+/* 기록 모아보기 */
+.record-list {
+  /* border: solid; */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: rgba(255, 255, 255);
+  box-shadow: 0px 0px 2px rgba(255, 255, 255);
+}
+
+.record-detail {
+  margin-top: 2%;
+  border-radius: 15px;
+}
+.record-box {
+  border-radius: 15px;
+  /* background-color: rgb(241, 244, 255); */
+  margin: 10px 20px 20px;
+  padding: 10px;
+  background: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 0%,
+    rgb(251, 251, 253) 32%,
+    rgb(255, 255, 255) 32%,
+    rgb(255, 255, 255) 100%
+  );
+  box-shadow: 5px 5px 5px rgba(203, 203, 203, 0.314);
+}
+
+li {
+  list-style: none;
+}
+
+.record-name-box {
+  border-radius: 20px;
+  /* background-color: rgb(255, 255, 255); */
+  box-sizing: content-box;
+  width: 70%;
+  /* box-shadow: 2px 2px 0px rgb(59, 45, 142); */
+  margin: auto;
+}
+
+.album-main {
+  background-color: rgb(59, 45, 142);
+}
+
+.record-detail-date {
+  text-align: center;
+}
+
+.record-list-box {
+  background-color: rgba(255, 255, 255, 0.922);
+  border-top-right-radius: 5%;
+  border-top-left-radius: 5%;
+  box-shadow: 1px 1px 0px 0px rgba(244, 244, 244, 0.922);
+  padding-top: 10px;
+  margin-top: 10px;
+  box-shadow: 0px 0px 10px 4px rgba(131, 127, 127, 0.4);
+}
+.img-padding {
+  float: left;
+  padding: 5px;
+}
+.img-padding2 {
+  border-radius: 10px;
+}
+
+.back-color {
+  background-color: rgb(241, 244, 255);
+}
+
+.record-list-text {
+  padding-left: 20px;
+  padding-top: 10px;
+  font-size: 19px;
+  margin-left: 10px;
+  color: rgb(59, 45, 142);
+}
+
+.text-padding {
+  padding-left: 100px;
+}
+
+.date-map-link {
+  padding-left: 50px;
+}
+
+.album-list-div {
+  background-color: g;
+}

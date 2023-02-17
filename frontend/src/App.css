@@ -1,0 +1,66 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gamja+Flower&family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+
+/* @font-face {
+  font-family: 'Noto Sans KR';
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');
+  font-style: normal;
+  font-weight: 900;
+} */
+
+body {
+  font-family: 'sngfont', sans-serif;
+}
+
+/* Material UI에 나눔고딕 적용 */
+[class^='MuiTypography'] {
+  font-family: 'sngfont', sans-serif !important;
+}
+
+/* 화면 크기별 css 설계하기
+반응형 웹 구현하는데 씀 */
+@media (min-width: 650px) {
+  .App {
+    height: auto;
+    width: 100vw;
+    justify-items: center;
+    /* background-color: black; */
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 650px) {
+  .App {
+    background-color: rgba(255, 255, 255, 0.922);
+    height: auto;
+    width: 100vw;
+    justify-items: center;
+    text-align: left;
+    overflow-x: hidden;
+  }
+}
+
+@font-face {
+  font-family: 'sngfont';
+  src: url('/assets/ridibatang.ttf');
+}
+
+button {
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(175, 140, 231);
+  padding: 5px 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+:root {
+  --main-orange: rgba(252, 163, 17, 1);
+  --main-lightpurple: rgb(175, 140, 231);
+}

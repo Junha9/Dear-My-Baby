@@ -1,0 +1,82 @@
+.planMapFloat {
+  position: absolute;
+  background-color: white;
+  z-index: '2';
+}
+
+/* .plan-frame {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: 'center';
+  justify-content: center;
+  padding: 3vh 20vh;
+} */
+
+.planning-div {
+  display: 'flex';
+  flex-direction: 'column';
+  align-items: 'center';
+  padding: 5%;
+  box-shadow: 2px 2px 15px rgba(217, 217, 217, 1);
+  border-radius: 5px;
+}
+
+.place-basket-div {
+  background-color: rgba(247, 247, 247, 0.8);
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 1;
+  padding: 5%;
+  box-shadow: 1px 1px 10px gray;
+  border-radius: 5px;
+  height: 20%;
+  overflow: scroll;
+}
+
+.plan-cityframe {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* box-shadow: 2px 2px 15px rgba(217, 217, 217, 1); */
+  border-radius: 5px;
+}
+
+.city__table {
+  width: 90%;
+  margin: 4%;
+  padding: 2%;
+}
+
+.modalInfo {
+  width: 100px;
+  height: 75px;
+}
+
+.modal__body {
+}
+
+.modal__button {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.select-place-button {
+  border: 1px solid rgb(230, 221, 245);
+  background-color: white;
+  box-shadow: 1px 1px 3px rgba(157, 151, 189, 0.566);
+  margin: 3%;
+  font-size: 1rem;
+  color: rgb(93, 93, 93);
+  padding: 7% 9%;
+  font-weight: 600;
+}
+
+.select-place-button:focus {
+  background-color: rgb(154, 138, 212);
+  border: none;
+  color: white;
+}

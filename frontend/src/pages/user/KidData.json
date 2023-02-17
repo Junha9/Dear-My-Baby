@@ -1,0 +1,128 @@
+[
+  {
+    "categoryName": "바다",
+    "imgUrl": "https://i.pinimg.com/564x/6f/99/b9/6f99b9b8bd0f8324669ec9d0d66af57e.jpg",
+    "type": "place",
+    "categoryId": 1
+  },
+  {
+    "categoryName": "산",
+    "imgUrl": "https://i.pinimg.com/564x/e4/9c/d3/e49cd376b118ff3c00f33ce3cdc7b67f.jpg",
+    "type": "place",
+    "categoryId": 2
+  },
+  {
+    "categoryName": "계곡",
+    "imgUrl": "https://i.pinimg.com/564x/84/19/b2/8419b29dae449966a2da4a789c16ee95.jpg",
+    "type": "place",
+    "categoryId": 3
+  },
+  {
+    "categoryName": "동굴",
+    "imgUrl": "https://i.pinimg.com/564x/d8/3b/3d/d83b3de9e56a21c9f2502dc5e46b81a2.jpg",
+    "type": "place",
+    "categoryId": 4
+  },
+  {
+    "categoryName": "도자기만들기",
+    "imgUrl": "https://i.pinimg.com/564x/56/4c/be/564cbef2d08a33f063facd23b2d9e952.jpg",
+    "type": "place",
+    "categoryId": 5
+  },
+  {
+    "categoryName": "농장체험",
+    "imgUrl": "https://i.pinimg.com/564x/c9/6e/f5/c96ef5a4d4cf48ebe2dc12d9017003c9.jpg",
+    "type": "place",
+    "categoryId": 5
+  },
+  {
+    "categoryName": "놀이공원",
+    "imgUrl": "https://i.pinimg.com/564x/66/f2/f2/66f2f28b67319b69c69988f6a09a0216.jpg",
+    "type": "place",
+    "categoryId": 5
+  },
+  {
+    "categoryName": "뮤지엄",
+    "imgUrl": "https://i.pinimg.com/564x/ac/ee/27/acee274636e95be30fc521bb47b7c737.jpg",
+    "type": "place",
+    "categoryId": 6
+  },
+  {
+    "categoryName": "민속촌",
+    "imgUrl": "https://i.pinimg.com/564x/44/67/07/446707b791762a0cb2b09a9f862608fd.jpg",
+    "type": "place",
+    "categoryId": 6
+  },
+  {
+    "categoryName": "동물원",
+    "imgUrl": "https://i.pinimg.com/564x/1c/d0/65/1cd06576ef7eb1911cbf8f0268e229cf.jpg",
+    "type": "place",
+    "categoryId": 7
+  },
+  {
+    "categoryName": "식물원",
+    "imgUrl": "https://i.pinimg.com/564x/74/9c/b3/749cb365981a77d070e75e0182156ba3.jpg",
+    "type": "place",
+    "categoryId": 7
+  },
+  {
+    "categoryName": "박물관",
+    "imgUrl": "https://i.pinimg.com/564x/15/e7/dd/15e7ddda55276950a2ee452ab9fb2fb0.jpg",
+    "type": "place",
+    "categoryId": 8
+  },
+  {
+    "categoryName": "유적지",
+    "imgUrl": "https://i.pinimg.com/564x/da/ee/2b/daee2b20b1960e8cabe9b13f914ea1ca.jpg",
+    "type": "place",
+    "categoryId": 8
+  },
+  {
+    "categoryName": "고기",
+    "imgUrl": "https://i.pinimg.com/564x/6f/86/5e/6f865ebee8923729c5ddb0759fed75e0.jpg",
+    "type": "food",
+    "categoryId": 9
+  },
+  {
+    "categoryName": "생선",
+    "imgUrl": "https://i.pinimg.com/564x/4e/37/f4/4e37f47a4adb6063024cf3d8f103dc6c.jpg",
+    "type": "food",
+    "categoryId": 10
+  },
+  {
+    "categoryName": "디저트",
+    "imgUrl": "https://i.pinimg.com/564x/5c/0e/76/5c0e76fdd115dd3d3bb512e42fa2dead.jpg",
+    "type": "food",
+    "categoryId": 11
+  },
+  {
+    "categoryName": "양식",
+    "imgUrl": "https://i.pinimg.com/564x/74/50/9e/74509ecde406b03373868654ca48eaf4.jpg",
+    "type": "food",
+    "categoryId": 12
+  },
+  {
+    "categoryName": "한식",
+    "imgUrl": "https://i.pinimg.com/564x/46/77/fc/4677fc4d4ea499802034ff9566125144.jpg",
+    "type": "food",
+    "categoryId": 13
+  },
+  {
+    "categoryName": "중식",
+    "imgUrl": "https://i.pinimg.com/564x/a7/86/2c/a7862cbe29a8f08859475f099d0c8c18.jpg",
+    "type": "food",
+    "categoryId": 14
+  },
+  {
+    "categoryName": "일식",
+    "imgUrl": "https://i.pinimg.com/564x/7c/34/86/7c348629d3a1be9ba2dc1db26e883416.jpg",
+    "type": "food",
+    "categoryId": 15
+  },
+  {
+    "categoryName": "과일",
+    "imgUrl": "https://i.pinimg.com/564x/af/5a/e6/af5ae6f7ab4af24d1bd2014eb908c9fe.jpg",
+    "type": "food",
+    "categoryId": 16
+  }
+]
