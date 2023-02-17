@@ -13,6 +13,7 @@ const RecordUpload = ({ currentDayId, currentLat, currentLng, setNowRecords, set
   const [recordText, setRecordText] = useState('');
   const [recordTitle, setRecordTitle] = useState('');
   const recordFile = source ? source.url : 'string';
+
   const record = {
     dayId: currentDayId,
     recordText: recordText,
